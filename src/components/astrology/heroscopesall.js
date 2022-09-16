@@ -1,14 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import { Container, Row,  Col, Input, InputGroup, Form,Button } from "reactstrap";
-// import aboutimg from "../../assets/img/aboutimg.jpg";
-import imgvertical from "../../assets/img/img-vertical.jpg";
-import abouttwo from "../../assets/img/abouttwo.png";
 import LayoutOne from "../../layouts/LayoutOne";
-import scope  from "../../assets/img/scope.png";
-import FunFactOne from "../../wrappers/fun-fact/FunFactOne";
-import asectionbg from "../../assets/img/asectionbg.jpg";
 import heroscope1 from "../../assets/img/heroscope/heroscope1.png";
+import astromob from "../../assets/img/astromob.png";
 
 
 class HeroscopesAll extends React.Component {
@@ -78,9 +73,9 @@ class HeroscopesAll extends React.Component {
                             </div>
                         </Col>
                          <Col lg="3">
-                             <div className="abo-2">
-                                  <img src={imgvertical} alt="" width="260"></img>
-                            </div> 
+                              <div className="abo-2">
+                                  <img src={astromob} alt="" width="100%"></img>
+                              </div> 
                         </Col>
                     </Row>
                   </Container>

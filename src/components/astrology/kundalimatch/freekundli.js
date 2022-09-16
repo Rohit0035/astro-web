@@ -3,9 +3,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import { Container, Row,  Col, Card,Input, InputGroup, Form,Button } from "reactstrap";
-import Pj from "../../../assets/img/pj.gif";
 import "../../../assets/scss/astropooja.css";
-import pagetitle  from "../../../assets/img/pagetitle.jpg";
 import LayoutOne from "../../../layouts/LayoutOne";
 import astromob from "../../../assets/img/astromob.png";
 
