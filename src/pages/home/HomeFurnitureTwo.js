@@ -30,6 +30,7 @@ import SliderList from "../../components/astrology/sliderlist";
 const HomeFurnitureTwo = () => {
   return (
     <LayoutOne headerTop="visible">
+
       {/* hero slider */}
       <HeroSliderTwentyNine />
 

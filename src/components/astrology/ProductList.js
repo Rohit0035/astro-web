@@ -11,7 +11,7 @@ import poojaone from "../../assets/img/pooja/pooja-1.jpg";
 import AutoSearch from "./autosearch";
 
 
-class AstromallList extends React.Component {
+class ProductList extends React.Component {
  
   render() {
 
@@ -33,7 +33,7 @@ class AstromallList extends React.Component {
                             <Row>
                                 <Col md="12">
                                     <div className="leftcont text-left">
-                                        <h1>Astromall Shop</h1>
+                                        <h1>Online-puja Products</h1>
                                         <h3>Shop Best Online Astrology Products And Services</h3>
                                     </div>
                                 </Col>
@@ -54,7 +54,7 @@ class AstromallList extends React.Component {
                                 <Row>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -63,8 +63,34 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
+                                                          </div>
+                                                      </Col>
+                                                 </Row>
+                                            </Link>
+                                         </div>
+                                    </Col>
+
+                                    <Col md="4">
+                                         <div className="po-box">
+                                            <Link to="/poojadetail">
+                                                 <Row>
+                                                     <Col md="4">
+                                                       <div className="po-1">
+                                                          <img src={poojaone} alt="" width="100%"/>
+                                                        </div>
+                                                     </Col>
+                                                      <Col md="8">
+                                                          <div className="po-1">
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
@@ -73,7 +99,7 @@ class AstromallList extends React.Component {
                                     </Col>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -82,8 +108,11 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
@@ -92,7 +121,7 @@ class AstromallList extends React.Component {
                                     </Col>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -101,8 +130,11 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
@@ -111,7 +143,7 @@ class AstromallList extends React.Component {
                                     </Col>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -120,8 +152,11 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
@@ -130,7 +165,7 @@ class AstromallList extends React.Component {
                                     </Col>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -139,8 +174,11 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
@@ -149,7 +187,7 @@ class AstromallList extends React.Component {
                                     </Col>
                                     <Col md="4">
                                          <div className="po-box">
-                                            <Link to="/productlist">
+                                            <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
@@ -158,20 +196,18 @@ class AstromallList extends React.Component {
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Puja @₹501</h3>
-                                                                <p>Almost everything runs on Internet today and in order to make your life much easier, we have introduced Online Puja for you</p>
+                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
+                                                                <p>Puja Starting from  @₹501</p>
+                                                                <Link className="pto-l">
+                                                                     Book Now
+                                                                </Link>
                                                           </div>
                                                       </Col>
                                                  </Row>
                                             </Link>
                                          </div>
                                     </Col>
-
-
-
-
-
-
+                                   
                                 </Row>
                             </div>
                         </Col>
@@ -192,4 +228,4 @@ class AstromallList extends React.Component {
 }
 
 
-export default AstromallList;
+export default ProductList;

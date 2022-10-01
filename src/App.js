@@ -149,10 +149,18 @@ const ProfileDetail = lazy(() => import("./components/astrology/profiledetail"))
 const PoojaDetail = lazy(() => import("./components/astrology/poojadetail"));
 const HeroscopesAll = lazy(() => import("./components/astrology/heroscopesall"));
 const HeroscopesTwo = lazy(() => import("./components/astrology/heroscopestwo"));
+const HoroscopeDetail = lazy(() => import("./components/astrology/HoroscopeDetail"));
+
 const AstromallList = lazy(() => import("./components/astrology/astromallList"));
+const ProductList = lazy(() => import("./components/astrology/ProductList"));
+const ConsultantList = lazy(() => import("./components/astrology/ConsultantList"));
+const CartList = lazy(() => import("./pages/other/CartList"));
+
 const OurService = lazy(() => import("./components/astrology/OurService"));
 const AllAstrologerList = lazy(() => import("./components/astrology/allastrologerlist"));
 const AutoSearch = lazy(() => import("./components/astrology/autosearch"));
+const MatchSearch = lazy(() => import("./components/astrology/MatchSearch"));
+
 const SliderDemo = lazy(() => import("./components/astrology/sliderdemo"));
 const SliderList = lazy(() => import("./components/astrology/sliderlist"));
 const ChatList = lazy(() => import("./components/chat/chatlist"));
@@ -162,6 +170,7 @@ const WalletMoney = lazy(() => import("./components/astrology/WalletMoney"));
 const WalletTransacList = lazy(() => import("./components/astrology/WalletTransacList"));
 const NotificationList = lazy(() => import("./components/astrology/NotificationList"));
 const WalletAddForm = lazy(() => import("./components/astrology/WalletAddForm"));
+const AddressForm = lazy(() => import("./components/astrology/AddressForm"));
 
 
 const Cart = lazy(() => import("./pages/other/Cart"));
@@ -497,6 +506,11 @@ const App = (props) => {
                   component={WalletAddForm}
                 />
 
+               <Route
+                  path={process.env.PUBLIC_URL + "/addressform"}
+                  component={AddressForm}
+                />
+
 <               Route
                   path={process.env.PUBLIC_URL + "/walletmoney"}
                   component={WalletMoney}
@@ -521,7 +535,7 @@ const App = (props) => {
                   component={PredictionallHome}
                 />
                  <Route
-                  path={process.env.PUBLIC_URL + "/astrologerdetail"}
+                  path={process.env.PUBLIC_URL + "/astrologerdetail/:id"}
                   component={AstrologerDetail}
                 />
                 <Route
@@ -568,6 +582,17 @@ const App = (props) => {
                 />
 
                 <Route
+                  path={process.env.PUBLIC_URL + "/consultantlist"}
+                  component={ConsultantList}
+                />
+
+                
+                <Route
+                  path={process.env.PUBLIC_URL + "/cartlist"}
+                  component={CartList}
+                />
+
+                <Route
                   path={process.env.PUBLIC_URL + "/heroscopesall"}
                   component={HeroscopesAll}
                 />
@@ -576,11 +601,21 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/heroscopestwo"}
                   component={HeroscopesTwo}
                 />
+                 <Route
+                  path={process.env.PUBLIC_URL + "/horoscopedetail"}
+                  component={HoroscopeDetail}
+                />
 
                 <Route
                   path={process.env.PUBLIC_URL + "/astromallList"}
                   component={AstromallList}
                 />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/productlist"}
+                  component={ProductList}
+                />
+
                 <Route
                   path={process.env.PUBLIC_URL + "/alertpage"}
                   component={AlertPage}
@@ -599,6 +634,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/autosearch"}
                   component={AutoSearch}
+                />
+                 <Route
+                  path={process.env.PUBLIC_URL + "/matchsearch"}
+                  component={MatchSearch}
                 />
                  <Route
                   path={process.env.PUBLIC_URL + "/sliderdemo"}

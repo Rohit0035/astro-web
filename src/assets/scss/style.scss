@@ -487,6 +487,7 @@ span.scope-sp {
 .st-search {
     width: 100%;
     margin-bottom: 70px;
+    margin-top: 30px;
 }
 
 // astro mall css
@@ -500,6 +501,7 @@ span.scope-sp {
         font-size: 16px;
         font-weight: 400;
         margin-bottom: 0px;
+        line-height: 22px;
     }
     p{
         font-size: 13px;
@@ -1020,5 +1022,131 @@ i.fa-hand-o-right.md-i {
     h3{
         margin-bottom: 30px;
         margin-top: 14px;
+    }
+}
+
+// match serch
+.wrapper {
+    margin: 0px;
+}
+// kundli match css
+
+.mtkun-box {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding-bottom: 4px;
+    border-bottom: 1px solid#cccccc82;
+    .k-bx {
+        width: 40px;
+        height: 40px;
+        float: left;
+        margin-right: 15px;
+        background: #000;
+        border-radius: 100%;
+        text-align: center;
+        p{
+            color: #fff;
+            font-size: 25px;
+            padding: 7px;
+        }
+    }
+    .k-bxx{
+        width: fit-content;
+        float: left;
+        h5{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        p{
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 2px;
+        }
+    }
+    .k-dlt {
+        float: right;
+    }
+}
+.scope-st {
+    padding: 30px;
+    background: #fdd39d4d;
+    border-radius: 5px;
+    margin-top: 62px;
+    margin-right: 30px;
+    select{
+        margin: 20px 0px;
+    }
+   
+}
+
+.h-cate{
+    margin-top: 40px;
+    h3{
+        font-weight: 500;
+    }
+    ul{
+        padding: 0px;
+       li{
+            line-height: 40px;
+           a{
+               font-size: 18px;
+               font-weight: 400;
+               color: #555151;
+           }
+       }
+   }
+}
+a.pto-l {
+    float: right;
+    padding: 4px 10px;
+    background: #ccc;
+    border-radius: 50px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+// order review
+
+.order-view {
+    background: #ffd59e30;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 5px 10px #7f7c7a;
+}
+.order-bx {
+    border-radius: 10px;
+    border: 1px solid;
+    margin: 50px 0px;
+    box-shadow: 5px 10px #4a4646;
+    padding: 20px;
+    ul{
+        li{
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            span{
+                float: right;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.rv-1 {
+    background: #f1e9e0;
+    text-align: center;
+    padding: 16px;
+    border-radius: 5px;
+    height: 130px;
+    p{
+        font-size: 18px;
+        font-weight: 600;
+        margin: 12px 0px;
+    }
+    img{
+        width: 70px;
     }
 }

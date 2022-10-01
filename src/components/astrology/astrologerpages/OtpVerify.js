@@ -70,7 +70,7 @@ handleSubmit(event)  {
           console.log(res);
           alert("anjali")
           swal("Success!", " OTP Verify Successful Done!", "success");
-          this.props.history.push("/");
+          this.props.history.push("/completeproastro");
         })
         .catch((error) => {
           console.log(error.response)

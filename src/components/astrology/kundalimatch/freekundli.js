@@ -6,6 +6,7 @@ import { Container, Row,  Col, Card,Input, InputGroup, Form,Button } from "react
 import "../../../assets/scss/astropooja.css";
 import LayoutOne from "../../../layouts/LayoutOne";
 import astromob from "../../../assets/img/astromob.png";
+import MatchSearch from "../MatchSearch";
 
 
 
@@ -59,9 +60,9 @@ class FreeKundli extends React.Component {
                            </p>
 
                             <div className="match-bx">
-                                <h3>New Kundli</h3>
                                         <Row>
                                             <Col md="8">
+                                              <h3>New Kundli</h3>
                                               <form>
                                                 <div className="form-m">
                                                     <Row>
@@ -522,8 +523,49 @@ class FreeKundli extends React.Component {
                                                 </Link>
                                             </Col>
                                             <Col md="4">
+                                            <h3>Saved Matches</h3>
                                                 <div className="form-m">
-                                                     <img src={astromob}  alt="" width="100%" />
+                                                    <Row>
+                                                          <Col>
+                                                              <MatchSearch/> 
+                                                               <h4 className="mt-3">Recent Views</h4>
+                                                               <hr></hr>
+                                                                <div className="mtkun-box">
+                                                                    <Link>
+                                                                            <div className="k-bx" >
+                                                                                <p>R</p>
+                                                                            </div> 
+                                                                            <div className="k-bxx">
+                                                                                <h5>lorem</h5>
+                                                                                <p>21/09/2022</p>
+                                                                                <p>Indore</p>
+                                                                            </div> 
+                                                                            <div className="k-dlt">
+                                                                                <Link className="Tansdel">
+                                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                                </Link>
+                                                                            </div>
+                                                                    </Link>
+                                                                </div>
+                                                                <div className="mtkun-box">
+                                                                    <Link>
+                                                                            <div className="k-bx" >
+                                                                                <p>S</p>
+                                                                            </div> 
+                                                                            <div className="k-bxx">
+                                                                                <h5>lorem</h5>
+                                                                                <p>21/09/2022</p>
+                                                                                <p>Indore</p>
+                                                                            </div> 
+                                                                            <div className="k-dlt">
+                                                                                <Link className="Tansdel">
+                                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                                </Link>
+                                                                            </div>
+                                                                    </Link>
+                                                                </div>
+                                                          </Col>
+                                                    </Row>
                                                 </div>
                                             </Col>
                                         </Row>

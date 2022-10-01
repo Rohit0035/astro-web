@@ -30,52 +30,27 @@ export default class MyAccount extends Component {
  
 
 
+ 
+
   componentDidMount() {
     let { id } = this.props.match.params;
     console.log(this.state);
-    axios
-      .get(`http://13.235.180.192/user/viewoneuser/${id}`, {
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      })
+    axios  
+      .get(`http://13.235.180.192/user/viewoneuser/${id}`)
       .then((response) => {
-        console.log(response);
-
+        console.log(response.data);
         this.setState({
-          firstname: response.data.data.firstname,
-          // lastname: response.data.data.lastname,
-          // email: response.data.data.email,
-          // mobile: response.data.data.mobile,
+          fullname: response.data.fullname,
+          email: response.data.email,
+          mobile: response.data.mobile,
+          userimg: response.data.userimg,
+          // about_me: response.data.about_me,
         });
         // this.state
-        console.log(this.state);
+        //console.log(this.state);
       })
       .catch((error) => {
-        console.log(error.response);
-      });
-
-    axios
-      .get("http://13.235.180.192/api/user/viewoneuseraddress", {
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-
-        this.setState({
-          // fullname:response.data.data.fullname,
-          address: response.data.data.address,
-          locality: response.data.data.locality,
-          pincode: response.data.data.pincode,
-          city: response.data.data.city,
-          state: response.data.data.state,
-        });
-        console.log(this.state);
-      })
-      .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   }
 

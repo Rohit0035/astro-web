@@ -3,7 +3,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import { Container, Row,  Col, Card,Input, InputGroup, Form,Button } from "reactstrap";
-import Pj from "../../assets/img/pj.gif";
+import Pj from "../../assets/img/Pj.jpg";
 import "../../assets/scss/astropooja.css";
 import pagetitle  from "../../assets/img/pagetitle.jpg";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -48,12 +48,12 @@ class PoojaDetail extends React.Component {
                   <Col md="12">
                        <Card className="mb-50">
                            <Row>
-                               <Col md="6">
+                               <Col md="4">
                                     <div className="preview-pic tab-content">
-                                        <img src={Pj}  alt=""/>
+                                        <img src={Pj}  alt="" width="100%"/>
                                     </div>
                                </Col>
-                               <Col md="6">
+                               <Col md="8">
                                     <div className="details">
                                         <h3 className="product-title">Magic ball reader</h3>
                                         <div className="rating">
@@ -69,7 +69,7 @@ class PoojaDetail extends React.Component {
                                         <p className="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
                                         <h4 className="price">current price: <span>$180</span></h4>
                                         <h4 className="price">discount price: <span>$180</span></h4>
-                                        <p className="vote"><strong>91%</strong> of buyers enjoyed this Pooja <strong>(87 votes)</strong></p>
+                                       
                                        
                                         {/* <h5 className="colors">colors:
                                             <span className="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
@@ -77,8 +77,9 @@ class PoojaDetail extends React.Component {
                                             <span className="color blue"></span>
                                         </h5> */}
                                         <div class="action">
-                                            <button className="add-to-cart btn btn-default" type="button">add to cart</button>
-                                            <button className="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                                            <Link to="/consultantlist">
+                                               <button className="add-to-cart btn btn-default" type="button">Book Now</button>
+                                            </Link>
                                         </div>
                                     </div>
                                </Col>
