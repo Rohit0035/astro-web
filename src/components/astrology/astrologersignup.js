@@ -320,7 +320,7 @@ class AstrologerSignup extends React.Component {
                   <div className="line"></div>
                   <div className="step" data-target="#test-l-3">
                     <button className="step-trigger">
-                      <span className="bs-stepper-circle">3</span>
+                      <span className="bs-stepper-circle">4</span>
                       <span className="bs-stepper-label">Other Details</span>
                     </button>
                   </div>

@@ -28,16 +28,14 @@ class AstrologerDetail extends React.Component {
     };
   }
   componentDidMount() {
-      let { id } = this.props.match.params;
+    let { id } = this.props.match.params;
     // console.log(id);
     axiosConfig
-      .get(
-        `user/astrodetails/${id}`
-      )
+      .get(`/user/astrodetails/${id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.data);
         this.setState({
-          Name: response.data.Name,
+          Name: response.data.data.Name,
           Skills: response.data.Skills,
           language: response.data.language,
           img: response.data.img,
@@ -46,11 +44,6 @@ class AstrologerDetail extends React.Component {
           callCharge: response.data.callCharge,
           about_me: response.data.about_me,
           msg: response.data.msg,
-          
-
-         
-        
-         
         });
       })
       .catch((error) => {

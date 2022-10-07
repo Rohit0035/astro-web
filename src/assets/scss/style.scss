@@ -460,6 +460,8 @@ p {
 .scope-text{
     p{
         margin-bottom: 0px;
+        overflow-y: hidden;
+        height: 120px;
     }
 }
 .scope-1 {

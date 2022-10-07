@@ -97,26 +97,28 @@ class HeroscopesTwo extends React.Component {
                   </p>
 
                   <Row>
-                    {horoscope.length ?  horoscope.map((hscope, index) => {
-                      return (
-                        <Col md="6" key={index}>
-                          <div className="scope-detail scop-2 mtb-10">
-                            <div className="scope-img">
-                              <img src={heroscope1} alt="" />
-                            </div>
-                            <div className="scope-text">
-                              <h4 className="">{hscope.rashi_title}</h4>
-                              <p>{hscope.desc}</p>
-                              <span className="scope-sp">
-                                <Link to="/horoscopedetail">Read More</Link>
-                              </span>
-                            </div>
-                          </div>
-                        </Col>
-                      );
-                    }): null}
-
-                  
+                    {horoscope.length
+                      ? horoscope.map((hscope, index) => {
+                          return (
+                            <Col md="6" key={index}>
+                              <div className="scope-detail scop-2 mtb-10">
+                                <div className="scope-img">
+                                  <img src={heroscope1} alt="" />
+                                </div>
+                                <div className="scope-text">
+                                  <h4 className="">{hscope.rashi_title}</h4>
+                                  <p>{hscope.desc}</p>
+                                  <span className="scope-sp">
+                                    <Link to={"/horoscopedetail/" + hscope._id}>
+                                      Read More
+                                    </Link>
+                                  </span>
+                                </div>
+                              </div>
+                            </Col>
+                          );
+                        })
+                      : null}
                   </Row>
                 </div>
               </Col>

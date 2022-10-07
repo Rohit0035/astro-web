@@ -1,11 +1,19 @@
-import React from "react"
+import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row,  Col, Input, InputGroup, Form,Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  InputGroup,
+  Form,
+  Button,
+} from "reactstrap";
 // import aboutimg from "../../assets/img/aboutimg.jpg";
 import aboutone from "../../assets/img/aboutone.png";
 import abouttwo from "../../assets/img/abouttwo.png";
 import LayoutOne from "../../layouts/LayoutOne";
-import pagetitle  from "../../assets/img/pagetitle.jpg";
+import pagetitle from "../../assets/img/pagetitle.jpg";
 import FunFactOne from "../../wrappers/fun-fact/FunFactOne";
 import poojaone from "../../assets/img/pooja/pooja-1.jpg";
 import AutoSearch from "./autosearch";
@@ -15,19 +23,17 @@ class AstromallList extends React.Component {
   constructor() {
     super();
     this.state = {
-      category: [],
-
+      procategory: [],
     };
   }
 
   componentDidMount = () => {
     axiosConfig
-      .get("/admin/getallCategory")
+      .get("/admin/getproductcalegory")
       .then((response) => {
         console.log(response.data);
         if (response.data.status === true) {
-          this.setState({ category: response.data.data });
-          
+          this.setState({ procategory: response.data.data });
         }
       })
       .catch((error) => {
@@ -36,66 +42,70 @@ class AstromallList extends React.Component {
       });
   };
   render() {
-    const { category } = this.state;
-  return (
-    <LayoutOne headerTop="visible">
-            <section className="pt-0 pb-0" >
-                 <div
-                    className=""
-                    style={{
-                      backgroundColor:"#FFD59E",
-                      width: "100%",
-                      padding:"70px 0px",
-                      backgroundSize:"cover"
-                    }}
-                  >
-                    <Container>
-                            <Row>
-                                <Col md="12">
-                                    <div className="leftcont text-left">
-                                        <h1>Astromall Shop</h1>
-                                        <h3>Shop Best Online Astrology Products And Services</h3>
-                                    </div>
-                                </Col>
-                                
-                            </Row>
-                    </Container>
-                    
-                </div>
-            </section>
+    const { procategory } = this.state;
+    return (
+      <LayoutOne headerTop="visible">
+        <section className="pt-0 pb-0">
+          <div
+            className=""
+            style={{
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
+            }}
+          >
+            <Container>
+              <Row>
+                <Col md="12">
+                  <div className="leftcont text-left">
+                    <h1>Astromall Shop</h1>
+                    <h3>Shop Best Online Astrology Products And Services</h3>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </section>
 
-              <section className="ptb-0">
-                  <Container>
-                      <Row>
-                          <Col lg="12">
-                            <div className="pt-10 pb-50">
-                                <AutoSearch/>                       
-                                <Row>
-                                {category.length ?  category.map((cat, index) => {
-                                  return (
-                                    <Col key={index} md="4">
-                                         <div className="po-box">
-                                            <Link to={'/productlist/'+cat._id}>
-                                                 <Row>
-                                                     <Col md="4">
-                                                       <div className="po-1">
-                                                          <img src={poojaone} alt="" width="100%"/>
-                                                        </div>
-                                                     </Col>
-                                                      <Col md="8">
-                                                          <div className="po-1">
-                                                                <h3>{cat.title}</h3>
-                                                                <p>{cat.desc}</p>
-                                                          </div>
-                                                      </Col>
-                                                 </Row>
-                                            </Link>
-                                         </div>
+        <section className="ptb-0">
+          <Container>
+            <Row>
+              <Col lg="12">
+                <div className="pt-10 pb-50">
+                  <AutoSearch />
+                  <Row>
+                    {procategory.length
+                      ? procategory.map((procat, index) => {
+                          return (
+                            <Col key={index} md="4">
+                              <div className="po-box">
+                                <Link to={"/productlist/" + procat._id}>
+                                  <Row>
+                                    <Col md="4">
+                                      <div className="po-1">
+                                        <img
+                                          src={procat.img}
+                                          alt="image"
+                                          width="100%"
+                                        />
+                                      </div>
                                     </Col>
-                                    );
-                                   }): null}
+                                    <Col md="8">
+                                      <div className="po-1">
+                                        <h3>{procat.name}</h3>
+                                        <p>{procat.desc}</p>
+                                      </div>
+                                    </Col>
+                                  </Row>
+                                </Link>
+                              </div>
+                            </Col>
+                          );
+                        })
+                      : null}
 
-                                    {/* <Col md="4">
+                    {/* <Col md="4">
                                          <div className="po-box">
                                             <Link to="/productlist">
                                                  <Row>
@@ -190,25 +200,20 @@ class AstromallList extends React.Component {
                                             </Link>
                                          </div>
                                     </Col> */}
-                                    
-                                </Row>
-                            </div>
-                        </Col>
-                        <Col lg="6">
-                            {/* <div className="abo-2">
+                  </Row>
+                </div>
+              </Col>
+              <Col lg="6">
+                {/* <div className="abo-2">
                                   <img src={aboutone} alt="" className="about-img"></img>
                             </div> */}
-                        </Col>
-                    </Row>
-                  </Container>
-              </section>
-      
-          
-
-   </LayoutOne>
-  );
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      </LayoutOne>
+    );
   }
 }
-
 
 export default AstromallList;

@@ -122,56 +122,97 @@ const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
 const Step = lazy(() => import("./pages/other/Step"));
 const Phone = lazy(() => import("./pages/other/Phone"));
 const Otp = lazy(() => import("./pages/other/Otp"));
-const OtpVerify = lazy(() => import("./components/astrology/astrologerpages/OtpVerify"));
-const RegisterAstro = lazy(() => import("./components/astrology/astrologerpages/RegisterAstro"));
-const CompleteProAstro = lazy(() => import("./components/astrology/astrologerpages/CompleteProAstro"));
-
-
+const OtpVerify = lazy(() =>
+  import("./components/astrology/astrologerpages/OtpVerify")
+);
+const RegisterAstro = lazy(() =>
+  import("./components/astrology/astrologerpages/RegisterAstro")
+);
+const CompleteProAstro = lazy(() =>
+  import("./components/astrology/astrologerpages/CompleteProAstro")
+);
 
 // astology pages start
 const AlertPage = lazy(() => import("./components/astrology/AlertPage"));
 
-const FreeKundli = lazy(() => import("./components/astrology/kundalimatch/freekundli"));
+const FreeKundli = lazy(() =>
+  import("./components/astrology/kundalimatch/freekundli")
+);
 
-const bannerSection = lazy(() => import("./components/astrology/bannerSection"));
-const TeamMemberOne = lazy(() => import("././wrappers/team-member/TeamMemberOne"));
+const bannerSection = lazy(() =>
+  import("./components/astrology/bannerSection")
+);
+const TeamMemberOne = lazy(() =>
+  import("././wrappers/team-member/TeamMemberOne")
+);
 const HomeCategory = lazy(() => import("./components/astrology/homecategory"));
 const OurWorkFlow = lazy(() => import("./components/astrology/ourworkflow.js"));
-const PredictionallHome = lazy(() => import("./components/astrology/predictionallhome"));
+const PredictionallHome = lazy(() =>
+  import("./components/astrology/predictionallhome")
+);
 const AboutUs = lazy(() => import("./components/astrology/aboutus"));
 const AboutDetail = lazy(() => import("./components/astrology/aboutdetail"));
-const AstrologerDetail = lazy(() => import("./components/astrology/astrologerdetail"));
-const AstrologerSignup = lazy(() => import("./components/astrology/astrologersignup"));
-const AstrologerLogin = lazy(() => import("./components/astrology/astrologerlogin"));
+const AstrologerDetail = lazy(() =>
+  import("./components/astrology/astrologerdetail")
+);
+const AstrologerSignup = lazy(() =>
+  import("./components/astrology/astrologersignup")
+);
+const AstrologerLogin = lazy(() =>
+  import("./components/astrology/astrologerlogin")
+);
 const AstroTeam = lazy(() => import("./components/astrology/astroteam"));
 const SectionPooja = lazy(() => import("./components/astrology/sectionpooja"));
-const ProfileDetail = lazy(() => import("./components/astrology/profiledetail"));
+const ProfileDetail = lazy(() =>
+  import("./components/astrology/profiledetail")
+);
 const PoojaDetail = lazy(() => import("./components/astrology/poojadetail"));
-const HeroscopesAll = lazy(() => import("./components/astrology/heroscopesall"));
-const HeroscopesTwo = lazy(() => import("./components/astrology/heroscopestwo"));
-const HoroscopeDetail = lazy(() => import("./components/astrology/HoroscopeDetail"));
+const HeroscopesAll = lazy(() =>
+  import("./components/astrology/heroscopesall")
+);
+const HeroscopesTwo = lazy(() =>
+  import("./components/astrology/heroscopestwo")
+);
+const HoroscopeDetail = lazy(() =>
+  import("./components/astrology/HoroscopeDetail")
+);
 
-const AstromallList = lazy(() => import("./components/astrology/astromallList"));
+const AstromallList = lazy(() =>
+  import("./components/astrology/astromallList")
+);
 const ProductList = lazy(() => import("./components/astrology/ProductList"));
-const ConsultantList = lazy(() => import("./components/astrology/ConsultantList"));
+const ConsultantList = lazy(() =>
+  import("./components/astrology/ConsultantList")
+);
 const CartList = lazy(() => import("./pages/other/CartList"));
 
 const OurService = lazy(() => import("./components/astrology/OurService"));
-const AllAstrologerList = lazy(() => import("./components/astrology/allastrologerlist"));
+const AllAstrologerList = lazy(() =>
+  import("./components/astrology/allastrologerlist")
+);
 const AutoSearch = lazy(() => import("./components/astrology/autosearch"));
 const MatchSearch = lazy(() => import("./components/astrology/MatchSearch"));
 
 const SliderDemo = lazy(() => import("./components/astrology/sliderdemo"));
 const SliderList = lazy(() => import("./components/astrology/sliderlist"));
 const ChatList = lazy(() => import("./components/chat/chatlist"));
-const KundaliForm = lazy(() => import("./components/astrology/kundalimatch/kundaliform"));
-const KundaliMatchList = lazy(() => import("./components/astrology/kundalimatch/kundalimatchlist"));
+const KundaliForm = lazy(() =>
+  import("./components/astrology/kundalimatch/kundaliform")
+);
+const KundaliMatchList = lazy(() =>
+  import("./components/astrology/kundalimatch/kundalimatchlist")
+);
 const WalletMoney = lazy(() => import("./components/astrology/WalletMoney"));
-const WalletTransacList = lazy(() => import("./components/astrology/WalletTransacList"));
-const NotificationList = lazy(() => import("./components/astrology/NotificationList"));
-const WalletAddForm = lazy(() => import("./components/astrology/WalletAddForm"));
+const WalletTransacList = lazy(() =>
+  import("./components/astrology/WalletTransacList")
+);
+const NotificationList = lazy(() =>
+  import("./components/astrology/NotificationList")
+);
+const WalletAddForm = lazy(() =>
+  import("./components/astrology/WalletAddForm")
+);
 const AddressForm = lazy(() => import("./components/astrology/AddressForm"));
-
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const MyOrder = lazy(() => import("./pages/other/MyOrder"));
@@ -261,7 +302,7 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/home-furniture"}
                   component={HomeFurniture}
                 /> */}
-              
+
                 <Route
                   exact
                   path={process.env.PUBLIC_URL + "/"}
@@ -379,7 +420,7 @@ const App = (props) => {
                   component={HomeCategory}
                 />
 
-                 {/* astologo route  Close */}
+                {/* astologo route  Close */}
 
                 {/* Shop pages */}
                 <Route
@@ -483,8 +524,7 @@ const App = (props) => {
                   component={BlogDetailsStandard}
                 />
 
-               
-               {/* astrology page path  */}
+                {/* astrology page path  */}
 
                 <Route
                   path={process.env.PUBLIC_URL + "/bannerSection"}
@@ -506,12 +546,12 @@ const App = (props) => {
                   component={WalletAddForm}
                 />
 
-               <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/addressform"}
                   component={AddressForm}
                 />
 
-<               Route
+                <Route
                   path={process.env.PUBLIC_URL + "/walletmoney"}
                   component={WalletMoney}
                 />
@@ -520,8 +560,8 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/profiledetail"}
                   component={ProfileDetail}
                 />
-                 
-                 <Route
+
+                <Route
                   path={process.env.PUBLIC_URL + "/TeamMemberOne"}
                   component={TeamMemberOne}
                 />
@@ -534,7 +574,7 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/predictionallhome"}
                   component={PredictionallHome}
                 />
-                 <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/astrologerdetail"}
                   component={AstrologerDetail}
                 />
@@ -542,7 +582,7 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/astrologersignup"}
                   component={AstrologerSignup}
                 />
-                 <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/astrologerlogin"}
                   component={AstrologerLogin}
                 />
@@ -570,14 +610,11 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/aboutdetail"}
                   component={AboutDetail}
                 />
-                
+
+                <Route path={process.env.PUBLIC_URL + "/faq"} component={FAQ} />
+
                 <Route
-                  path={process.env.PUBLIC_URL + "/faq"}
-                  component={FAQ}
-                />
-                  
-                <Route
-                  path={process.env.PUBLIC_URL + "/poojadetail"}
+                  path={process.env.PUBLIC_URL + "/poojadetail/:id"}
                   component={PoojaDetail}
                 />
 
@@ -586,7 +623,6 @@ const App = (props) => {
                   component={ConsultantList}
                 />
 
-                
                 <Route
                   path={process.env.PUBLIC_URL + "/cartlist"}
                   component={CartList}
@@ -601,8 +637,8 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/heroscopestwo"}
                   component={HeroscopesTwo}
                 />
-                 <Route
-                  path={process.env.PUBLIC_URL + "/horoscopedetail"}
+                <Route
+                  path={process.env.PUBLIC_URL + "/horoscopedetail/:id"}
                   component={HoroscopeDetail}
                 />
 
@@ -621,7 +657,6 @@ const App = (props) => {
                   component={AlertPage}
                 />
 
-                
                 <Route
                   path={process.env.PUBLIC_URL + "/ourservice"}
                   component={OurService}
@@ -635,11 +670,11 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/autosearch"}
                   component={AutoSearch}
                 />
-                 <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/matchsearch"}
                   component={MatchSearch}
                 />
-                 <Route
+                <Route
                   path={process.env.PUBLIC_URL + "/sliderdemo"}
                   component={SliderDemo}
                 />
@@ -662,7 +697,6 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/kundalimatchlist"}
                   component={KundaliMatchList}
                 />
-
 
                 {/* Other pages */}
                 <Route
@@ -699,13 +733,13 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/registerastro"}
                   component={RegisterAstro}
-                />  
+                />
 
                 <Route
                   path={process.env.PUBLIC_URL + "/completeproastro"}
                   component={CompleteProAstro}
-                />                     
-              
+                />
+
                 <Route
                   path={process.env.PUBLIC_URL + "/step"}
                   component={Step}
