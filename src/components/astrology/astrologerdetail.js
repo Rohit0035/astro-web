@@ -28,11 +28,11 @@ class AstrologerDetail extends React.Component {
     };
   }
   componentDidMount() {
-     let { id } = this.props.match.params;
+      let { id } = this.props.match.params;
     // console.log(id);
-    axios
+    axiosConfig
       .get(
-        `http://13.235.180.192:8000/user/astrodetails/${id}`
+        `user/astrodetails/${id}`
       )
       .then((response) => {
         console.log(response.data);
@@ -45,6 +45,12 @@ class AstrologerDetail extends React.Component {
           Exp: response.data.Exp,
           callCharge: response.data.callCharge,
           about_me: response.data.about_me,
+          msg: response.data.msg,
+          
+
+         
+        
+         
         });
       })
       .catch((error) => {

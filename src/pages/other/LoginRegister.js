@@ -76,7 +76,7 @@ export default class LoginRegister extends Component {
     e.preventDefault();
 
     axios
-      .post("http://15.207.86.15:8000/user/userlogin", {
+      .post("http://13.235.180.192:8000/user/userlogin", {
         mobile:
           parseInt(this.state.email) != NaN
             ? parseInt(this.state.email)
@@ -109,7 +109,7 @@ export default class LoginRegister extends Component {
     e.preventDefault();
     // this.setState({ otp: false });
     axios
-      .post("http://15.207.86.15:8000/user/usersignup", this.state)
+      .post("http://13.235.180.192:8000/user/usersignup", this.state)
       .then((response) => {
         console.log(response);
         localStorage.setItem("auth-token", response.data.token);

@@ -535,7 +535,7 @@ const App = (props) => {
                   component={PredictionallHome}
                 />
                  <Route
-                  path={process.env.PUBLIC_URL + "/astrologerdetail/:id"}
+                  path={process.env.PUBLIC_URL + "/astrologerdetail"}
                   component={AstrologerDetail}
                 />
                 <Route
@@ -612,7 +612,7 @@ const App = (props) => {
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/productlist"}
+                  path={process.env.PUBLIC_URL + "/productlist/:id"}
                   component={ProductList}
                 />
 

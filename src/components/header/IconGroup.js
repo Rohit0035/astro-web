@@ -37,7 +37,7 @@ const IconGroup = ({
   //const { id } = useParams();
   const fetchcarts = async (token) => {
     const { data } = await Axios.get(
-      `http://13.235.180.192/api/admin/cartbycustomer`,
+      // `http://13.235.180.192/api/admin/cartbycustomer`,
       {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -58,7 +58,7 @@ const IconGroup = ({
   const [wish, setWish] = useState([]);
   const fetchWish = async () => {
     const { data } = await Axios.get(
-      "http://13.235.180.192/api/admin/getallwishlist",
+      // "http://13.235.180.192/api/admin/getallwishlist",
       {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -80,11 +80,11 @@ const IconGroup = ({
 const [customer, setCustomer] = useState([]);
 const fetchCustomer = async () => {
   const { data } = await Axios.get(
-    "http://15.207.86.15:8000/user/viewoneuser/62ee1dbe9b502d1ab4f5e131",
+    `http://13.235.180.192:8000/admin/getoneAstro/632846ee78e712488b9646d0`,
     {
-      headers: {
-        "auth-token": localStorage.getItem("auth-token"),
-      },
+      // headers: {
+      //   "auth-token": localStorage.getItem("auth-token"),
+      // },
     }
   );
 
@@ -146,9 +146,9 @@ useEffect(() => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/registerastro"}>
+                  {/* <Link to={process.env.PUBLIC_URL + "/astrologersignup"}>
                     Astrologer Register
-                  </Link>
+                  </Link> */}
                 </li>
               </>
             ) : (

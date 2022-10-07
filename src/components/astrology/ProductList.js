@@ -9,13 +9,40 @@ import pagetitle  from "../../assets/img/pagetitle.jpg";
 import FunFactOne from "../../wrappers/fun-fact/FunFactOne";
 import poojaone from "../../assets/img/pooja/pooja-1.jpg";
 import AutoSearch from "./autosearch";
+import axiosConfig from "../../axiosConfig";
 
 
 class ProductList extends React.Component {
- 
+     constructor(props) {
+          super(props);
+      
+          this.state = {
+            data: {},
+            productList:[]
+          };
+        }
+        componentDidMount() {
+           let { id } = this.props.match.params;
+          console.log(id);
+          axiosConfig
+            .get(
+              `/user/productbycategory/633bc7ba0a22b164016ff025`
+            )
+            .then((response) => {
+              console.log('productbycategory',response.data);
+              if(response.data.status === true){
+               this.setState({
+                    productList: response.data.data
+                   });
+              }
+              
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
   render() {
-
-
+const { productList } = this.state;
   return (
 
     <LayoutOne headerTop="visible">
@@ -52,19 +79,21 @@ class ProductList extends React.Component {
                                 <AutoSearch/>
                          
                                 <Row>
-                                    <Col md="4">
+                                {productList.length ?  productList.map((product, index) => {
+                                  return (
+                                    <Col md="4" key={index}>
                                          <div className="po-box">
                                             <Link to="/poojadetail">
                                                  <Row>
                                                      <Col md="4">
                                                        <div className="po-1">
-                                                          <img src={poojaone} alt="" width="100%"/>
+                                                          <img src={product?.image[0]} alt="pooja" width="100%"/>
                                                         </div>
                                                      </Col>
                                                       <Col md="8">
                                                           <div className="po-1">
-                                                                <h3>Mata Katyayani Group Puja and Hawan</h3>
-                                                                <p>Puja Starting from  @₹501</p>
+                                                                <h3>{product.title}</h3>
+                                                                <p>Puja Starting from  @₹{product?.mrp_price ? product?.mrp_price : 0}</p>
                                                                 <Link className="pto-l">
                                                                      Book Now
                                                                 </Link>
@@ -74,8 +103,10 @@ class ProductList extends React.Component {
                                             </Link>
                                          </div>
                                     </Col>
+                                    );
+                                   }): null}
 
-                                    <Col md="4">
+                                    {/* <Col md="4">
                                          <div className="po-box">
                                             <Link to="/poojadetail">
                                                  <Row>
@@ -184,8 +215,8 @@ class ProductList extends React.Component {
                                                  </Row>
                                             </Link>
                                          </div>
-                                    </Col>
-                                    <Col md="4">
+                                    </Col> */}
+                                    {/* <Col md="4">
                                          <div className="po-box">
                                             <Link to="/poojadetail">
                                                  <Row>
@@ -206,7 +237,7 @@ class ProductList extends React.Component {
                                                  </Row>
                                             </Link>
                                          </div>
-                                    </Col>
+                                    </Col> */}
                                    
                                 </Row>
                             </div>

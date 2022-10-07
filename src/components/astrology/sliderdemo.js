@@ -83,7 +83,7 @@ const SliderDemo = ({ data, sliderClass, sliderdemoClass }) => {
                     Call Rate: <span>Rs.20/hour</span>
                   </li>
                 </ul>
-                <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
+                <Link to="/astrologerdetail/:id" className="btn btn-primary btn-sm">
                   <i class="fa fa-phone"></i> Call Now
                 </Link>
               </div>

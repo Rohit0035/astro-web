@@ -7,10 +7,48 @@ import Pj from "../../assets/img/Pj.jpg";
 import "../../assets/scss/astropooja.css";
 import pagetitle  from "../../assets/img/pagetitle.jpg";
 import LayoutOne from "../../layouts/LayoutOne";
-
+import axiosConfig from "../../axiosConfig";
 
 class PoojaDetail extends React.Component {
- 
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          data: {},
+          title:''
+          
+        };
+      }
+    componentDidMount() {
+        //  let { id } = this.props.match.params;
+        // console.log(id);
+        axiosConfig
+          .get(
+            `/user/productbycategory/633bc7ba0a22b164016ff025`
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.setState({
+             title: response.data.title,
+              productname: response.data.productname,
+            //   language: response.data.language,
+            //   img: response.data.img,
+            //   status: response.data.status,
+            //   Exp: response.data.Exp,
+            //   callCharge: response.data.callCharge,
+            //   about_me: response.data.about_me,
+            //   msg: response.data.msg,
+            //   productname: response.data.productname,
+    
+             
+            
+             
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
 
   render() {
 
@@ -55,7 +93,7 @@ class PoojaDetail extends React.Component {
                                </Col>
                                <Col md="8">
                                     <div className="details">
-                                        <h3 className="product-title">Magic ball reader</h3>
+                                        <h3 className="product-title">{this.state.title}</h3>
                                         <div className="rating">
                                             <div className="stars">
                                                 <span className="fa fa-star checked"></span>

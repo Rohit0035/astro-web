@@ -194,9 +194,9 @@ class AstrologerSignup extends React.Component {
     for (var key of data.keys()) {
       console.log(key);
     }
-    let { id } = this.props.match.params;
+    // let { userId } = this.props.match.params;
     axiosConfig
-      .post(`/user/fillAstroDetails/${this.state.userId}`, obj)
+      .post(`/user/editAstroDetails/${this.state.userId}`, obj)
       .then((response) => {
         console.log(response.data.message);
         swal("Success!", "Submitted SuccessFull!", "success");
