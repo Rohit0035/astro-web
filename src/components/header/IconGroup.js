@@ -158,7 +158,7 @@ useEffect(() => {
                 </li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/notificationlist"}>
-                    Notification
+                    Notifications
                   </Link>
                 </li>
                 <li>
