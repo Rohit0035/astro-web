@@ -140,15 +140,15 @@ useEffect(() => {
                     Register
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={process.env.PUBLIC_URL + "/astrologerlogin"}>
                     Astrologer login
                   </Link>
-                </li>
+                </li> */}
                 <li>
-                  {/* <Link to={process.env.PUBLIC_URL + "/astrologersignup"}>
+                  <Link to={process.env.PUBLIC_URL + "/astrologersignup"}>
                     Astrologer Register
-                  </Link> */}
+                  </Link>
                 </li>
               </>
             ) : (
