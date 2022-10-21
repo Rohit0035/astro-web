@@ -1,15 +1,23 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import astro3 from "../../assets/img/team/astro3.jpg";
 
 const SliderDemo = ({ data, sliderClass, sliderdemoClass }) => {
   const [userId, setUserId] = useState("");
+  const [ bestAstrology, setBestAstrology] = useState(data);
+  
+  // useEffect(() => {
+  //   var user_id = localStorage.getItem("user_id");
+  //   setUserId(user_id);
+  // });
+
   useEffect(() => {
-    var user_id = localStorage.getItem("user_id");
-    setUserId(user_id);
-  });
+    setBestAstrology(data)
+  }, [data]);
+
+  // console.log('@@@',data)
 
   return (
     <div
@@ -24,73 +32,133 @@ const SliderDemo = ({ data, sliderClass, sliderdemoClass }) => {
         <h5>{data.customerName}</h5>
         <span>{data.title}</span>
       </div> */}
+                       
+                          
+                       
+                        <div className="image-flip">
+                          <div className="mainflip flip-0">
+                            <div className="frontside">
+                              <div className="card">
+                                <div className="card-body text-center">
+                                  <p>
+                                    <img src={data.img} alt="" />
+                                  </p>
+                                  <h4 className="card-title">
+                                    {data.fullname}
+                                  </h4>
+                                  <ul className="mb-3">
+                                    <li>
+                                     Specility: {" "}
+                                      <span>{data.all_skills}</span>
+                                    </li>
+                                    <li>
+                                      Language:{" "}
+                                      <span>{data.language}</span>
+                                    </li>
+                                    <li>
+                                      Experience:{" "}
+                                      <span>{data.exp_in_years}</span>
+                                    </li>
+                                    <li>
+                                      Call Rate:{" "}
+                                      <span>{data.callCharge}/{data.conrubute_hrs}</span>
+                                    </li>
+                                  </ul>
+                                  <Link className="btn btn-primary btn-sm st-d">
+                                    Online
+                                  </Link>
+                                  <Link className="btn btn-primary btn-sm">
+                                    <i class="fa fa-phone">
+                                      
+                                    </i>{" "}
+                                    Call Now
+                                    <small>
+                                      {/* / 20{" "}
+                                      <i class="fa fa-inr" aria-hidden="true">
+                                        {data.conrubute_hrs}
+                                      </i>{" "}
+                                      per Hour */}
+                                    </small>
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="backside">
+                              <div className="card">
+                                <div className="card-body text-center mt-4">
+                                  <h4 className="card-title">
+                                    {" "}
+                                    {data.fullname}
+                                  </h4>
+                                  <ul>
+                                    <li>
+                                      Rating:<span>(1458)</span>
+                                      <p className="mb-3">
+                                        <i
+                                          class="fa fa-star"
+                                          aria-hidden="true"
+                                        >
+                                        </i>
+                                        <i
+                                          class="fa fa-star"
+                                          aria-hidden="true"
+                                        ></i>
+                                        <i
+                                          class="fa fa-star"
+                                          aria-hidden="true"
+                                        ></i>
+                                        <i
+                                          class="fa fa-star"
+                                          aria-hidden="true"
+                                        ></i>
+                                        <i
+                                          class="fa fa-star"
+                                          aria-hidden="true"
+                                        ></i>
+                                      </p>
+                                    </li>
+                                    <li>
+                                    Specility:{" "}
+                                      <span>{data.all_skills}</span>
+                                    </li>
+                                    <li>
+                                      Language:{" "}
+                                      <span>{data.language}</span>
+                                    </li>
+                                    <li>
+                                      Experience:{" "}
+                                      <span>{data.exp_in_years}</span>
+                                    </li>
+                                    <li>
+                                    Call Rate:{" "}
+                                      <span>  {data.callCharge}/{data.conrubute_hrs}</span>
+                                    </li>
+                                  </ul>
 
-      <div className="image-flip">
-        <div className="mainflip flip-0">
-          <div className="frontside">
-            <div className="card">
-              <div className="card-body text-center">
-                <p>
-                  <img src={astro3} alt="" />
-                </p>
-                <h4 className="card-title">Krishnan Iyer</h4>
-                <ul className="mb-3">
-                  <li className="btt">
-                    Specility: <span>Tarot Card Reading , Vedic Astrology</span>
-                  </li>
-                  <li className="btt">
-                    Language: <span>English , Tamil , Malayalam</span>
-                  </li>
-                  <li className="btt">
-                    Experience: <span>2 years</span>
-                  </li>
-                  <li className="btt">
-                    Call Rate: <span>Rs.20/hour</span>
-                  </li>
-                </ul>
-                <Link className="btn btn-primary btn-sm st-d">Online</Link>
-                <Link className="btn btn-primary btn-sm">
-                  <i class="fa fa-phone"></i> Call Now
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="backside">
-            <div className="card">
-              <div className="card-body text-center mt-4">
-                <h4 className="card-title">Krishnan Iyer</h4>
-                <ul>
-                  <li>
-                    Rating :<span>(1458)</span>
-                    <p className="mb-3">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </p>
-                  </li>
-                  <li className="btt">
-                    Specility: <span>Tarot Card Reading , Vedic Astrology</span>
-                  </li>
-                  <li className="btt">
-                    Language: <span>English , Tamil , Malayalam</span>
-                  </li>
-                  <li className="btt">
-                    Experience: <span>2 years</span>
-                  </li>
-                  <li className="btt">
-                    Call Rate: <span>Rs.20/hour</span>
-                  </li>
-                </ul>
-                <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                  <i class="fa fa-phone"></i> Call Now
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                                  <Link
+                                    to={"/astrologerdetail/" + data._id}
+                                    className="btn btn-primary btn-sm"
+                                  >
+                                    <i class="fa fa-phone">
+                                      {/* {data.callCharge} */}
+                                    </i>{" "}
+                                    Call Now
+                                    {/* <small>
+                                      {" "}
+                                      20{" "}
+                                      <i class="fa fa-inr" aria-hidden="true">
+                                        {data.conrubute_hrs}
+                                      </i>
+                                      Hour
+                                    </small> */}
+                                  </Link>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
     </div>
   );
 };

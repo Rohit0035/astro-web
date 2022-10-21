@@ -1,131 +1,135 @@
-// import PropTypes from "prop-types";
-import React, { Fragment, Component } from "react";
-import MetaTags from "react-meta-tags";
-import { Link, useHistory } from "react-router-dom";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import Tab from "react-bootstrap/Tab";
-import Nav from "react-bootstrap/Nav";
-import axios from "axios";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import { ToastContainer } from "react-bootstrap";
-import { Button } from "reactstrap";
-import swal from "sweetalert";
+import React, { Fragment, Component } from 'react'
+import MetaTags from 'react-meta-tags'
+import Tab from 'react-bootstrap/Tab'
+import Nav from 'react-bootstrap/Nav'
+import axios from 'axios'
+import LayoutOne from '../../layouts/LayoutOne'
+import { Label, Input, Form, Button } from 'reactstrap'
+import swal from 'sweetalert'
 export default class LoginRegister extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      fullname: "",
-      email: "",
-      mobile: "",
-      password: "",
-      cnfrmPassword:"",
+      fullname: '',
+      email: '',
+      mobile: '',
+      dob: '',
+      userimg: '',
+      selectedName: '',
+      selectedFile: null,
+      otp: '',
+      otpMsg: '',
+    }
+  }
+  //Image Submit Handler
+  onChangeHandler = (event) => {
+    this.setState({ selectedFile: event.target.files[0] })
+    this.setState({ selectedName: event.target.files[0].name })
+    console.log(event.target.files[0])
+  }
+  otpHandler = (e) => {
+    e.preventDefault()
+    console.log(this.state)
+    axios
+      .post(`http://13.235.180.192:8000/user/userVryfyotp`, {
+        mobile: parseInt(this.state.mobile),
+        otp: parseInt(this.state.otp),
+      })
+      .then((response) => {
+        console.log('@@@####', response.data)
+        let id = response.data.user
 
-      // otp: true,
-      // walletId:"",
-
-      // otpnumber: "",
-      // token: "",
-    };
-    // this.state = {
-    //   email: "",
-    //   mobile: "",
-    //   password: "",
-    // };
+        if (response.data.status === true) {
+          this.setState({ otpMsg: response.data.msg })
+          localStorage.setItem('userData', JSON.stringify(response?.data?.data))
+          localStorage.setItem('token', JSON.stringify(response?.data?.token))
+          localStorage.setItem(
+            'user_id',
+            JSON.stringify(response?.data?.data?._id),
+          )
+          if (response.data.msg === 'otp verified') {
+            swal('otp verified')
+            // window.location.replace('/')
+            this.props.history.push('/')
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+        //this.setState({ errormsg: error });
+      })
   }
 
-  // otpHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(this.state);
-  //   axios
-  //     .post("http://35.154.134.118/api/user/verifyotp", {
-  //       mobile: this.state.mobile,
-  //       //customer_email: this.state.email,
-  //       otp: this.state.otpnumber,
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //       //localStorage.setItem("user", response.data.data._id);
-  //       localStorage.setItem("auth-token", this.state.token);
-  //       // const location = this.props.location;
-  //       // if (location.state && location.state.nextPathname) {
-  //       //   History.push("/login-register");
-  //       // } else {
-  //       //   History.push("/cart");
-  //       // }
-  //       // const history = useHistory();
-  //       // history.push("/cart");
-
-  //       this.props.history.push({
-  //         pathname: `/cart`,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //       //this.setState({ errormsg: error });
-  //     });
-  // };
-
   handlechange = (e) => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    e.preventDefault()
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   loginHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    let obj = {
+      mobile: parseInt(this.state.mobile),
+    }
 
     axios
-      .post("http://13.235.180.192:8000/user/userlogin", {
-        mobile:
-          parseInt(this.state.email) != NaN
-            ? parseInt(this.state.email)
-            : "null",
-        email: this.state.email,
-        password: this.state.password,
-      })
+      .post(`http://13.235.180.192:8000/user/userlogin`, obj)
       .then((response) => {
-        console.log('@@@####',response.data);
-        let userInfo = response.data.user;
-        
-        //localStorage.setItem("authec", response.data.token);
-        localStorage.setItem("auth-token", response.data.token);
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        swal("Success!", "Login Successful Done!", "success");
-        this.props.history.push("/");
+        console.log('@@@####', response.data)
+        this.setState({ otpMsg: response.data.msg })
+        if (response.data.msg === 'otp Send Successfully') {
+          swal('otp Send Successfully')
+          // this.props.history.push('/')
+        }
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-        swal("Error!", " Wrong UserName or Password", "error");
-      });
-  };
+        console.log(error)
+        console.log(error.response)
+        swal('Error!', ' Wrong UserName or Password', 'error')
+      })
+  }
   // otp = true;
   changeHandler = (e) => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    e.preventDefault()
+    this.setState({ [e.target.name]: e.target.value })
+  }
   submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    console.log(this.state.data)
+    const data = new FormData()
+    data.append('fullname', this.state.fullname)
+    data.append('email', this.state.email)
+    data.append('mobile', this.state.mobile)
+
+    data.append('dob', this.state.dob)
+    if (this.state.selectedFile !== null) {
+      data.append('userimg', this.state.selectedFile, this.state.selectedName)
+    }
+
+    for (var value of data.values()) {
+      console.log(value)
+    }
+
+    for (var key of data.keys()) {
+      console.log(key)
+    }
     // this.setState({ otp: false });
     axios
-      .post("http://13.235.180.192:8000/user/usersignup", this.state)
+      .post(`http://13.235.180.192:8000/user/usersignup`, data)
       .then((response) => {
-        console.log(response);
-        localStorage.setItem("auth-token", response.data.token);
+        console.log(response.data.msg)
+        localStorage.setItem('auth-token', response.data.token)
         this.setState({
-          token: response.data.token,
-        });
-        swal("Success!", " Register Successful Done!", "success");
-        this.props.history.push("/");
+          // token: response.data.token,
+          otpMsg: response.data.otp,
+        })
+        swal('Success!', ' Register Successful Done!', 'success')
+        this.props.history.push('/')
       })
       .catch((error) => {
-        console.log(error.response);
-          swal("Error!", "Something went wrong", "error");
-      });
-
-   
-  };
+        console.log(error.response)
+        swal('Error!', 'Something went wrong', 'error')
+      })
+  }
   render() {
     // console.log(this.state.otp);
     return (
@@ -139,160 +143,6 @@ export default class LoginRegister extends Component {
         </MetaTags>
         <LayoutOne headerTop="visible">
           <div className="login-register-area pt-100 pb-100">
-            <div className="container">
-              <div className="row d-flex align-items-center justify-content-center">
-                <div className="col-lg-7 col-md-12 ml-auto mr-auto">
-                  {/* {this.state.otp ? ( */}
-                    <div className="login-register-wrapper">
-                      <Tab.Container defaultActiveKey="login">
-                        <Nav
-                          variant="pills"
-                          className="login-register-tab-list"
-                        >
-                          <Nav.Item>
-                            <Nav.Link eventKey="login">
-                              <h4>Login</h4>
-                            </Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="register">
-                              <h4>Register</h4>
-                            </Nav.Link>
-                          </Nav.Item>
-                        </Nav>
-                        <Tab.Content>
-                          <Tab.Pane eventKey="login">
-                            <div className="login-form-container">
-                              <div className="login-register-form">
-                                <form onSubmit={this.loginHandler}>
-                                  <input
-                                    type="text"
-                                    name="email"
-                                    required
-                                    placeholder="Email / Mobile"
-                                    value={this.state.email}
-                                    onChange={this.handlechange}
-                                  />
-                                 
-                                  <input
-                                    type="password"
-                                    maxLength={8}
-                                    name="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.handlechange}
-                                  />
-                              
-                                  <div className="button-box">
-                                    <div className="login-toggle-btn"></div>
-                                    <button type="submit">
-                                      <span>Login</span>
-                                    </button>
-                                    <Link to="/PinForgotpass" className="login-toggle-btn fgtbtn">
-                                         Forget Password   
-                                     </Link>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </Tab.Pane>
-
-                          {/* Register the user now */}
-
-                          <Tab.Pane eventKey="register">
-                            <div className="login-form-container">
-                              <div className="login-register-form">
-                                <form
-                                  className="text-center"
-                                  onSubmit={this.submitHandler}
-                                  method="post"
-                                >
-                                  <input
-                                    type="text"
-                                    name="fullname"
-                                    required
-                                    placeholder="Enter Your Fullname"
-                                    value={this.state.fullname}
-                                    onChange={this.changeHandler}
-                                  />
-                                 
-                                  <input
-                                    type="email"
-                                    name="email"
-                                    required
-                                    placeholder="Enter Your Email"
-                                    value={this.state.email}
-                                    onChange={this.changeHandler}
-                                  />
-                                  <input
-                                    type="number"
-                                    name="mobile"
-                                    maxLength="12"
-                                    required
-                                    placeholder="Enter Your Mobile No."
-                                    value={this.state.mobile}
-                                    onChange={this.changeHandler}
-                                  />
-                                  <input
-                                    type="password"
-                                    minLength={6}
-                                    maxLength={8}
-                                    name="password"
-                                    required
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.changeHandler}
-                                  />
-                                   <input
-                                    type="password"
-                                    name="cnfrmPassword"
-                                    maxLength="8"
-                                    required
-                                    placeholder="Confrim Password"
-                                    value={this.state.cnfrmPassword}
-                                    onChange={this.changeHandler}
-                                  />
-                                  <div className="button-box">
-                                    <button type="submit">
-                                      <span>Register</span>
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </Tab.Pane>
-                        </Tab.Content>
-                      </Tab.Container>
-                    </div>
-                  {/* ) : ( */}
-                    <>
-                      <div className="login-form-container">
-                        <div className="login-register-form">
-                          {/* <form onSubmit={this.otpHandler}> */}
-                            {/* <input
-                              type="number"
-                              name="otpnumber"
-                              placeholder="OTP No"
-                              value={this.state.otpnumber}
-                              onChange={this.handlechange}
-                            /> */}
-                            <div className="button-box">
-                              <div className="login-toggle-btn"></div>
-                              {/* <Button type="submit">
-                                <span>Verify</span>
-                              </Button> */}
-                            </div>
-                          {/* </form> */}
-                        </div>
-                      </div>
-                    </>
-                  {/* )} */}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* <div className="login-register-area pt-100 pb-100">
             <div className="container">
               <div className="row d-flex align-items-center justify-content-center">
                 <div className="col-lg-7 col-md-12 ml-auto mr-auto">
@@ -313,86 +163,130 @@ export default class LoginRegister extends Component {
                       <Tab.Content>
                         <Tab.Pane eventKey="login">
                           <div className="login-form-container">
-                            <div className="login-register-form">
-                              <form onSubmit={this.loginHandler}>
-                                <input
-                                  type="text"
-                                  name="customer_email"
-                                  placeholder="Email"
-                                  value={this.state.customer_email}
-                                  onChange={this.handlechange}
-                                />
-                                <div className="button-box">
-                                  <div className="login-toggle-btn"></div>
-                                  <button type="submit">
-                                    <span>Login</span>
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
+                            {this.state.otpMsg === 'otp Send Successfully' ? (
+                              <div className="login-register-form">
+                                <Form onSubmit={this.otpHandler}>
+                                  <Input
+                                    type="number"
+                                    name="otp"
+                                    required
+                                    placeholder="Enter otp"
+                                    value={this.state.otp}
+                                    onChange={this.changeHandler}
+                                  />
+
+                                  <div className="button-box">
+                                    <div className="login-toggle-btn"></div>
+                                    <button type="submit">
+                                      <span>Otp Verify</span>
+                                    </button>
+                                  </div>
+                                </Form>
+                              </div>
+                            ) : (
+                              <div className="login-register-form">
+                                <Form onSubmit={this.loginHandler}>
+                                  <Input
+                                    type="number"
+                                    name="mobile"
+                                    maxLength="12"
+                                    required
+                                    placeholder="Enter Your Mobile No."
+                                    value={this.state.mobile}
+                                    onChange={this.changeHandler}
+                                  />
+
+                                  <div className="button-box">
+                                    <div className="login-toggle-btn"></div>
+                                    <button type="submit">
+                                      <span>Login</span>
+                                    </button>
+                                  </div>
+                                </Form>
+                              </div>
+                            )}
                           </div>
                         </Tab.Pane>
+
+                        {/* Register the user now */}
+
                         <Tab.Pane eventKey="register">
                           <div className="login-form-container">
                             <div className="login-register-form">
-                              <form
-                                className=" text-center "
+                              <Form
+                                className="text-center"
                                 onSubmit={this.submitHandler}
                                 method="post"
                               >
-                                <input
+                                <Input
                                   type="text"
-                                  name="first_name"
-                                  placeholder="Enter Your Firstname"
-                                  value={this.state.first_name}
+                                  name="fullname"
+                                  required
+                                  placeholder="Enter Your Fullname"
+                                  value={this.state.fullname}
                                   onChange={this.changeHandler}
                                 />
-                                <input
-                                  type="text"
-                                  name="last_name"
-                                  placeholder="Enter Your Lastname"
-                                  value={this.state.last_name}
-                                  onChange={this.changeHandler}
-                                />
-                                <input
+
+                                <Input
                                   type="email"
-                                  name="customer_email"
+                                  name="email"
+                                  required
                                   placeholder="Enter Your Email"
-                                  value={this.state.customer_email}
+                                  value={this.state.email}
                                   onChange={this.changeHandler}
                                 />
-                                <input
+                                <Input
                                   type="number"
-                                  name="mobile_no"
+                                  name="mobile"
+                                  maxLength="12"
+                                  required
                                   placeholder="Enter Your Mobile No."
-                                  value={this.state.mobile_no}
+                                  value={this.state.mobile}
                                   onChange={this.changeHandler}
                                 />
-                                <input
-                                  type="number"
-                                  name="sortorder"
-                                  placeholder="Sort Order"
-                                  value={this.state.sortorder}
+                                <Input
+                                  type="date"
+                                  name="dob"
+                                  required
+                                  placeholder="Date of birth"
+                                  value={this.state.dob}
                                   onChange={this.changeHandler}
+                                />
+                                <Label>User Image</Label>
+                                <Input
+                                  className="form-control"
+                                  type="file"
+                                  name="userimg"
+                                  onChange={this.onChangeHandler}
                                 />
                                 <div className="button-box">
-                                  <button type="submit">
+                                  <Button type="submit">
                                     <span>Register</span>
-                                  </button>
+                                  </Button>
                                 </div>
-                              </form>
+                              </Form>
                             </div>
                           </div>
                         </Tab.Pane>
                       </Tab.Content>
                     </Tab.Container>
                   </div>
+
+                  <>
+                    <div className="login-form-container">
+                      <div className="login-register-form">
+                        <div className="button-box">
+                          <div className="login-toggle-btn"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </LayoutOne>
       </Fragment>
-    );
+    )
   }
 }

@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { connect } from "react-redux";
-import MenuCart from "./sub-components/MenuCart";
-import { deleteFromCart } from "../../redux/actions/cartActions";
-import Axios from "axios";
+import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory, useParams } from 'react-router-dom'
+import { connect } from 'react-redux'
+import MenuCart from './sub-components/MenuCart'
+import { deleteFromCart } from '../../redux/actions/cartActions'
+import Axios from 'axios'
 
 const IconGroup = ({
   currency,
@@ -15,95 +15,88 @@ const IconGroup = ({
   iconWhiteClass,
 }) => {
   const handleClick = (e) => {
-    e.currentTarget.nextSibling.classList.toggle("active");
-  };
+    e.currentTarget.nextSibling.classList.toggle('active')
+  }
 
   const handleLogout = (e) => {
     window.localStorage.clear()
     // window.location.reload()
-     window.location.replace("/");
+    window.location.replace('/')
     //  window.location.replace("http://soxypay.com/");
-
-  };
+  }
 
   const triggerMobileMenu = () => {
-    const offcanvasMobileMenu = document.querySelector(
-      "#offcanvas-mobile-menu"
-    );
-    offcanvasMobileMenu.classList.add("active");
-  };
+    const offcanvasMobileMenu = document.querySelector('#offcanvas-mobile-menu')
+    offcanvasMobileMenu.classList.add('active')
+  }
 
-  const [carts, setCarts] = useState([]);
+  const [carts, setCarts] = useState([])
   //const { id } = useParams();
   const fetchcarts = async (token) => {
     const { data } = await Axios.get(
       // `http://13.235.180.192/api/admin/cartbycustomer`,
       {
         headers: {
-          "auth-token": localStorage.getItem("auth-token"),
+          'auth-token': localStorage.getItem('auth-token'),
         },
-      }
-    );
-    const carts = data.data;
-    setCarts(carts);
-    console.log(carts);
-  };
+      },
+    )
+    const carts = data.data
+    setCarts(carts)
+    console.log(carts)
+  }
   useEffect(() => {
-    if (localStorage.getItem("auth-token")) {
-      fetchcarts();
+    if (localStorage.getItem('auth-token')) {
+      fetchcarts()
     }
-  }, []);
-  const history = useHistory();
+  }, [])
+  const history = useHistory()
 
-  const [wish, setWish] = useState([]);
+  const [wish, setWish] = useState([])
   const fetchWish = async () => {
     const { data } = await Axios.get(
       // "http://13.235.180.192/api/admin/getallwishlist",
       {
         headers: {
-          "auth-token": localStorage.getItem("auth-token"),
+          'auth-token': localStorage.getItem('auth-token'),
         },
-      }
-    );
-    const wish = data.data;
-    setWish(wish);
-    console.log(wish);
-  };
+      },
+    )
+    const wish = data.data
+    setWish(wish)
+    console.log(wish)
+  }
   useEffect(() => {
-    if (localStorage.getItem("auth-token")) {
-      fetchWish();
+    if (localStorage.getItem('auth-token')) {
+      fetchWish()
     }
-  }, []);
-
+  }, [])
 
   // account
-const [customer, setCustomer] = useState([]);
-const fetchCustomer = async () => {
-  const { data } = await Axios.get(
-    `http://13.235.180.192:8000/admin/getoneAstro/632846ee78e712488b9646d0`,
-    {
-      // headers: {
-      //   "auth-token": localStorage.getItem("auth-token"),
-      // },
-    }
-  );
+  const [customer, setCustomer] = useState({})
+  const [token, setToken] = useState('')
 
-  
-  
-  
-  const customer = data.data;
-  setCustomer(customer);
-  console.log(customer);
-};
-useEffect(() => {
-  if (localStorage.getItem("auth-token")) {
-    fetchCustomer();
+  const fetchCustomer = async () => {
+    let user_id = JSON.parse(localStorage.getItem('user_id'))
+    console.log('first', user_id)
+    Axios.get(`http://13.235.180.192:8000/user/viewoneuser/${user_id}`)
+      .then((response) => {
+        console.log(response.data.data)
+        setCustomer(response.data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
-}, []);
+  useEffect(() => {
+    let data = localStorage.getItem('token')
+    setToken(data)
+    fetchCustomer()
+  }, [])
 
   return (
     <div
-      className={`header-right-wrap ${iconWhiteClass ? iconWhiteClass : ""}`}
+      className={`header-right-wrap ${iconWhiteClass ? iconWhiteClass : ''}`}
     >
       {/* <div className="same-style header-search d-none d-lg-block">
         <button className="search-active" onClick={(e) => handleClick(e)}>
@@ -123,20 +116,34 @@ useEffect(() => {
           className="account-setting-active"
           onClick={(e) => handleClick(e)}
         >
-          <i className="pe-7s-user-female" />
-          <span className="username">{customer?.fullname}</span>
+          {customer?.userimg ? (
+            <>
+              <span className="username">{customer?.fullname}</span>
+              <span data-tour="user">
+                <img
+                  src={customer?.userimg}
+                  className="round ftt"
+                  height="40"
+                  width="40"
+                  alt="Login"
+                />
+              </span>
+            </>
+          ) : (
+            <span className="username">Login</span>
+          )}
         </button>
         <div className="account-dropdown">
           <ul>
-            {!localStorage.getItem("auth-token") ? (
+            {!localStorage.getItem('token') ? (
               <>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                  <Link to={process.env.PUBLIC_URL + '/login-register'}>
                     Login
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                  <Link to={process.env.PUBLIC_URL + '/login-register'}>
                     Register
                   </Link>
                 </li>
@@ -146,7 +153,7 @@ useEffect(() => {
                   </Link>
                 </li> */}
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/astrologersignup"}>
+                  <Link to={process.env.PUBLIC_URL + '/astrologersignup'}>
                     Astrologer Register
                   </Link>
                 </li>
@@ -154,36 +161,39 @@ useEffect(() => {
             ) : (
               <>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/myOrder"}>My Order</Link>
+                  <Link to={process.env.PUBLIC_URL + '/my-order'}>
+                    My Order
+                  </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/notificationlist"}>
+                  <Link to={process.env.PUBLIC_URL + '/notificationlist'}>
                     Notification
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/my-account"}>
+                  <Link to={process.env.PUBLIC_URL + '/my-account'}>
                     My Account
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/wallettransaclist"}>
-                      Wallet Transaction 
+                  <Link to={process.env.PUBLIC_URL + '/wallettransaclist'}>
+                    Wallet Transaction
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/walletmoney"}>
-                      Wallet Recharge 
+                  <Link to={process.env.PUBLIC_URL + '/walletmoney'}>
+                    Wallet Recharge
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/"}
+                  <Link
+                    to={process.env.PUBLIC_URL + '/'}
                     // onClick={(e) =>{(
                     //   window.localStorage.clear()
-                      
+
                     //   //localStorage.removeItem("auth-token","userInfo")
                     // )}
-                    onClick = {(e) => handleLogout()}
+                    onClick={(e) => handleLogout()}
                     //}
                   >
                     Logout
@@ -203,7 +213,7 @@ useEffect(() => {
         </Link>
       </div> */}
       <div className="same-style header-wishlist">
-        <Link to={process.env.PUBLIC_URL + "/wishlist"}>
+        <Link to={process.env.PUBLIC_URL + '/wishlist'}>
           <i className="pe-7s-like" />
           <span className="count-style">
             {wish && wish.length ? wish.length : 0}
@@ -226,7 +236,7 @@ useEffect(() => {
         />
       </div>
       <div className="same-style cart-wrap d-block d-lg-none">
-        <Link className="icon-cart" to={process.env.PUBLIC_URL + "/cart"}>
+        <Link className="icon-cart" to={process.env.PUBLIC_URL + '/cart'}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {carts && carts.length ? carts.length : 0}
@@ -243,8 +253,8 @@ useEffect(() => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 IconGroup.propTypes = {
   cartData: PropTypes.array,
@@ -253,7 +263,7 @@ IconGroup.propTypes = {
   iconWhiteClass: PropTypes.string,
   deleteFromCart: PropTypes.func,
   wishlistData: PropTypes.array,
-};
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -261,15 +271,15 @@ const mapStateToProps = (state) => {
     cartData: state.cartData,
     wishlistData: state.wishlistData,
     compareData: state.compareData,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteFromCart: (item, addToast) => {
-      dispatch(deleteFromCart(item, addToast));
+      dispatch(deleteFromCart(item, addToast))
     },
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(IconGroup);
+export default connect(mapStateToProps, mapDispatchToProps)(IconGroup)

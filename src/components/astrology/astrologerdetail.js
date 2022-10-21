@@ -31,19 +31,20 @@ class AstrologerDetail extends React.Component {
     let { id } = this.props.match.params;
     // console.log(id);
     axiosConfig
-      .get(`/user/astrodetails/${id}`)
+      .get(`/admin/getoneAstro/${id}`)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data);
         this.setState({
-          Name: response.data.data.Name,
-          Skills: response.data.Skills,
-          language: response.data.language,
-          img: response.data.img,
+          fullname: response.data.data.fullname,
+          all_skills: response.data.data.all_skills,
+          language: response.data.data.language,
+          img: response.data.data.img[0],
           status: response.data.status,
-          Exp: response.data.Exp,
-          callCharge: response.data.callCharge,
-          about_me: response.data.about_me,
-          msg: response.data.msg,
+          Exp: response.data.data.Exp,
+          exp_in_years: response.data.data.exp_in_years,
+          callCharge: response.data.data.callCharge,
+          long_bio: response.data.data.long_bio,
+          msg: response.data.data.msg,
         });
       })
       .catch((error) => {
@@ -82,12 +83,12 @@ class AstrologerDetail extends React.Component {
                   <Row>
                     <Col md="3">
                       <div className="as-pic mt-30">
-                        <img src={women} alt="" className="pic-as" />
+                        <img src={this.state?.img} alt="" className="pic-as" />
                       </div>
                     </Col>
                     <Col md="6">
                       <div className="as-content mt-60">
-                        <h3>{this.state.Name}</h3>
+                        <h3>{this.state.fullname}</h3>
                         <div className="review-rating">
                           <i className="fa fa-star" />
                           <i className="fa fa-star" />
@@ -97,26 +98,51 @@ class AstrologerDetail extends React.Component {
                         </div>
                         <ul>
                           <li>
-                            Language: <span>{this.state.language}</span>
+                          {/* Language: */}
+                            <span>{this.state.language}</span>
+                          </li>
+                         
+                          <li>
+                            Skills: <span> {this.state.all_skills}</span>
                           </li>
                           <li>
-                            Experience: <span>{this.state.Exp}</span>
+                            Experience: <span>{this.state.exp_in_years}</span>
                           </li>
                           <li>
-                            Skills: <span> {this.state.Skills}</span>
+                            <span>{this.state.callCharge}</span>
                           </li>
+                          
                         </ul>
-                      </div>
-                    </Col>
-                    <Col md="3" className="mt-30">
-                      <Button className="btn-as st">
-                        Call Now
+                        </div>
+                        <Row>
+                        <Col md="6" className="mt-30">
+                    <Button className="btn-as st">
+                          <i class="fa fa-commenting" aria-hidden="true"></i>{" "}
+
+                   Start Chat
                         <small className="sm-text">
-                          <i class="fa fa-inr" aria-hidden="true"></i>{" "}
-                          {this.state.callCharge}
+                          {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
+                          {/* {this.state.callCharge} */}
                         </small>
                       </Button>
+                      </Col>
+                      <Col md="6" className="mt-30">
+                      <Button className="btn-as st">
+                         <i class="fa fa-phone" aria-hidden="true"></i>{" "}
+                       Start Call
+                        <small className="sm-text">
+                          {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
+                          {/* {this.state.callCharge} */}
+                        </small>
+                      </Button>
+                     
+                  
                     </Col>
+                    
+</Row>
+                   
+                    </Col>
+                   
                   </Row>
                 </section>
                 <section className="mt-50 mb-30">
@@ -143,7 +169,7 @@ class AstrologerDetail extends React.Component {
                         <Tab.Pane eventKey="additionalInfo">
                           <div className="product-anotherinfo-wrapper">
                             <p>
-                              {this.state.about_me}
+                              {this.state.long_bio}
                               {/* Sree Sanjib ji is KP astrologer from Kolkata,
                               India. He has 15 years of experience in KP
                               astrology and Vedic Astrology. You can consult him

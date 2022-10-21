@@ -3,7 +3,7 @@ import React from "react";
 import teamMemberData from "../../data/team-members/team-member-one.json";
 import TeamMemberOneSingle from "../../components/team-member/TeamMemberOneSingle";
 import textbottom from "../../assets/img/textbottom.png";
- 
+
 const TeamMemberOne = ({ spaceTopClass, spaceBottomClass }) => {
   return (
     <div
@@ -14,9 +14,9 @@ const TeamMemberOne = ({ spaceTopClass, spaceBottomClass }) => {
       <div className="container">
         {/* section title */}
         <div className="heading">
-              <h2>Best Astrologers</h2>
-              <img src={textbottom} alt=""/>
-         </div>
+          <h2>Best Astrologers</h2>
+          <img src={textbottom} alt="" />
+        </div>
 
         <div className="row">
           {teamMemberData &&
@@ -37,7 +37,7 @@ const TeamMemberOne = ({ spaceTopClass, spaceBottomClass }) => {
 
 TeamMemberOne.propTypes = {
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default TeamMemberOne;

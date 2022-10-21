@@ -492,6 +492,7 @@ class AstrologerSignup extends React.Component {
                             />
                           </div>
                         </Col>
+
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Experience in years*</Label>
@@ -608,6 +609,7 @@ class AstrologerSignup extends React.Component {
                             />
                           </div>
                         </Col>
+
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Call Charge</Label>
@@ -697,6 +699,15 @@ class AstrologerSignup extends React.Component {
                               onChange={this.changeHandler}
                             />
                           </div>
+                        </Col>
+                        <Col md="6">
+                          <Label>User Image</Label>
+                          <Input
+                            className="form-control"
+                            type="file"
+                            name="img"
+                            onChange={this.onChangeHandler}
+                          />
                         </Col>
                         <Col md="6">
                           <div className="form-group mtb-10">

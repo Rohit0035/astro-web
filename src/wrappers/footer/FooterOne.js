@@ -75,6 +75,66 @@ const FooterOne = ({
               </div>
             </div>
           </div> */}
+
+<div
+            className={`${
+              sideMenu ? "col-xl-3 col-sm-4" : "col-lg-3 col-sm-6"
+            }`}
+          >
+            <div
+              className={`${
+                sideMenu
+                  ? "footer-widget mb-30 ml-145"
+                  : "footer-widget mb-30 ml-75"
+              }`}
+            >
+              <div className="footer-title">
+                <h3>Horoscope Category</h3>
+              </div>
+              <div className="footer-list">
+                <ul>
+                  <li>
+                     <Link to="/heroscopesall">Love Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/heroscopesall">Health Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Career Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Finance Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Education Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Chinese Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Lal Kitab Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Numerology Horoscope 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Tarot Reading Predictions 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Festival 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Planetary Transit 2022</Link>
+                  </li>
+                  <li>
+                      <Link to="/">Planetary Transit 2022</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
           <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-4" : "col-lg-3 col-sm-4"
@@ -113,7 +173,7 @@ const FooterOne = ({
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Orders tracking
+                      
                     </Link>
                   </li>
                     <Link to={process.env.PUBLIC_URL + "/TermsOfUse"}>
@@ -132,69 +192,7 @@ const FooterOne = ({
               </div>
             </div>
           </div>
-          <div
-            className={`${
-              sideMenu ? "col-xl-3 col-sm-4" : "col-lg-3 col-sm-6"
-            }`}
-          >
-            <div
-              className={`${
-                sideMenu
-                  ? "footer-widget mb-30 ml-145"
-                  : "footer-widget mb-30 ml-75"
-              }`}
-            >
-              <div className="footer-title">
-                <h3>FOLLOW US</h3>
-              </div>
-              <div className="footer-list">
-                <ul>
-                  <li>
-                    <i class="fa fa-facebook foot-icon" aria-hidden="true"></i>
-                    <a
-                      href="//www.facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Facebook
-                    </a>
-                  </li>
-                  <li>
-                    <i class="fa fa-twitter foot-icon" aria-hidden="true"></i>
-
-                    <a
-                      href="//www.twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Twitter
-                    </a>
-                  </li>
-                  <li>
-                    <i class="fa fa-instagram foot-icon" aria-hidden="true"></i>
-
-                    <a
-                      href="//www.instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Instagram
-                    </a>
-                  </li>
-                  <li>
-                    <i class="fa fa-youtube-play foot-icon" aria-hidden="true"></i>
-                    <a
-                      href="//www.youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Youtube
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        
           <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-8" : "col-lg-3 col-sm-6"

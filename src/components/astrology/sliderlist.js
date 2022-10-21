@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect,useState  } from "react";
 import Swiper from "react-id-swiper";
-import testimonialData from "../../data/testimonial/testimonial-one.json";
+//import testimonialData from "../../data/testimonial/testimonial-one.json";
 // import TestimonialOneSingle from "../../components/testimonial/TestimonialOneSingle.js";
 import textbottom from "../../assets/img/textbottom.png";
 import SliderDemo from "./sliderdemo";
+import axiosConfig from "../../axiosConfig";
 
 const SliderList = ({
   spaceTopClass,
@@ -13,7 +14,7 @@ const SliderList = ({
   spaceRightClass,
   bgColorClass,
   sliderdemoClass,
-  backgroundImage
+  backgroundImage,
 }) => {
   // swiper slider settings
   const settings = {
@@ -21,24 +22,45 @@ const SliderList = ({
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
     breakpoints: {
-       
-        768: {
-          slidesPerView: 4,
-          direction: "horizontal"
-        },
-        640: {
-          slidesPerView: 4,
-          direction: "horizontal"
-        },
-        320: {
-          slidesPerView: 2,
-          direction: "horizontal"
-        }
-      }
+     
+      768: {
+        slidesPerView: 4,
+        direction: "horizontal",
+        spaceBetween: 20,
+      },
+      640: {
+        slidesPerView: 2,
+        direction: "horizontal",
+        spaceBetween: 20,
+      },
+      320: {
+        slidesPerView: 2,
+        direction: "horizontal",
+        spaceBetween: 20,
+      },
+    },
   };
+
+  const [testimonialData, setTestimonialData] = useState([]);
+
+  useEffect(() => {
+    axiosConfig
+  .get(`/admin/allAstro`)
+  .then((response) => {
+    console.log(response.data.data);
+    if(response.data.status === true){
+      setTestimonialData(response.data.data)
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  }, []);
+
+  
 
   return (
     <div
@@ -51,10 +73,9 @@ const SliderList = ({
       <div className="container">
         <div className="row">
           <div className="col-lg-12  ml-auto mr-auto">
-
             <div className="heading">
               <h2>Best Astrologers</h2>
-              <img src={textbottom} alt=""/>
+              <img src={textbottom} alt="" />
             </div>
             <div className=" nav-style-1 nav-testi-style">
               <Swiper {...settings}>
@@ -64,8 +85,8 @@ const SliderList = ({
                       <SliderDemo
                         data={single}
                         key={key}
-                        sliderClass="swiper-slide"
-                        sliderdemoClass={ sliderdemoClass}
+                        sliderClass="swiper-slide rtt"
+                        sliderdemoClass={sliderdemoClass}
                       />
                     );
                   })}
@@ -84,7 +105,7 @@ SliderList.propTypes = {
   spaceLeftClass: PropTypes.string,
   spaceRightClass: PropTypes.string,
   spaceTopClass: PropTypes.string,
-  testimonialClass: PropTypes.string
+  testimonialClass: PropTypes.string,
 };
 
 export default SliderList;

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   Container,
   Row,
@@ -9,41 +9,36 @@ import {
   InputGroup,
   Form,
   Button,
-} from "reactstrap";
-import Pj from "../../assets/img/Pj.jpg";
-import "../../assets/scss/astropooja.css";
-import pagetitle from "../../assets/img/pagetitle.jpg";
-import LayoutOne from "../../layouts/LayoutOne";
-import axiosConfig from "../../axiosConfig";
+} from 'reactstrap'
+import Pj from '../../assets/img/Pj.jpg'
+import '../../assets/scss/astropooja.css'
+import pagetitle from '../../assets/img/pagetitle.jpg'
+import LayoutOne from '../../layouts/LayoutOne'
+import axiosConfig from '../../axiosConfig'
 
 class PoojaDetail extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       data: {},
-    };
+    }
   }
   componentDidMount() {
-    let { id } = this.props.match.params;
-    // console.log(id);
+    let { id } = this.props.match.params
+    console.log(id)
     axiosConfig
       .get(`/admin/viewoneProduct/${id}`)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data.data)
         this.setState({
-          //  title: response.data.title,
-          productname: response.data.data.productname,
-          mrp_price: response.data.data.mrp_price,
+          data: response.data.data,
           image: response.data.data.image[0],
-          status: response.data.data.status,
-          des_price: response.data.data.des_price,
-          desc: response.data.data.desc,
-        });
+        })
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   }
 
   render() {
@@ -53,10 +48,10 @@ class PoojaDetail extends React.Component {
           <div
             className=""
             style={{
-              backgroundColor: "#FFD59E",
-              width: "100%",
-              padding: "70px 0px",
-              backgroundSize: "cover",
+              backgroundColor: '#FFD59E',
+              width: '100%',
+              padding: '70px 0px',
+              backgroundSize: 'cover',
             }}
           >
             <Container>
@@ -85,7 +80,7 @@ class PoojaDetail extends React.Component {
                   <Col md="8">
                     <div className="details">
                       <h3 className="product-title">
-                        {this.state.productname}
+                        {this.state.data.productname}
                       </h3>
                       <div className="rating">
                         <div className="stars">
@@ -97,12 +92,13 @@ class PoojaDetail extends React.Component {
                         </div>
                         <span className="review-no">41 reviews</span>
                       </div>
-                      <p>{this.state.desc}</p>
+                      <p>{this.state.data.desc}</p>
                       <h4 className="price">
-                        current price: <span>${this.state.mrp_price}</span>
+                        current price: <span>${this.state.data.mrp_price}</span>
                       </h4>
                       <h4 className="price">
-                        discount price: <span>${this.state.des_price}</span>
+                        discount price:{' '}
+                        <span>${this.state.data.des_price}</span>
                       </h4>
 
                       {/* <h5 className="colors">colors:
@@ -111,7 +107,7 @@ class PoojaDetail extends React.Component {
                                             <span className="color blue"></span>
                                         </h5> */}
                       <div class="action">
-                        <Link to="/consultantlist">
+                        <Link to={'/consultantlist/' + this.state.data._id}>
                           <button
                             className="add-to-cart btn btn-default"
                             type="button"
@@ -128,8 +124,8 @@ class PoojaDetail extends React.Component {
           </Row>
         </Container>
       </LayoutOne>
-    );
+    )
   }
 }
 
-export default PoojaDetail;
+export default PoojaDetail

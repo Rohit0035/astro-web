@@ -50,7 +50,7 @@ class CartList extends React.Component {
         <section>
               <Container>
                     <Row>
-                         <Col lg="12">
+                         {/* <Col lg="12">
                              <div className="order-view">
                                     <h4>ORDER REVIEW</h4>
                                     <Table striped className="">
@@ -128,7 +128,7 @@ class CartList extends React.Component {
                                         </tbody>
                                     </Table>
                              </div>
-                         </Col>
+                         </Col> */}
                          <Col lg="4">
                              <div className="order-bx">
                                   <h3 className="py-3">Total Amount</h3>
