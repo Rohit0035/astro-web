@@ -111,7 +111,7 @@ const IconGroup = ({
           </form>
         </div>
       </div> */}
-      <div className="same-style account-setting d-none d-lg-block">
+      <div className="same-style account-setting  d-lg-block">
         <button
           className="account-setting-active"
           onClick={(e) => handleClick(e)}
@@ -147,11 +147,11 @@ const IconGroup = ({
                     Register
                   </Link>
                 </li>
-                {/* <li>
-                  <Link to={process.env.PUBLIC_URL + "/astrologerlogin"}>
+                <li>
+                  <a href='http://astro.astrologically.in/#/pages/login' >
                     Astrologer login
-                  </Link>
-                </li> */}
+                  </a>
+                </li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + '/astrologersignup'}>
                     Astrologer Register
