@@ -84,7 +84,7 @@ export default class LoginRegister extends Component {
       .catch((error) => {
         console.log(error)
         console.log(error.response)
-        swal('Error!', ' Wrong UserName or Password', 'error')
+        swal('Error!', "User doesn't Exist", 'error')
       })
   }
   // otp = true;

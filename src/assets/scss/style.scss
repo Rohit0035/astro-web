@@ -71,8 +71,8 @@ img.st-1 {
 img.st-2 {
     width: 20%;
     position: absolute;
-    top: 25%;
-    left: 60%;
+    top: 28%;
+    left: 62%;
 }
 h1.st-3 {
     font-size: 65px;
@@ -128,6 +128,7 @@ h3.stltext {
     color: #FFD59E;
     font-weight: 700;
     font-size: 22px;
+    margin-top: 27px;
 }
 
 // home category css
@@ -1007,7 +1008,7 @@ i.fa-hand-o-right.md-i {
     max-width:1000px;
     margin:0 auto;
      }
-.wrap-1{
+   .wrap-1{
     height: initial;
     max-width:620px;
     margin:0 auto;
@@ -1171,3 +1172,36 @@ a.pto-l {
     border-radius: 100%;
     margin-left: 6px;
 }
+img.abt-img {
+    width: 80%;
+}
+
+// css for mobile screen
+
+@media only screen and (max-width: 600px) {
+    .slider-height-2 {
+       height: auto;
+    }
+    img.abt-img {
+        width: 100%;
+    }
+    img.st-2 {
+        width: 50%;
+        position: absolute;
+        top: 65%;
+        left: 25%;
+    }
+    i.pe-7s-menu {
+        color: #000;
+        font-weight: 600;
+    }
+    .process-left:after{
+        display: none !important;
+    }
+    h3.stltext, .stltext.h3 {
+        color: #FFD59E;
+        font-weight: 700;
+        font-size: 16px;
+        margin-top: 0px;
+    }
+  }

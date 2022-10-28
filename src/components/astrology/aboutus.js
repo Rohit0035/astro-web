@@ -26,7 +26,7 @@ class AboutUs extends React.Component {
              <Row>
                  <Col lg="6">
                     <div >
-                         <img src={Abotimg} alt="" gclassName="ab-img"  width="500px"/>
+                         <img src={Abotimg} alt="" gclassName="ab-img"  className="abt-img"/>
                     </div>
                  </Col>
                   <Col lg="6">

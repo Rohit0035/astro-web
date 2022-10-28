@@ -60,7 +60,7 @@ const HeaderOne = ({
           <div className="row" style={{ marginBottom: "-10px" }}>
             <div className="col-xl-2 col-lg-2 col-md-2 col-4">
               {/* header logo */}
-              <div style={{ padding: 18 }}>
+              <div className="logoo">
                 {/* <Logo imageUrl="/assets/img/logo/logo.png" /> */}
                 <h3 className="stltext">Astro Vipra </h3>
               </div>
