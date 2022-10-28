@@ -14,7 +14,7 @@ import AutoSearch from './autosearch'
 import axiosConfig from '../../axiosConfig'
 import swal from 'sweetalert'
 
-class AddressForm extends React.Component {
+class AddressFormEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -68,7 +68,7 @@ class AddressForm extends React.Component {
                 <Col md="12">
                   <div className="leftcont text-left">
                     <h1>
-                      Astromall Shop/ Product Detail/ Consultant List/ Address
+                      Astromall Shop/ Product Detail/ Consultant List/ Edit Address
                     </h1>
                     <h3>Shop Best Online Astrology Products And Services</h3>
                   </div>
@@ -80,114 +80,10 @@ class AddressForm extends React.Component {
 
         <section className="">
           <Container>
-             <div className='multi-address'>
-              <Row>
-                  <Col lg="6" className='mb-20'>
-                    <div className="wal-amt">
-                      <h3>Continue with your saved address
-                      <span>
-                          <Link to="/addressformedit" className="">
-                              <i className="pe-7s-note ad-edit" />
-                          </Link>
-                          <Link to="/" className=" ">
-                              <i className="pe-7s-trash ad-del" />
-                          </Link>
-                      </span>
-                      </h3>
-                      <hr></hr>
-                      <div className="user-pro py-0">
-                        <ul>
-                          <li>
-                            Name : <span>lorem</span>
-                          </li>
-                          <li>
-                            Mobile : <span>4454544545</span>
-                          </li>
-                          <li>
-                            Email : <span>Test@gmail.com</span>
-                          </li>
-                          <li>
-                            State : <span>MP</span>
-                          </li>
-                          <li>
-                            City : <span>Indore</span>
-                          </li>
-                          <li>
-                            Address : <span>Vijay Nagar</span>
-                          </li>
-                          <li>
-                            Locality : <span>Indore</span>
-                          </li>
-                          <li>
-                            Pin Code : <span>452001</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="py-3 text-center">
-                        <Link to="/cartlist">
-                          <Button className="btn btn-warning">
-                            Deliver To This Address{' '}
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" className='mb-20'>
-                    <div className="wal-amt">
-                      <h3>Continue with your saved address
-                      <span>
-                          <Link to="/addressformedit" className="">
-                              <i className="pe-7s-note ad-edit" />
-                          </Link>
-                          <Link to="/" className=" ">
-                              <i className="pe-7s-trash ad-del" />
-                          </Link>
-                      </span>
-                      </h3>
-                      <hr></hr>
-                      <div className="user-pro py-0">
-                        <ul>
-                          <li>
-                            Name : <span>lorem</span>
-                          </li>
-                          <li>
-                            Mobile : <span>4454544545</span>
-                          </li>
-                          <li>
-                            Email : <span>Test@gmail.com</span>
-                          </li>
-                          <li>
-                            State : <span>MP</span>
-                          </li>
-                          <li>
-                            City : <span>Indore</span>
-                          </li>
-                          <li>
-                            Address : <span>Vijay Nagar</span>
-                          </li>
-                          <li>
-                            Locality : <span>Indore</span>
-                          </li>
-                          <li>
-                            Pin Code : <span>452001</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="py-3 text-center">
-                        <Link to="/cartlist">
-                          <Button className="btn btn-warning">
-                            Deliver To This Address{' '}
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </Col>
-                  </Row>
-             </div>
              <Row>
               <Col lg="12">
                 <div className="wal-amt">
-                  <h3>Add New Address </h3>
+                  <h3>Edit Address </h3>
                   <hr></hr>
                   <form onSubmit={this.submitHandler}>
                     <Row>
@@ -351,4 +247,4 @@ class AddressForm extends React.Component {
   }
 }
 
-export default AddressForm
+export default AddressFormEdit
