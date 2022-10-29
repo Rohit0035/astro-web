@@ -1,130 +1,117 @@
-import React, { useState } from "react";
+import React from 'react'
 // import render  from 'react-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bs-stepper/dist/css/bs-stepper.min.css";
-import Stepper from "bs-stepper";
-import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bs-stepper/dist/css/bs-stepper.min.css'
+import Stepper from 'bs-stepper'
+// import axios from 'axios'
 // import LayoutOne from "../../layouts/LayoutOne";
-import {
-  Container,
-  Row,
-  Col,
-  Input,
-  InputGroup,
-  Form,
-  Button,
-  Label,
-} from "reactstrap";
-import astrologinbg from "../../assets/img/astrologin-bg.jpg";
-import Select from "react-select";
-import swal from "sweetalert";
-import axiosConfig from "../../axiosConfig";
+import { Container, Row, Col, Input, Form, Button, Label } from 'reactstrap'
+import astrologinbg from '../../assets/img/astrologin-bg.jpg'
+// import Select from 'react-select'
+import swal from 'sweetalert'
+import axiosConfig from '../../axiosConfig'
 // import { colourOptions } from '../astrology/selectdata/data.ts';
-
 class AstrologerSignup extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      fullname: "",
-      email: "",
-      mobile: "",
-      gender: "",
-      otp: "",
-      dob: "",
-      primary_skills: "",
-      all_skills: "",
-      language: "",
-      exp_in_years: "",
-      conrubute_hrs: "",
-      hear_abt_astrology: "",
-      other_online_platform: "",
-      why_onboard_you: "",
-      suitable_tym_interview: "",
-      crnt_city: "",
-      income_src: "",
-      highest_qualification: "",
-      degree_deploma: "",
-      clg_scl_name: "",
-      lrn_abt_astrology: "",
-      insta_link: "",
-      fb_link: "",
-      linkedln_link: "",
-      youtube_link: "",
-      website_link: "",
-      anybody_prefer: "",
-      min_earning_expe: "",
-      max_earning_expe: "",
-      long_bio: "",
-      status: "Active",
-      callCharge: "",
-      img: "",
-      selectedName: "",
+      fullname: '',
+      email: '',
+      mobile: '',
+      gender: '',
+      otp: '',
+      dob: '',
+      primary_skills: '',
+      all_skills: '',
+      language: '',
+      exp_in_years: '',
+      conrubute_hrs: '',
+      hear_abt_astrology: '',
+      other_online_platform: '',
+      why_onboard_you: '',
+      suitable_tym_interview: '',
+      crnt_city: '',
+      income_src: '',
+      highest_qualification: '',
+      degree_deploma: '',
+      clg_scl_name: '',
+      lrn_abt_astrology: '',
+      insta_link: '',
+      fb_link: '',
+      linkedln_link: '',
+      youtube_link: '',
+      website_link: '',
+      anybody_prefer: '',
+      min_earning_expe: '',
+      max_earning_expe: '',
+      long_bio: '',
+      status: 'Active',
+      callCharge: '',
+      img: '',
+      selectedName: '',
       selectedFile: null,
-      userId: "",
+      userId: '',
       __v: 0,
-      approvedstatus: "false",
-      otpverify: "true",
-    };
+      approvedstatus: 'false',
+      otpverify: 'true',
+    }
   }
   //Image Submit Handler
   onChangeHandler = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
-  };
+    this.setState({ selectedFile: event.target.files[0] })
+    this.setState({ selectedName: event.target.files[0].name })
+    console.log(event.target.files[0])
+  }
 
   componentDidMount() {
-    this.stepper = new Stepper(document.querySelector("#stepper1"), {
+    this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
       animation: true,
-    });
+    })
   }
 
   handlechange = (e) => {
     // e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   changeHandler = (e) => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    e.preventDefault()
+    this.setState({ [e.target.name]: e.target.value })
+  }
   submitHandlerLogin = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     //this.setState({ otp: false });
     axiosConfig
-      .post("/user/signup", this.state)
+      .post('/user/signup', this.state)
       .then((response) => {
-        console.log(response);
-        localStorage.setItem("auth-token", response.data.token);
+        console.log(response)
+        localStorage.setItem('auth-token', response.data.token)
         this.setState({
           token: response.data.token,
-        });
-        swal("Success!", " Register Successful Done!", "success");
-        this.props.history.push("/otpverify");
+        })
+        swal('Success!', ' Register Successful Done!', 'success')
+        this.props.history.push('/otpverify')
       })
       .catch((error) => {
-        console.log(error.response);
-        swal("Error!", "Something went wrong", "error");
-      });
-  };
+        console.log(error.response)
+        swal('Error!', 'Something went wrong', 'error')
+      })
+  }
 
   submitHandler = (e) => {
-    e.preventDefault();
-    console.log("@@@@@");
+    e.preventDefault()
+    console.log('@@@@@')
     let obj = {
       fullname: this.state.fullname,
       email: this.state.email,
       mobile: this.state.mobile,
       otpverify: this.state.otpverify,
       approvedstatus: this.state.approvedstatus,
-      //createdAt: "2022-09-16T11:22:43.536Z",
-      //updatedAt: "2022-09-25T16:07:58.333Z",
-      __v: this.state.__v,
       all_skills: this.state.all_skills,
       anybody_prefer: this.state.anybody_prefer,
       callCharge: this.state.callCharge,
-      img: this.state.selectedFile !== null ? this.state.selectedName : "",
+      img: this.state.selectedFile !== null ? this.state.selectedName : '',
       clg_scl_name: this.state.clg_scl_name,
       conrubute_hrs: this.state.conrubute_hrs,
       crnt_city: this.state.crnt_city,
@@ -150,133 +137,110 @@ class AstrologerSignup extends React.Component {
       website_link: this.state.website_link,
       why_onboard_you: this.state.why_onboard_you,
       youtube_link: this.state.youtube_link,
-    };
-    const data = new FormData();
-    data.append("_id", this.state.userId);
-    data.append("fullname", this.state.fullname);
-    data.append("email", this.state.email);
-    data.append("mobile", this.state.mobile);
-    data.append("gender", this.state.gender);
-    data.append("dob", this.state.dob);
-    data.append("primary_skills", this.state.primary_skills);
-    data.append("all_skills", this.state.all_skills);
-    data.append("language", this.state.language);
-    data.append("exp_in_years", this.state.exp_in_years);
-    data.append("conrubute_hrs", this.state.conrubute_hrs);
-    data.append("hear_abt_astrology", this.state.hear_abt_astrology);
-    data.append("other_online_platform", this.state.other_online_platform);
-    data.append("why_onboard_you", this.state.why_onboard_you);
-    data.append("suitable_tym_interview", this.state.suitable_tym_interview);
-    data.append("crnt_city", this.state.crnt_city);
-    data.append("income_src", this.state.income_src);
-    data.append("highest_qualification", this.state.highest_qualification);
-    data.append("degree_deploma", this.state.degree_deploma);
-    data.append("lrn_abt_astrology", this.state.lrn_abt_astrology);
-    data.append("insta_link", this.state.insta_link);
-    data.append("fb_link", this.state.fb_link);
-    data.append("linkedln_link", this.state.linkedln_link);
-    data.append("youtube_link", this.state.youtube_link);
-    data.append("website_link", this.state.website_link);
-    data.append("anybody_prefer", this.state.anybody_prefer);
-    data.append("min_earning_expe", this.state.min_earning_expe);
-    data.append("max_earning_expe", this.state.max_earning_expe);
-    data.append("long_bio", this.state.long_bio);
-    data.append("status", this.state.status);
-    data.append("callCharge", this.state.callCharge);
+    }
+    const data = new FormData()
+    data.append('_id', this.state.userId)
+    data.append('fullname', this.state.fullname)
+    data.append('email', this.state.email)
+    data.append('mobile', this.state.mobile)
+    data.append('gender', this.state.gender)
+    data.append('dob', this.state.dob)
+    data.append('primary_skills', this.state.primary_skills)
+    data.append('all_skills', this.state.all_skills)
+    data.append('language', this.state.language)
+    data.append('exp_in_years', this.state.exp_in_years)
+    data.append('conrubute_hrs', this.state.conrubute_hrs)
+    data.append('hear_abt_astrology', this.state.hear_abt_astrology)
+    data.append('other_online_platform', this.state.other_online_platform)
+    data.append('why_onboard_you', this.state.why_onboard_you)
+    data.append('suitable_tym_interview', this.state.suitable_tym_interview)
+    data.append('crnt_city', this.state.crnt_city)
+    data.append('income_src', this.state.income_src)
+    data.append('highest_qualification', this.state.highest_qualification)
+    data.append('degree_deploma', this.state.degree_deploma)
+    data.append('lrn_abt_astrology', this.state.lrn_abt_astrology)
+    data.append('insta_link', this.state.insta_link)
+    data.append('fb_link', this.state.fb_link)
+    data.append('linkedln_link', this.state.linkedln_link)
+    data.append('youtube_link', this.state.youtube_link)
+    data.append('website_link', this.state.website_link)
+    data.append('anybody_prefer', this.state.anybody_prefer)
+    data.append('min_earning_expe', this.state.min_earning_expe)
+    data.append('max_earning_expe', this.state.max_earning_expe)
+    data.append('long_bio', this.state.long_bio)
+    data.append('status', this.state.status)
+    data.append('callCharge', this.state.callCharge)
     if (this.state.selectedFile !== null) {
-      data.append("img", this.state.selectedFile, this.state.selectedName);
+      data.append('img', this.state.selectedFile, this.state.selectedName)
     }
 
     for (var value of data.values()) {
-      console.log(value);
+      console.log(value)
     }
 
     for (var key of data.keys()) {
-      console.log(key);
+      console.log(key)
     }
     // let { userId } = this.props.match.params;
     axiosConfig
       .post(`/user/editAstroDetails/${this.state.userId}`, obj)
       .then((response) => {
-        console.log(response.data.message);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/");
+        console.log(response.data.message)
+        swal('Success!', 'Submitted SuccessFull!', 'success')
+        this.props.history.push('/')
       })
 
       .catch((error) => {
-        swal("Error!", "You clicked the button!", "error");
-        console.log(error.response);
-      });
-  };
-
-  // submitHandler = (e) => {
-  //   e.preventDefault();
-  //   // this.setState({ otp: false });
-  //   axios
-  //     .post(
-  //       `43.205.82.226:8000/user/fillAstroDetails/63245c83f0916fdff4865804`,
-  //       this.state
-  //     )
-  //     .then((response) => {
-  //       console.log(response);
-  //       localStorage.setItem("auth-token", response.data.token);
-  //       this.setState({
-  //         token: response.data.token,
-  //       });
-  //       swal("Success!", " Register Successful Done!", "success");
-  //       this.props.history.push("/");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //       swal("Error!", "Something went wrong", "error");
-  //     });
-  // };
+        swal('Error!', 'You clicked the button!', 'error')
+        console.log(error.response)
+      })
+  }
 
   stepperFirst = () => {
-    const { email, mobile, fullname } = this.state;
+    const { email, mobile, fullname } = this.state
     axiosConfig
-      .post("/user/signup", {
-        mobile: parseInt(mobile) != NaN ? parseInt(mobile) : "null",
+      .post('/user/signup', {
+        mobile: parseInt(mobile) != NaN ? parseInt(mobile) : 'null',
 
         email: email,
         fullname: fullname,
       })
       .then((response) => {
-        this.stepper.next();
-        console.log("@@@####", response.data);
-        let userInfo = response.data.user;
-        localStorage.setItem("user_id", response.data._id);
+        this.stepper.next()
+        console.log('@@@####', response.data)
+        let userInfo = response.data.user
+        localStorage.setItem('user_id', response.data._id)
         // localStorage.setItem("auth-token", response.data.token);
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem('userInfo', JSON.stringify(userInfo))
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-        swal("Error!", " Wrong UserName or Password", "error");
-      });
-  };
+        console.log(error)
+        console.log(error.response)
+        swal('Error!', ' Wrong UserName or Password', 'error')
+      })
+  }
   stepperSecond = () => {
-    const { otp } = this.state;
+    const { otp } = this.state
     axiosConfig
-      .post("/user/verifyotp", {
-        otp: parseInt(otp) != NaN ? parseInt(otp) : "null",
+      .post('/user/verifyotp', {
+        otp: parseInt(otp) != NaN ? parseInt(otp) : 'null',
         otp: otp,
       })
       .then((response) => {
-        this.stepper.next();
-        console.log("@@@####", response.data);
-        let userInfo = response.data.user;
-        this.setState({ userId: response.data._id });
-        localStorage.setItem("user_id", response.data._id);
+        this.stepper.next()
+        console.log('@@@####', response.data)
+        let userInfo = response.data.user
+        this.setState({ userId: response.data._id })
+        localStorage.setItem('user_id', response.data._id)
         // localStorage.setItem("auth-token", response.data.token);
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem('userInfo', JSON.stringify(userInfo))
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-        swal("Error!", " Wrong UserName or Password", "error");
-      });
-  };
+        console.log(error)
+        console.log(error.response)
+        swal('Error!', ' Wrong UserName or Password', 'error')
+      })
+  }
 
   render() {
     return (
@@ -284,10 +248,10 @@ class AstrologerSignup extends React.Component {
         className=""
         style={{
           backgroundImage: `url(${astrologinbg})`,
-          width: "100%",
-          padding: "50px 0px",
-          height: "100%",
-          backgroundSize: "cover",
+          width: '100%',
+          padding: '50px 0px',
+          height: '100%',
+          backgroundSize: 'cover',
         }}
       >
         <Container>
@@ -433,14 +397,7 @@ class AstrologerSignup extends React.Component {
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Primary Skills*</Label>
-                            {/* <Select
-                                              isMulti
-                                              name="primary_skills"
-                                              required
-                                              className="basic-multi-select"
-                                              classNamePrefix="select"
-                                              onChange={this.changeHandler}
-                                            /> */}
+
                             <Input
                               placeholder="Primary Skills"
                               name="primary_skills"
@@ -453,15 +410,7 @@ class AstrologerSignup extends React.Component {
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>All Skills*</Label>
-                            {/* <Select
-                                              isMulti
-                                              name="all_skills"
-                                              required
-                                              className="basic-multi-select"
-                                              classNamePrefix="select"
-                                              value={this.state.all_skills}
-                                              onChange={this.changeHandler}
-                                            /> */}
+
                             <Input
                               placeholder="All Skills"
                               name="all_skills"
@@ -474,15 +423,7 @@ class AstrologerSignup extends React.Component {
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Language*</Label>
-                            {/* <Select
-                                              isMulti
-                                              required
-                                              name="language"
-                                              className="basic-multi-select"
-                                              classNamePrefix="select"
-                                              onChange={this.changeHandler}
-                                              value={this.state.language}
-                                            /> */}
+
                             <Input
                               placeholder="language"
                               name="language"
@@ -549,12 +490,7 @@ class AstrologerSignup extends React.Component {
                             <Col md="6">
                               <div className="form-group mtb-10">
                                 <Label>Monthly Earning</Label>
-                                <Input
-                                  type="text"
-                                  // name="max_earning_expe"
-                                  // value={this.state.max_earning_expe}
-                                  // onChange={this.changeHandler}
-                                />
+                                <Input type="text" />
                               </div>
                             </Col>
                           </Row>
@@ -627,11 +563,7 @@ class AstrologerSignup extends React.Component {
                             <Label>
                               Main source of business (other than astrology)*
                             </Label>
-                            {/* <Select
-                                              value={this.state.income_src}
-                                              required
-                                              onChange={this.changeHandler}
-                                          /> */}
+
                             <Input
                               placeholder="source of business"
                               name="income_src"
@@ -644,12 +576,7 @@ class AstrologerSignup extends React.Component {
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Select your highest qualification*</Label>
-                            {/* <Select
-                                              value={this.state.highest_qualification }
-                                              required
-                                              options={qualioption}
-                                              onChange={this.changeHandler}
-                                          /> */}
+
                             <Input
                               placeholder="qualification"
                               name="highest_qualification"
@@ -662,11 +589,7 @@ class AstrologerSignup extends React.Component {
                         <Col md="6">
                           <div className="form-group mtb-10">
                             <Label>Degree/Diploma*</Label>
-                            {/* <Select
-                                              value={this.state.degree_deploma}
-                                              required
-                                              onChange={this.changeHandler}
-                                          /> */}
+
                             <Input
                               placeholder="Degree/Diploma"
                               name="degree_deploma"
@@ -833,15 +756,6 @@ class AstrologerSignup extends React.Component {
                       <Button type="submit" className="btn btn-primary mt-5">
                         Submit
                       </Button>
-                      {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Button.Ripple
-                    color="primary"
-                    type="submit"
-                    className="mr-1 mb-1"
-                  >
-                    Submit
-                  </Button.Ripple>
-                </Col> */}
                     </div>
                   </Form>
                 </div>
@@ -850,8 +764,8 @@ class AstrologerSignup extends React.Component {
           </section>
         </Container>
       </section>
-    );
+    )
   }
 }
 
-export default AstrologerSignup;
+export default AstrologerSignup

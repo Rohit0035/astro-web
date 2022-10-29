@@ -1,19 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import {
-  Container,
-  Row,
-  Col,
-  Input,
-  InputGroup,
-  Form,
-  Button,
-} from 'reactstrap'
+// import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button } from 'reactstrap'
 import LayoutOne from '../../layouts/LayoutOne'
-import AutoSearch from './autosearch'
+// import AutoSearch from './autosearch'
 import axiosConfig from '../../axiosConfig'
 import swal from 'sweetalert'
-
 class AddressFormEdit extends React.Component {
   constructor(props) {
     super(props)
@@ -26,7 +17,8 @@ class AddressFormEdit extends React.Component {
       country: '',
       pincode: '',
       landmark: '',
-      fullname: '',
+      name: '',
+      mobile: '',
     }
   }
   changeHandler = (e) => {
@@ -37,11 +29,11 @@ class AddressFormEdit extends React.Component {
     let { id } = this.props.match.params
     console.log(id)
     axiosConfig
-      .post(`/user/shipping_address/${id}`, this.state)
+      .post(`/user/edit_address/${id}`, this.state)
       .then((response) => {
         console.log(response.data)
         swal('Success!', 'Submitted SuccessFull!', 'success')
-        window.location.reload('/pages/other/cartList')
+        // this.props.history.push('/addressform/'+userid)
       })
 
       .catch((error) => {
@@ -68,7 +60,8 @@ class AddressFormEdit extends React.Component {
                 <Col md="12">
                   <div className="leftcont text-left">
                     <h1>
-                      Astromall Shop/ Product Detail/ Consultant List/ Edit Address
+                      Astromall Shop/ Product Detail/ Consultant List/ Edit
+                      Address
                     </h1>
                     <h3>Shop Best Online Astrology Products And Services</h3>
                   </div>
@@ -80,7 +73,7 @@ class AddressFormEdit extends React.Component {
 
         <section className="">
           <Container>
-             <Row>
+            <Row>
               <Col lg="12">
                 <div className="wal-amt">
                   <h3>Edit Address </h3>
@@ -92,10 +85,10 @@ class AddressFormEdit extends React.Component {
                           <label>Name*</label>
                           <input
                             type="text"
-                            name="fullname"
+                            name="name"
                             required
                             placeholder="Enter Your Fullname"
-                            value={this.state.fullname}
+                            value={this.state.name}
                             onChange={this.changeHandler}
                           />
                         </div>

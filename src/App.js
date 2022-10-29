@@ -197,8 +197,9 @@ const NotificationList = lazy(() =>
 )
 const WalletAddForm = lazy(() => import('./components/astrology/WalletAddForm'))
 const AddressForm = lazy(() => import('./components/astrology/AddressForm'))
-const AddressFormEdit = lazy(() => import('./components/astrology/AddressFormEdit'))
-
+const AddressFormEdit = lazy(() =>
+  import('./components/astrology/AddressFormEdit'),
+)
 
 const Cart = lazy(() => import('./pages/other/Cart'))
 const MyOrder = lazy(() => import('./pages/other/MyOrder'))
@@ -543,10 +544,6 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + '/addressform/:id'}
                   component={AddressForm}
                 />
-                <Route
-                  path={process.env.PUBLIC_URL + '/addressformedit'}
-                  component={AddressFormEdit}
-                />
 
                 <Route
                   path={process.env.PUBLIC_URL + '/walletmoney'}
@@ -618,6 +615,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + '/consultantlist/:id'}
                   component={ConsultantList}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + '/addressformedit/:id'}
+                  component={AddressFormEdit}
                 />
 
                 <Route

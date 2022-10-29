@@ -78,6 +78,7 @@ const IconGroup = ({
 
   const fetchCustomer = async () => {
     let user_id = JSON.parse(localStorage.getItem('user_id'))
+
     console.log('first', user_id)
     Axios.get(`http://13.235.180.192:8000/user/viewoneuser/${user_id}`)
       .then((response) => {
@@ -121,7 +122,7 @@ const IconGroup = ({
               <span className="username">{customer?.fullname}</span>
               <span data-tour="user">
                 <img
-                  src={customer?.userimg}
+                  src={customer?.userimg[0]}
                   className="round ftt"
                   height="40"
                   width="40"
@@ -148,7 +149,7 @@ const IconGroup = ({
                   </Link>
                 </li>
                 <li>
-                  <a href='http://astro.astrologically.in/#/pages/login' >
+                  <a href="http://astro.astrologically.in/#/pages/login">
                     Astrologer login
                   </a>
                 </li>
@@ -212,23 +213,23 @@ const IconGroup = ({
           </span>
         </Link>
       </div> */}
-      <div className="same-style header-wishlist">
+      {/* <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + '/wishlist'}>
           <i className="pe-7s-like" />
           <span className="count-style">
             {wish && wish.length ? wish.length : 0}
           </span>
         </Link>
-      </div>
+      </div> */}
 
-      <div className="same-style cart-wrap d-none d-lg-block">
+      {/* <div className="same-style cart-wrap d-none d-lg-block">
         <button className="icon-cart" onClick={(e) => handleClick(e)}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {carts && carts.length ? carts.length : 0}
           </span>
         </button>
-        {/* menu cart */}
+       
         <MenuCart
           carts={carts}
           currency={currency}
@@ -242,7 +243,7 @@ const IconGroup = ({
             {carts && carts.length ? carts.length : 0}
           </span>
         </Link>
-      </div>
+      </div> */}
 
       <div className="same-style mobile-off-canvas d-block d-lg-none">
         <button

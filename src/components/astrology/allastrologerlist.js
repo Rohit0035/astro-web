@@ -1,45 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Input,
-  InputGroup,
-  Form,
-  Button,
-} from "reactstrap";
-import textbottom from "../../assets/img/textbottom.png";
-import astro3 from "../../assets/img/team/astro3.jpg";
-import "../../assets/scss/astroteam.scss";
-import LayoutOne from "../../layouts/LayoutOne";
-import axiosConfig from "../../axiosConfig";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col } from 'reactstrap'
+// import textbottom from '../../assets/img/textbottom.png'
+// import astro3 from '../../assets/img/team/astro3.jpg'
+import '../../assets/scss/astroteam.scss'
+import LayoutOne from '../../layouts/LayoutOne'
+import axiosConfig from '../../axiosConfig'
 
 class AllAstrologerList extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       // data: {},
       astrologerList: [],
-    };
+    }
   }
   componentDidMount = () => {
     axiosConfig
-      .get("/admin/allAstro")
+      .get('/admin/allAstro')
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data)
         if (response.data.status === true) {
-          this.setState({ astrologerList: response.data.data });
+          this.setState({ astrologerList: response.data.data })
         }
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-      });
-  };
+        console.log(error)
+        console.log(error.response)
+      })
+  }
   render() {
-    const { astrologerList } = this.state;
+    const { astrologerList } = this.state
 
     return (
       <LayoutOne headerTop="visible">
@@ -47,10 +39,10 @@ class AllAstrologerList extends React.Component {
           <div
             className=""
             style={{
-              backgroundColor: "#FFD59E",
-              width: "100%",
-              padding: "70px 0px",
-              backgroundSize: "cover",
+              backgroundColor: '#FFD59E',
+              width: '100%',
+              padding: '70px 0px',
+              backgroundSize: 'cover',
             }}
           >
             <Container>
@@ -79,48 +71,61 @@ class AllAstrologerList extends React.Component {
                         <div className="image-flip">
                           <div className="mainflip flip-0">
                             <div className="frontside">
-                              <div className="card">
-                                <div className="card-body text-center">
-                                  <p>
-                                    <img src={astrologer.img} alt="" />
-                                  </p>
-                                  <h4 className="card-title">
-                                    {astrologer.fullname}
-                                  </h4>
-                                  <ul className="mb-3">
-                                    <li>
-                                      {" "}
-                                      <span>{astrologer.all_skills}</span>
-                                    </li>
-                                    <li>
-                                      Language:{" "}
-                                      <span>{astrologer.language}</span>
-                                    </li>
-                                  </ul>
-                                  <Link className="btn btn-primary btn-sm st-d">
-                                    Online
-                                  </Link>
-                                  <Link className="btn btn-primary btn-sm">
-                                    <i class="fa fa-phone">
-                                      {astrologer.callCharge}
-                                    </i>{" "}
-                                    Call
-                                    <small>
-                                      / 20{" "}
-                                      <i class="fa fa-inr" aria-hidden="true">
-                                        {astrologer.conrubute_hrs}
-                                      </i>{" "}
-                                      per Hour
-                                    </small>
-                                  </Link>
-                                </div>
-                              </div>
+                                <Link
+                                    to={'/astrologerdetail/' + astrologer._id}
+                                    className=""
+                                  >
+                                    <div className="card">
+                                      <div className="card-body text-center">
+                                        <p>
+                                          <img src={astrologer?.img} alt="" />
+                                        </p>
+                                        <h4 className="card-title">
+                                      
+                                          {astrologer?.fullname}
+                                        </h4>
+                                        <ul className="mb-3">
+                                          <li>
+                                            Specility: <span>{astrologer?.all_skills}</span>
+                                          </li>
+                                          <li>
+                                            Language: <span>{astrologer?.language}</span>
+                                          </li>
+                                          <li>
+                                            Experience: <span>{astrologer?.exp_in_years}</span>
+                                          </li>
+                                          <li>
+                                            Call Rate:{' '}
+                                            <span>
+                                              {astrologer?.callCharge}/{astrologer?.conrubute_hrs}
+                                            </span>
+                                          </li>
+                                        </ul>
+                                        <Link className="btn btn-primary btn-sm st-d">
+                                          Online
+                                        </Link>
+                                        <Link className="btn btn-primary btn-sm">
+                                          {/* <i class="fa fa-phone">
+                                            {astrologer?.callCharge}
+                                          </i>{' '} */}
+                                          Call
+                                          {/* <small>
+                                            / 20{' '}
+                                            <i class="fa fa-inr" aria-hidden="true">
+                                              {astrologer?.conrubute_hrs}
+                                            </i>{' '}
+                                            per Hour
+                                          </small> */}
+                                        </Link>
+                                      </div>
+                                    </div>
+                                </Link>
                             </div>
-                            <div className="backside">
+                            {/* <div className="backside">
                               <div className="card">
                                 <div className="card-body text-center mt-4">
                                   <h4 className="card-title">
-                                    {" "}
+                                    {' '}
                                     {astrologer.fullname}
                                   </h4>
                                   <ul>
@@ -150,430 +155,51 @@ class AllAstrologerList extends React.Component {
                                       </p>
                                     </li>
                                     <li>
-                                      {" "}
+                                      {' '}
                                       <span>{astrologer.all_skills}</span>
                                     </li>
                                     <li>
-                                      Language:{" "}
+                                      Language:{' '}
                                       <span>{astrologer.language}</span>
                                     </li>
                                     <li>
-                                      Experience:{" "}
+                                      Experience:{' '}
                                       <span>{astrologer.exp_in_years}</span>
                                     </li>
                                   </ul>
 
                                   <Link
-                                    to={"/astrologerdetail/" + astrologer._id}
+                                    to={'/astrologerdetail/' + astrologer._id}
                                     className="btn btn-primary btn-sm"
                                   >
                                     <i class="fa fa-phone">
                                       {astrologer.callCharge}
-                                    </i>{" "}
+                                    </i>{' '}
                                     Call Now
                                     <small>
-                                      {" "}
-                                      20{" "}
+                                      {' '}
+                                      20{' '}
                                       <i class="fa fa-inr" aria-hidden="true">
                                         {astrologer.conrubute_hrs}
                                       </i>
                                       Hour
                                     </small>
                                   </Link>
-                                  {/* <ul className="list-inline">
-                                                <li className="list-inline-item">
-                                                    <a className="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                        <i className="fa fa-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li className="list-inline-item">
-                                                    <a className="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li className="list-inline-item">
-                                                    <a className="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                        <i className="fa fa-skype"></i>
-                                                    </a>
-                                                </li>
-                                                <li className="list-inline-item">
-                                                    <a className="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                        <i className="fa fa-google"></i>
-                                                    </a>
-                                                </li>
-                                            </ul> */}
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </Col>
-                    );
+                    )
                   })
                 : null}
-              {/* <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small>/ 20  <i class="fa fa-inr" aria-hidden="true"></i>  per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul >
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small> 20 <i class="fa fa-inr" aria-hidden="true"></i>  /Hour </small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> / 20  <i class="fa fa-inr" aria-hidden="true"></i>  per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul >
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  <i class="fa fa-inr" aria-hidden="true"></i> 20/Hour</small>
-                                            </Link>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> /<i class="fa fa-inr" aria-hidden="true"></i>   20 per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul>
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  20  <i class="fa fa-inr" aria-hidden="true"></i>  /Hour</small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> /<i class="fa fa-inr" aria-hidden="true"></i>   20 per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul>
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  20  <i class="fa fa-inr" aria-hidden="true"></i>  /Hour</small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> /<i class="fa fa-inr" aria-hidden="true"></i>   20 per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul>
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  20  <i class="fa fa-inr" aria-hidden="true"></i>  /Hour</small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> /<i class="fa fa-inr" aria-hidden="true"></i>   20 per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul>
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  20  <i class="fa fa-inr" aria-hidden="true"></i>  /Hour</small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col>
-                <Col md="3">
-                    <div className="image-flip">
-                            <div className="mainflip flip-0">
-                                <div className="frontside">
-                                    <div className="card">
-                                        <div className="card-body text-center">
-                                            <p><img src={astro3} alt=""/></p>
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul className="mb-3">
-                                                <li> <span>Tarot Card Reading , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                            </ul>
-                                            <Link className="btn btn-primary btn-sm st-d">
-                                                Online
-                                            </Link>
-                                            <Link className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call
-                                                <small> /<i class="fa fa-inr" aria-hidden="true"></i>   20 per Hour</small>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="backside">
-                                    <div className="card">
-                                        <div className="card-body text-center mt-4">
-                                            <h4 className="card-title">Krishnan Iyer</h4>
-                                            <ul>
-                                                <li>Rating :<span>(1458)</span>
-                                                <p className="mb-3">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                </p>
-                                                </li>
-                                                <li> <span>Tarot Card  , Vedic Astrology</span></li>
-                                                <li>Language:   <span>English , Tamil , Malayalam</span></li>
-                                                <li>Experience:  <span>22 Years</span></li>
-                                            </ul>
-                                            <Link to="/astrologerdetail" className="btn btn-primary btn-sm">
-                                                <i class="fa fa-phone"></i> Call Now
-                                                <small>  20  <i class="fa fa-inr" aria-hidden="true"></i>  /Hour</small>
-                                            </Link>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </Col> */}
             </Row>
           </Container>
         </section>
       </LayoutOne>
-    );
+    )
   }
 }
 
-export default AllAstrologerList;
+export default AllAstrologerList

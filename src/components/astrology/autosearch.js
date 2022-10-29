@@ -6,24 +6,24 @@ function AutoSearch() {
   const items = [
     {
       id: 0,
-      name: 'Cobol'
+      name: 'Cobol',
     },
     {
       id: 1,
-      name: 'JavaScript'
+      name: 'JavaScript',
     },
     {
       id: 2,
-      name: 'Basic'
+      name: 'Basic',
     },
     {
       id: 3,
-      name: 'PHP'
+      name: 'PHP',
     },
     {
       id: 4,
-      name: 'Java'
-    }
+      name: 'Java',
+    },
   ]
 
   const handleOnSearch = (string, results) => {
@@ -49,8 +49,12 @@ function AutoSearch() {
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>
+          id: {item.id}
+        </span>
+        <span style={{ display: 'block', textAlign: 'left' }}>
+          name: {item.name}
+        </span>
       </>
     )
   }
@@ -75,5 +79,3 @@ function AutoSearch() {
 }
 
 export default AutoSearch
-  
-

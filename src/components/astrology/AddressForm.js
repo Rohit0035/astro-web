@@ -1,16 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Container,
-  Row,
-  Col,
-  Input,
-  InputGroup,
-  Form,
-  Button,
-} from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 import LayoutOne from '../../layouts/LayoutOne'
-import AutoSearch from './autosearch'
+// import AutoSearch from './autosearch'
 import axiosConfig from '../../axiosConfig'
 import swal from 'sweetalert'
 
@@ -18,6 +10,10 @@ class AddressForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      name: '',
+      mobile: '',
+      email: '',
+      userid: '',
       alt_mobile: '',
       flat_no: '',
       locality: '',
@@ -26,31 +22,82 @@ class AddressForm extends React.Component {
       country: '',
       pincode: '',
       landmark: '',
-      fullname: '',
+      data: [],
+      viewoneAddressData: [],
     }
   }
+  componentDidMount() {
+    let userId = JSON.parse(localStorage.getItem('user_id'))
+    axiosConfig
+      .get(`/user/viewone_address/${userId}`)
+      .then((response) => {
+        console.log('viewone_address', response.data.data)
+        this.setState({
+          viewoneAddressData: response.data.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  changeHandler1 = (e) => {
+    this.setState({ status: e.target.value })
+  }
+
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
   submitHandler = (e) => {
     e.preventDefault()
-    let { id } = this.props.match.params
-    console.log(id)
+    // let { id } = this.props.match.params
+    // console.log(id)
+    let userId = JSON.parse(localStorage.getItem('user_id'))
+    let obj = {
+      userid: userId,
+      alt_mobile: parseInt(this.state.alt_mobile),
+      flat_no: parseInt(this.state.flat_no),
+      locality: this.state.locality,
+      city: this.state.city,
+      state: this.state.state,
+      country: this.state.country,
+      pincode: this.state.pincode,
+      landmark: this.state.landmark,
+      name: this.state.name,
+      mobile: parseInt(this.state.mobile),
+      email: this.state.email,
+    }
+
     axiosConfig
-      .post(`/user/shipping_address/${id}`, this.state)
+      .post(`/user/add_shipping_address`, obj)
       .then((response) => {
-        console.log(response.data)
+        console.log('@@@@@', response.data.data)
         swal('Success!', 'Submitted SuccessFull!', 'success')
-        window.location.reload('/pages/other/cartList')
+        window.location.reload('/addressForm')
       })
 
       .catch((error) => {
         swal('Error!', 'You clicked the button!', 'error')
-        console.log(error.response)
+        console.log(error)
+      })
+  }
+
+  addressDelete = (id) => {
+    axiosConfig
+      .get('/user/dlt_address/' + id)
+      .then((response) => {
+        console.log('@@@@@', response.data.data)
+        swal('Success!', 'Address SuccessFull! Deleted', 'success')
+        window.location.reload(true)
+      })
+
+      .catch((error) => {
+        swal('Error!', 'You clicked the button!', 'error')
+        console.log(error)
       })
   }
 
   render() {
+    const { viewoneAddressData } = this.state
     return (
       <LayoutOne headerTop="visible">
         <section className="pt-0 pb-0">
@@ -80,111 +127,142 @@ class AddressForm extends React.Component {
 
         <section className="">
           <Container>
-             <div className='multi-address'>
+            <div className="multi-address">
               <Row>
-                  <Col lg="6" className='mb-20'>
-                    <div className="wal-amt">
-                      <h3>Continue with your saved address
+                {viewoneAddressData.length
+                  ? viewoneAddressData.map((address, index) => {
+                      return (
+                        <Col lg="6" className="mb-20">
+                          <div className="wal-amt">
+                            <h3>
+                              Continue with your saved address
+                              <span>
+                                <Link
+                                  to={'/addressformedit/' + address?._id}
+                                  className=""
+                                >
+                                  <i className="pe-7s-note ad-edit" />
+                                </Link>
+                                <Link
+                                  onClick={() =>
+                                    this.addressDelete(address?._id)
+                                  }
+                                  className=" "
+                                >
+                                  <i className="pe-7s-trash ad-del" />
+                                </Link>
+                              </span>
+                            </h3>
+                            <hr></hr>
+                            <div className="user-pro py-0">
+                              <ul>
+                                <li>
+                                  Name : <span>{address?.name}</span>
+                                </li>
+                                <li>
+                                  Mobile : <span>{address?.mobile}</span>
+                                </li>
+                                <li>
+                                  Email : <span>{address?.email}</span>
+                                </li>
+                                <li>
+                                  Address :
+                                  <span>
+                                    {address?.flat_no +
+                                      ',' +
+                                      address?.locality +
+                                      ',' +
+                                      address?.city +
+                                      '(' +
+                                      address.pincode +
+                                      ')'}
+                                  </span>
+                                </li>
+                                <li>
+                                  City : <span>{address?.city}</span>
+                                </li>
+                                <li>
+                                  State : <span>{address?.state}</span>
+                                </li>
+
+                                <li>
+                                  Locality : <span>{address?.locality}</span>
+                                </li>
+                                <li>
+                                  Pin Code :{' '}
+                                  <span>
+                                    {address?.pincode ? address?.pincode : 'NA'}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <div className="py-3 text-center">
+                              <Link to="/cartlist">
+                                <Button className="btn btn-warning">
+                                  Deliver To This Address{' '}
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        </Col>
+                      )
+                    })
+                  : null}
+
+                {/* <Col lg="6" className="mb-20">
+                  <div className="wal-amt">
+                    <h3>
+                      Continue with your saved address
                       <span>
-                          <Link to="/addressformedit" className="">
-                              <i className="pe-7s-note ad-edit" />
-                          </Link>
-                          <Link to="/" className=" ">
-                              <i className="pe-7s-trash ad-del" />
-                          </Link>
-                      </span>
-                      </h3>
-                      <hr></hr>
-                      <div className="user-pro py-0">
-                        <ul>
-                          <li>
-                            Name : <span>lorem</span>
-                          </li>
-                          <li>
-                            Mobile : <span>4454544545</span>
-                          </li>
-                          <li>
-                            Email : <span>Test@gmail.com</span>
-                          </li>
-                          <li>
-                            State : <span>MP</span>
-                          </li>
-                          <li>
-                            City : <span>Indore</span>
-                          </li>
-                          <li>
-                            Address : <span>Vijay Nagar</span>
-                          </li>
-                          <li>
-                            Locality : <span>Indore</span>
-                          </li>
-                          <li>
-                            Pin Code : <span>452001</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="py-3 text-center">
-                        <Link to="/cartlist">
-                          <Button className="btn btn-warning">
-                            Deliver To This Address{' '}
-                          </Button>
+                        <Link to="/addressformedit" className="">
+                          <i className="pe-7s-note ad-edit" />
                         </Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" className='mb-20'>
-                    <div className="wal-amt">
-                      <h3>Continue with your saved address
-                      <span>
-                          <Link to="/addressformedit" className="">
-                              <i className="pe-7s-note ad-edit" />
-                          </Link>
-                          <Link to="/" className=" ">
-                              <i className="pe-7s-trash ad-del" />
-                          </Link>
-                      </span>
-                      </h3>
-                      <hr></hr>
-                      <div className="user-pro py-0">
-                        <ul>
-                          <li>
-                            Name : <span>lorem</span>
-                          </li>
-                          <li>
-                            Mobile : <span>4454544545</span>
-                          </li>
-                          <li>
-                            Email : <span>Test@gmail.com</span>
-                          </li>
-                          <li>
-                            State : <span>MP</span>
-                          </li>
-                          <li>
-                            City : <span>Indore</span>
-                          </li>
-                          <li>
-                            Address : <span>Vijay Nagar</span>
-                          </li>
-                          <li>
-                            Locality : <span>Indore</span>
-                          </li>
-                          <li>
-                            Pin Code : <span>452001</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="py-3 text-center">
-                        <Link to="/cartlist">
-                          <Button className="btn btn-warning">
-                            Deliver To This Address{' '}
-                          </Button>
+                        <Link to="/" className=" ">
+                          <i className="pe-7s-trash ad-del" />
                         </Link>
-                      </div>
+                      </span>
+                    </h3>
+                    <hr></hr>
+                    <div className="user-pro py-0">
+                      <ul>
+                        <li>
+                          Name : <span>lorem</span>
+                        </li>
+                        <li>
+                          Mobile : <span>4454544545</span>
+                        </li>
+                        <li>
+                          Email : <span>Test@gmail.com</span>
+                        </li>
+                        <li>
+                          State : <span>MP</span>
+                        </li>
+                        <li>
+                          City : <span>Indore</span>
+                        </li>
+                        <li>
+                          Address : <span>Vijay Nagar</span>
+                        </li>
+                        <li>
+                          Locality : <span>Indore</span>
+                        </li>
+                        <li>
+                          Pin Code : <span>452001</span>
+                        </li>
+                      </ul>
                     </div>
-                  </Col>
-                  </Row>
-             </div>
-             <Row>
+                    <div className="py-3 text-center">
+                      <Link to="/cartlist">
+                        <Button className="btn btn-warning">
+                          Deliver To This Address{' '}
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </Col> */}
+              </Row>
+            </div>
+            <Row>
               <Col lg="12">
                 <div className="wal-amt">
                   <h3>Add New Address </h3>
@@ -196,10 +274,10 @@ class AddressForm extends React.Component {
                           <label>Name*</label>
                           <input
                             type="text"
-                            name="fullname"
+                            name="name"
                             required
                             placeholder="Enter Your Fullname"
-                            value={this.state.fullname}
+                            value={this.state.name}
                             onChange={this.changeHandler}
                           />
                         </div>
@@ -350,5 +428,4 @@ class AddressForm extends React.Component {
     )
   }
 }
-
 export default AddressForm
