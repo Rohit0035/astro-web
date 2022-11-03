@@ -26,12 +26,12 @@ const HeroSliderTwentyNineSingle = ({ data, sliderClass }) => {
                 dangerouslySetInnerHTML={{ __html: data.subtitle }}
               />
               <div className="slider-btn-brown btn-hover">
-                <Link
+                {/* <Link
                   className="animated"
                   to={process.env.PUBLIC_URL + data.url}
                 >
                   Appointment
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

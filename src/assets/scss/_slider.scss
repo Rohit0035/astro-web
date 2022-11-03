@@ -1143,7 +1143,6 @@
 .nav-style-2 .ht-swiper-button-nav {
   font-size: 60px;
   line-height: 94px;
-
   position: absolute;
   top: 50%;
 
@@ -2823,4 +2822,27 @@
       padding: 12px 30px;
     }
   }
+}
+
+
+// .swiper-button-prev:after, .swiper-button-next:after{
+//   font-size: 30px !important;
+//   color: #fc6e00;
+// }
+
+button.swiper-button-prev.ht-swiper-button-nav.ser-1 {
+  background: #fc6e00;
+  border: none;
+  font-size: 42px;
+  color: #FFFF;
+  border-radius: 3px;
+  width: 40px;
+}
+button.swiper-button-next.ht-swiper-button-nav.ser-2 {
+  background: #fc6e00;
+  border: none;
+  font-size: 42px;
+  color: #FFFF;
+  border-radius: 3px;
+  width: 40px;
 }

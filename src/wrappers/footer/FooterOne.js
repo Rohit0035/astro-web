@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { animateScroll } from "react-scroll";
 import FooterCopyright from "../../components/footer/FooterCopyright";
 import FooterNewsletter from "../../components/footer/FooterNewsletter";
+import Axios from "axios";
 
 const FooterOne = ({
   backgroundColorClass,
@@ -17,7 +18,20 @@ const FooterOne = ({
 }) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
-
+  const [categoryList, setCategoryList] = useState([]);
+  const getCategory = () => {
+    Axios.get(`http://13.235.180.192:8000/admin/getallCategory`)
+      .then((response) => {
+        console.log("5555555", response.data.data);
+        setCategoryList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getCategory();
+  }, []);
   useEffect(() => {
     setTop(100);
     window.addEventListener("scroll", handleScroll);
@@ -55,7 +69,7 @@ const FooterOne = ({
             <h3 className="stltext">AstroVipra </h3>
             <FooterCopyright
               // footerLogo="/assets/img/logo/logo.png"
-             
+
               spaceBottomClass="mb-30"
             />
           </div>
@@ -76,7 +90,7 @@ const FooterOne = ({
             </div>
           </div> */}
 
-<div
+          <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-4" : "col-lg-3 col-sm-6"
             }`}
@@ -94,9 +108,18 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                     <Link to="/heroscopesall">Love Horoscope 2022</Link>
+                    <Link>Horoscopes</Link>
+                    <ul className="submenu">
+                      {categoryList?.map((cat) => (
+                        <li className="" key={cat._id}>
+                          <Link to={process.env.PUBLIC_URL + "/heroscopesall"}>
+                            {cat?.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </li>
-                  <li>
+                  {/* <li>
                       <Link to="/heroscopesall">Health Horoscope 2022</Link>
                   </li>
                   <li>
@@ -128,12 +151,11 @@ const FooterOne = ({
                   </li>
                   <li>
                       <Link to="/">Planetary Transit 2022</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
           </div>
-
 
           <div
             className={`${
@@ -153,29 +175,33 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/ourservice"}>Our Services</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/freekundli"}>Free Kundli</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/blog"}>Blog</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/aboutdetail"}>About us</Link>
-                  </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "/ourservice"}>
+                        Our Services
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "/freekundli"}>
+                        Free Kundli
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "/blog"}>Blog</Link>
+                    </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "/aboutdetail"}>
+                        About us
+                      </Link>
+                    </li>
 
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/contact"}>
-                      Contact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      
-                    </Link>
-                  </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "/contact"}>
+                        Contact
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={process.env.PUBLIC_URL + "#/"}></Link>
+                    </li>
                     <Link to={process.env.PUBLIC_URL + "/TermsOfUse"}>
                       Terms of Use
                     </Link>
@@ -192,7 +218,7 @@ const FooterOne = ({
               </div>
             </div>
           </div>
-        
+
           <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-8" : "col-lg-3 col-sm-6"

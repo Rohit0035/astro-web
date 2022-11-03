@@ -204,6 +204,7 @@ class AstrologerSignup extends React.Component {
 
         email: email,
         fullname: fullname,
+        moblie:mobile,
       })
       .then((response) => {
         this.stepper.next()
@@ -220,11 +221,12 @@ class AstrologerSignup extends React.Component {
       })
   }
   stepperSecond = () => {
-    const { otp } = this.state
+    const { otp,mobile } = this.state
     axiosConfig
       .post('/user/verifyotp', {
-        otp: parseInt(otp) != NaN ? parseInt(otp) : 'null',
+        otp: parseInt(otp,mobile) != NaN ? parseInt(otp) : 'null',
         otp: otp,
+        mobile:mobile,
       })
       .then((response) => {
         this.stepper.next()

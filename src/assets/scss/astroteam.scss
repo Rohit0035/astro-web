@@ -163,9 +163,7 @@ a.btn.btn-primary.btn-sm.st-d {
 // pooja section
 /********************* Shopping Demo-8 **********************/
 .product-grid8 {
-  font-family: Poppins, sans-serif;
-  position: relative;
-  z-index: 1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .product-grid8 .product-image8 {
   border: 1px solid #e4e9ef;
@@ -255,7 +253,7 @@ a.btn.btn-primary.btn-sm.st-d {
   clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
 }
 .product-grid8 .product-content {
-  padding: 20px 0 0;
+  padding: 20px 15px;
 }
 .product-grid8 .price {
   color: #000;
@@ -319,7 +317,7 @@ a.btn.btn-primary.btn-sm.st-d {
   margin-left: 7px;
 }
 .product-grid8 .all-deals:hover {
-  background-color: #ff5722;
+  background-color: #000;
 }
 @media only screen and (max-width: 990px) {
   .product-grid8 {

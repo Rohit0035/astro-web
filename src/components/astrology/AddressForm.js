@@ -1,57 +1,57 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'reactstrap'
-import LayoutOne from '../../layouts/LayoutOne'
+import React from "react";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Button } from "reactstrap";
+import LayoutOne from "../../layouts/LayoutOne";
 // import AutoSearch from './autosearch'
-import axiosConfig from '../../axiosConfig'
-import swal from 'sweetalert'
+import axiosConfig from "../../axiosConfig";
+import swal from "sweetalert";
 
 class AddressForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      name: '',
-      mobile: '',
-      email: '',
-      userid: '',
-      alt_mobile: '',
-      flat_no: '',
-      locality: '',
-      city: '',
-      state: '',
-      country: '',
-      pincode: '',
-      landmark: '',
+      name: "",
+      mobile: "",
+      email: "",
+      userid: "",
+      alt_mobile: "",
+      flat_no: "",
+      locality: "",
+      city: "",
+      state: "",
+      country: "",
+      pincode: "",
+      landmark: "",
       data: [],
       viewoneAddressData: [],
-    }
+    };
   }
   componentDidMount() {
-    let userId = JSON.parse(localStorage.getItem('user_id'))
+    let userId = JSON.parse(localStorage.getItem("user_id"));
     axiosConfig
       .get(`/user/viewone_address/${userId}`)
       .then((response) => {
-        console.log('viewone_address', response.data.data)
+        console.log("viewone_address", response.data.data);
         this.setState({
           viewoneAddressData: response.data.data,
-        })
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
   changeHandler1 = (e) => {
-    this.setState({ status: e.target.value })
-  }
+    this.setState({ status: e.target.value });
+  };
 
   changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
   submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // let { id } = this.props.match.params
     // console.log(id)
-    let userId = JSON.parse(localStorage.getItem('user_id'))
+    let userId = JSON.parse(localStorage.getItem("user_id"));
     let obj = {
       userid: userId,
       alt_mobile: parseInt(this.state.alt_mobile),
@@ -65,49 +65,49 @@ class AddressForm extends React.Component {
       name: this.state.name,
       mobile: parseInt(this.state.mobile),
       email: this.state.email,
-    }
+    };
 
     axiosConfig
       .post(`/user/add_shipping_address`, obj)
       .then((response) => {
-        console.log('@@@@@', response.data.data)
-        swal('Success!', 'Submitted SuccessFull!', 'success')
-        window.location.reload('/addressForm')
+        console.log("@@@@@", response.data.data);
+        swal("Success!", "Submitted SuccessFull!", "success");
+        window.location.reload("/addressForm");
       })
 
       .catch((error) => {
-        swal('Error!', 'You clicked the button!', 'error')
-        console.log(error)
-      })
-  }
+        swal("Error!", "You clicked the button!", "error");
+        console.log(error);
+      });
+  };
 
   addressDelete = (id) => {
     axiosConfig
-      .get('/user/dlt_address/' + id)
+      .get("/user/dlt_address/" + id)
       .then((response) => {
-        console.log('@@@@@', response.data.data)
-        swal('Success!', 'Address SuccessFull! Deleted', 'success')
-        window.location.reload(true)
+        console.log("@@@@@", response.data.data);
+        swal("Success!", "Address SuccessFull! Deleted", "success");
+        window.location.reload(true);
       })
 
       .catch((error) => {
-        swal('Error!', 'You clicked the button!', 'error')
-        console.log(error)
-      })
-  }
+        swal("Error!", "You clicked the button!", "error");
+        console.log(error);
+      });
+  };
 
   render() {
-    const { viewoneAddressData } = this.state
+    const { viewoneAddressData } = this.state;
     return (
       <LayoutOne headerTop="visible">
         <section className="pt-0 pb-0">
           <div
             className=""
             style={{
-              backgroundColor: '#FFD59E',
-              width: '100%',
-              padding: '70px 0px',
-              backgroundSize: 'cover',
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
             }}
           >
             <Container>
@@ -130,7 +130,7 @@ class AddressForm extends React.Component {
             <div className="multi-address">
               <Row>
                 {viewoneAddressData.length
-                  ? viewoneAddressData.map((address, index) => {
+                  ? viewoneAddressData.map((address) => {
                       return (
                         <Col lg="6" className="mb-20">
                           <div className="wal-amt">
@@ -138,7 +138,7 @@ class AddressForm extends React.Component {
                               Continue with your saved address
                               <span>
                                 <Link
-                                  to={'/addressformedit/' + address?._id}
+                                  to={"/addressformedit/" + address?._id}
                                   className=""
                                 >
                                   <i className="pe-7s-note ad-edit" />
@@ -169,13 +169,13 @@ class AddressForm extends React.Component {
                                   Address :
                                   <span>
                                     {address?.flat_no +
-                                      ',' +
+                                      "," +
                                       address?.locality +
-                                      ',' +
+                                      "," +
                                       address?.city +
-                                      '(' +
+                                      "(" +
                                       address.pincode +
-                                      ')'}
+                                      ")"}
                                   </span>
                                 </li>
                                 <li>
@@ -189,9 +189,9 @@ class AddressForm extends React.Component {
                                   Locality : <span>{address?.locality}</span>
                                 </li>
                                 <li>
-                                  Pin Code :{' '}
+                                  Pin Code :{" "}
                                   <span>
-                                    {address?.pincode ? address?.pincode : 'NA'}
+                                    {address?.pincode ? address?.pincode : "NA"}
                                   </span>
                                 </li>
                               </ul>
@@ -199,67 +199,15 @@ class AddressForm extends React.Component {
                             <div className="py-3 text-center">
                               <Link to="/cartlist">
                                 <Button className="btn btn-warning">
-                                  Deliver To This Address{' '}
+                                  Deliver To This Address{" "}
                                 </Button>
                               </Link>
                             </div>
                           </div>
                         </Col>
-                      )
+                      );
                     })
                   : null}
-
-                {/* <Col lg="6" className="mb-20">
-                  <div className="wal-amt">
-                    <h3>
-                      Continue with your saved address
-                      <span>
-                        <Link to="/addressformedit" className="">
-                          <i className="pe-7s-note ad-edit" />
-                        </Link>
-                        <Link to="/" className=" ">
-                          <i className="pe-7s-trash ad-del" />
-                        </Link>
-                      </span>
-                    </h3>
-                    <hr></hr>
-                    <div className="user-pro py-0">
-                      <ul>
-                        <li>
-                          Name : <span>lorem</span>
-                        </li>
-                        <li>
-                          Mobile : <span>4454544545</span>
-                        </li>
-                        <li>
-                          Email : <span>Test@gmail.com</span>
-                        </li>
-                        <li>
-                          State : <span>MP</span>
-                        </li>
-                        <li>
-                          City : <span>Indore</span>
-                        </li>
-                        <li>
-                          Address : <span>Vijay Nagar</span>
-                        </li>
-                        <li>
-                          Locality : <span>Indore</span>
-                        </li>
-                        <li>
-                          Pin Code : <span>452001</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="py-3 text-center">
-                      <Link to="/cartlist">
-                        <Button className="btn btn-warning">
-                          Deliver To This Address{' '}
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </Col> */}
               </Row>
             </div>
             <Row>
@@ -425,7 +373,7 @@ class AddressForm extends React.Component {
           </Container>
         </section>
       </LayoutOne>
-    )
+    );
   }
 }
-export default AddressForm
+export default AddressForm;

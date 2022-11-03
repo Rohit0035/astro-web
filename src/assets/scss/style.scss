@@ -656,10 +656,13 @@ a.wr-6 button {
     margin: 10px;
 }
 .w-offer button {
-    background: #4caf50;
+    background: #f1e9e0;
     font-size: 18px;
+    color: #000;
     font-weight: 500;
-    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
 }
 .Wr-1.wr-t {
     text-align: left;
@@ -777,8 +780,8 @@ img.imgser2 {
     background-color:#fff;
     text-align: center;
     padding: 50px 22px 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-top: 30px;
-    box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 6%);
     position: relative;
     min-height: 322px;
     border-radius: 10px;
@@ -1191,6 +1194,75 @@ i.pe-7s-note.ad-edit {
     color: #1b7906;
     font-weight: 700;
 }
+
+
+
+// css for customersupport
+
+.supp-1{
+    text-align: center;
+    padding: 28px 14px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    i{
+        font-size: 50px;
+        font-weight: 700;
+        color: #d63907;
+    }
+    p{
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+}
+.supp-2{
+    text-align: left;
+    padding: 28px 14px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 15px;
+}
+.supp-2 ul li span {
+    float: right !important;
+}
+.supp-3{
+    text-align: right;
+}
+.supp-3 a {
+    background: #ea8b0e;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.supp-3 a:hover{
+    color: #fff !important;
+}
+.supp-4 {
+    margin: 50px 0px;
+}
+textarea.form-control.stp {
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.spt-1 {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #fc6e00 !important;
+    border-color: #fc6e00 !important;
+}
+
+a.oth-btn {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
 // css for mobile screen
 
 @media only screen and (max-width: 600px) {
@@ -1229,5 +1301,20 @@ i.pe-7s-note.ad-edit {
     .col-xl-3.col-lg-3.col-md-3.col-8 {
         width: 100%;
     }
+    .col-xl-2.col-lg-2.col-md-2.col-8 {
+        width: 100%;
+    }
+    .spt-1 {
+        width: 100%;
+        margin: 0 auto;
+    }
+    img.hm-img {
+        padding: 20px;
+        width: 85px;
+    }
   }
+
+
+
+//   swiper slide
 

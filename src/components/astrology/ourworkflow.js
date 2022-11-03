@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Container, Row,  Col, Input, InputGroup, Form,Button } from "reactstrap";
 import textbottom from "../../assets/img/textbottom.png";
 import "../../assets/scss/workflow.css"
+import chatimg from "../../assets/img/icon-img/chaticon.png";
+import callimg from "../../assets/img/icon-img/callicon.png";
+import videoimg from "../../assets/img/icon-img/video.png";
 
 
 class OurWorkFlow extends React.Component {
@@ -17,7 +20,7 @@ class OurWorkFlow extends React.Component {
       <Container>
 
          <div className="heading">
-              <h2>3 Step To Do</h2>
+              <h2>Connect to Astrologers</h2>
               <img src={textbottom} alt=""/>
          </div>
              <Row>
@@ -26,12 +29,11 @@ class OurWorkFlow extends React.Component {
                         <Row>
                             <Col md="5">
                                 <div className="process-step">
-                                    <p className="m-0 p-0">Step</p>
-                                    <h2 className="m-0 p-0">01</h2>
+                                    <img src={chatimg}  alt="" className="hm-img"/>
                                 </div>  
                             </Col>
                             <Col md="7">
-                                <h5 className="bt-txt">Select a package</h5>
+                                <h5 className="bt-txt">Chat with Astrologer</h5>
                                 <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p> 
                             </Col>
                             {/* <div class="process-line-l"></div> */}
@@ -43,12 +45,11 @@ class OurWorkFlow extends React.Component {
                         <Row>
                             <Col md="5">
                                 <div className="process-step">
-                                    <p className="m-0 p-0">Step</p>
-                                    <h2 className="m-0 p-0">02</h2>
+                                    <img src={callimg}  alt="" className="hm-img"/>
                                 </div>  
                             </Col>
                             <Col md="7">
-                                <h5 className="bt-txt">Purchase a Package</h5>
+                                <h5 className="bt-txt">Talk to Astrologer</h5>
                                 <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p> 
                             </Col>
                             {/* <div class="process-line-l"></div> */}
@@ -56,16 +57,15 @@ class OurWorkFlow extends React.Component {
                     </div>
                </Col>
                <Col md="4">
-                  <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+                    <div className="process-box process-left" data-aos="fade-right"        data-aos-duration="1000">
                         <Row>
                             <Col md="5">
                                 <div className="process-step">
-                                    <p className="m-0 p-0">Step</p>
-                                    <h2 className="m-0 p-0">03</h2>
+                                    <img src={videoimg}  alt="" className="hm-img"/>
                                 </div>  
                             </Col>
                             <Col md="7">
-                                <h5 className="bt-txt">Talk With Astrologer</h5>
+                                <h5 className="bt-txt">Live Astrologers</h5>
                                 <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p> 
                             </Col>
                             {/* <div class="process-line-l"></div> */}

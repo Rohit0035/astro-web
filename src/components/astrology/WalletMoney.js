@@ -82,7 +82,7 @@ class WalletMoney extends React.Component {
                                </Link>
                          </Col>
                          <Col xl="3" lg="3" md="3" sm="6" xs="6">
-                               <Link>
+                               <Link to="paymentdetail">
                                       <div className="promoBox success-box info-ribbon">
                                         <aside>
                                             <p>100% extra</p>
@@ -170,7 +170,7 @@ class WalletMoney extends React.Component {
                                </Link>
                          </Col>
 
-                         <Col lg="12">
+                         {/* <Col lg="12">
                              <div className="w-offer">
                                  <Button onClick={this.toggle} >
                                      <i class="fa fa-percent" aria-hidden="true"></i>
@@ -181,7 +181,7 @@ class WalletMoney extends React.Component {
 
                                  </Button>
                              </div>
-                         </Col>
+                         </Col> */}
                     </Row>
               </Container>
         </section>

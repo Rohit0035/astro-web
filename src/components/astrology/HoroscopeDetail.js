@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -8,48 +8,63 @@ import {
   // InputGroup,
   // Form,
   // Button,
-} from 'reactstrap'
-import LayoutOne from '../../layouts/LayoutOne'
+} from "reactstrap";
+import LayoutOne from "../../layouts/LayoutOne";
 // import heroscope1 from "../../assets/img/heroscope/heroscope1.png";
 // import astromob from "../../assets/img/astromob.png";
-import axiosConfig from '../../axiosConfig'
+import axiosConfig from "../../axiosConfig";
 class HoroscopeDetail extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       data: {},
-    }
+      categoryList: [],
+    };
   }
   componentDidMount() {
-    let { id } = this.props.match.params
+    axiosConfig
+      .get("/admin/getallCategory")
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === true) {
+          this.setState({ categoryList: response.data.data });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+      });
+
+    let { id } = this.props.match.params;
     // console.log(id);
     axiosConfig
       .get(`/admin/getoneRashi/${id}`)
       .then((response) => {
-        console.log(response.data.data)
+        console.log(response.data.data);
         this.setState({
           rashi_title: response.data.data.rashi_title,
           desc: response.data.data.desc,
           date: response.data.data.date,
-        })
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
 
   render() {
+    const { categoryList } = this.state;
     return (
       <LayoutOne headerTop="visible">
         <section className="pt-0 pb-0">
           <div
             className=""
             style={{
-              backgroundColor: '#FFD59E',
-              width: '100%',
-              padding: '70px 0px',
-              backgroundSize: 'cover',
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
             }}
           >
             <Container>
@@ -85,32 +100,19 @@ class HoroscopeDetail extends React.Component {
                     <option value="aquarius">Aquarius</option>
                     <option value="pisces">Pisces</option>
                   </select>
-
                   <div className="h-cate">
                     <h3>HOROSCOPES:</h3>
-                    <ul>
-                      <li>
-                        <Link>Today's Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Today's Love Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Tomorrow's Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Yesterday's Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Weekly Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Monthly Horoscope</Link>
-                      </li>
-                      <li>
-                        <Link>Annual Horoscope</Link>
-                      </li>
-                    </ul>
+                    {categoryList.length
+                      ? categoryList.map((cat) => {
+                          return (
+                            <ul>
+                              <li>
+                                <Link>{cat?.title}</Link>
+                              </li>
+                            </ul>
+                          );
+                        })
+                      : null}
                   </div>
                 </div>
               </Col>
@@ -124,8 +126,8 @@ class HoroscopeDetail extends React.Component {
           </Container>
         </section>
       </LayoutOne>
-    )
+    );
   }
 }
 
-export default HoroscopeDetail
+export default HoroscopeDetail;

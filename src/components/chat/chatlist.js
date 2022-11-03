@@ -5,7 +5,8 @@ import textbottom from "../../assets/img/textbottom.png";
 import aboutimg from "../../assets/img/aboutimg.jpg";
 import "../../assets/scss/chat.scss";
 import LayoutOne from "../../layouts/LayoutOne";
-
+import ChatBox from 'react-custom-chat'
+import { useState } from 'react'
 
 class ChatList extends React.Component {
  

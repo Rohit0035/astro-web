@@ -128,8 +128,18 @@ const CompleteProAstro = lazy(() =>
   import('./components/astrology/astrologerpages/CompleteProAstro'),
 )
 
+
+
 // astology pages start
+
+
 const AlertPage = lazy(() => import('./components/astrology/AlertPage'))
+
+const CustomerSupport = lazy(() => import('./components/astrology/CustomerSupport'))
+const UserRequestForm = lazy(() => import('./components/astrology/UserRequestForm'))
+const CustomerSupportForm = lazy(() => import('./components/astrology/CustomerSupportForm'))
+const CustomerSupportView = lazy(() => import('./components/astrology/CustomerSupportView'))
+
 
 const FreeKundli = lazy(() =>
   import('./components/astrology/kundalimatch/freekundli'),
@@ -173,6 +183,8 @@ const ConsultantList = lazy(() =>
 const CartList = lazy(() => import('./pages/other/CartList'))
 
 const OurService = lazy(() => import('./components/astrology/OurService'))
+const ServiceList = lazy(() => import('./components/astrology/ServiceList'))
+
 const AllAstrologerList = lazy(() =>
   import('./components/astrology/allastrologerlist'),
 )
@@ -191,6 +203,9 @@ const KundaliMatchList = lazy(() =>
 const WalletMoney = lazy(() => import('./components/astrology/WalletMoney'))
 const WalletTransacList = lazy(() =>
   import('./components/astrology/WalletTransacList'),
+)
+const PaymentDetail = lazy(() =>
+  import('./components/astrology/PaymentDetail'),
 )
 const NotificationList = lazy(() =>
   import('./components/astrology/NotificationList'),
@@ -529,6 +544,11 @@ const App = (props) => {
                 />
 
                 <Route
+                  path={process.env.PUBLIC_URL + '/paymentdetail'}
+                  component={PaymentDetail}
+                />
+
+                <Route
                   path={process.env.PUBLIC_URL + '/walletaddform'}
                   component={WalletAddForm}
                 />
@@ -650,14 +670,38 @@ const App = (props) => {
                   component={ProductList}
                 />
 
+
+
                 <Route
                   path={process.env.PUBLIC_URL + '/alertpage'}
                   component={AlertPage}
                 />
 
                 <Route
+                  path={process.env.PUBLIC_URL + '/customersupport'}
+                  component={CustomerSupport}
+                /> 
+                 <Route
+                  path={process.env.PUBLIC_URL + '/customersupportform'}
+                  component={CustomerSupportForm}
+                /> 
+                 <Route
+                  path={process.env.PUBLIC_URL + '/customersupportview'}
+                  component={CustomerSupportView}
+                /> 
+
+                <Route
+                  path={process.env.PUBLIC_URL + '/userrequestform'}
+                  component={UserRequestForm}
+                />     
+
+                <Route
                   path={process.env.PUBLIC_URL + '/ourservice'}
                   component={OurService}
+                />
+                 <Route
+                  path={process.env.PUBLIC_URL + '/servicelist'}
+                  component={ServiceList}
                 />
 
                 <Route

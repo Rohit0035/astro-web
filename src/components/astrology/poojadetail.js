@@ -82,25 +82,11 @@ class PoojaDetail extends React.Component {
                       <h3 className="product-title">
                         {this.state.data.productname}
                       </h3>
-                      <div className="rating">
-                        <div className="stars">
-                          <span className="fa fa-star checked"></span>
-                          <span className="fa fa-star checked"></span>
-                          <span className="fa fa-star checked"></span>
-                          <span className="fa fa-star"></span>
-                          <span className="fa fa-star"></span>
-                        </div>
-                        <span className="review-no">41 reviews</span>
-                      </div>
                       <p>{this.state.data.desc}</p>
                       <h4 className="price">
-                        current price: <span>${this.state.data.mrp_price}</span>
+                         Starting From: <span>${this.state.data.mrp_price}</span>
                       </h4>
-                      <h4 className="price">
-                        discount price:{' '}
-                        <span>${this.state.data.des_price}</span>
-                      </h4>
-
+                    
                       {/* <h5 className="colors">colors:
                                             <span className="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
                                             <span className="color green"></span>

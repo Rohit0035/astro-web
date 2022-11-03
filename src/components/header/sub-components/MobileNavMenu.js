@@ -150,17 +150,22 @@ const MobileNavMenu = ({ strings }) => {
             </ul>
           </li> */}
 
-        <li>
-          <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
-        </li>
+            <li>
+              <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
+            </li>
 
-          <li>
+            <li>
               <Link to="/kundaliform">Kundli Matching</Link>
            </li>
 
             <li>
+                <Link to="/allastrologerlist">Chat Astrologer</Link>
+            </li>
+
+            <li>
                <Link to="/allastrologerlist">Talk Astrologer</Link>
-           </li>
+            </li>
+           
 
              <li>
               <Link>Horoscopes</Link>

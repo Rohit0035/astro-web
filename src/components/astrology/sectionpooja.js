@@ -12,7 +12,7 @@ class SectionPooja extends React.Component {
   return (
     <Container>
         <div className="heading mt-40">
-              <h2>Rituals</h2>
+              <h2>Our Trending Products</h2>
               <img src={textbottom} alt=""/>
          </div>
         <Row>
@@ -27,19 +27,10 @@ class SectionPooja extends React.Component {
                             <Link to="/poojadetail">
                             <img src={astro2} alt=""/>
                             </Link>
-                            <ul class="social">
-                                {/* <li><a href="" className="fa fa-search"></a></li> */}
-                                <li><Link className="fa fa-search"></Link></li>
-                                <li><Link className="fa fa-shopping-bag"></Link></li>
-                                <li><Link className="fa fa-shopping-cart"></Link></li>
-                            </ul>
-                            <span className="product-discount-label">-20%</span>
                         </div>
                         <div className="product-content">
                             <div className="price"><i class="fa fa-inr" aria-hidden="true"></i> 800.00
-                                <span><i className="fa fa-inr" aria-hidden="true"></i> 1000.00</span>
                             </div>
-                            <span className="product-shipping">Free Shipping</span>
                              <h3 className="title"><Link>Magic ball reader</Link></h3>
                              <Link className="all-deals">View More<i class="fa fa-angle-right icon"></i></Link>
                         </div>
@@ -51,19 +42,10 @@ class SectionPooja extends React.Component {
                             <Link to="/poojadetail">
                             <img src={astro2} alt=""/>
                             </Link>
-                            <ul class="social">
-                                {/* <li><a href="" className="fa fa-search"></a></li> */}
-                                <li><Link className="fa fa-search"></Link></li>
-                                <li><Link className="fa fa-shopping-bag"></Link></li>
-                                <li><Link className="fa fa-shopping-cart"></Link></li>
-                            </ul>
-                            <span className="product-discount-label">-20%</span>
                         </div>
                         <div className="product-content">
                             <div className="price"><i class="fa fa-inr" aria-hidden="true"></i> 800.00
-                                <span><i className="fa fa-inr" aria-hidden="true"></i> 1000.00</span>
                             </div>
-                            <span className="product-shipping">Free Shipping</span>
                              <h3 className="title"><Link>Magic ball reader</Link></h3>
                              <Link className="all-deals">View More<i class="fa fa-angle-right icon"></i></Link>
                         </div>
@@ -75,19 +57,10 @@ class SectionPooja extends React.Component {
                             <Link to="/poojadetail">
                             <img src={astro2} alt=""/>
                             </Link>
-                            <ul class="social">
-                                {/* <li><a href="" className="fa fa-search"></a></li> */}
-                                <li><Link className="fa fa-search"></Link></li>
-                                <li><Link className="fa fa-shopping-bag"></Link></li>
-                                <li><Link className="fa fa-shopping-cart"></Link></li>
-                            </ul>
-                            <span className="product-discount-label">-20%</span>
                         </div>
                         <div className="product-content">
                             <div className="price"><i class="fa fa-inr" aria-hidden="true"></i> 800.00
-                                <span><i className="fa fa-inr" aria-hidden="true"></i> 1000.00</span>
                             </div>
-                            <span className="product-shipping">Free Shipping</span>
                              <h3 className="title"><Link>Magic ball reader</Link></h3>
                              <Link className="all-deals">View More<i class="fa fa-angle-right icon"></i></Link>
                         </div>
@@ -99,19 +72,10 @@ class SectionPooja extends React.Component {
                             <Link to="/poojadetail">
                             <img src={astro2} alt=""/>
                             </Link>
-                            <ul class="social">
-                                {/* <li><a href="" className="fa fa-search"></a></li> */}
-                                <li><Link className="fa fa-search"></Link></li>
-                                <li><Link className="fa fa-shopping-bag"></Link></li>
-                                <li><Link className="fa fa-shopping-cart"></Link></li>
-                            </ul>
-                            <span className="product-discount-label">-20%</span>
                         </div>
                         <div className="product-content">
                             <div className="price"><i class="fa fa-inr" aria-hidden="true"></i> 800.00
-                                <span><i className="fa fa-inr" aria-hidden="true"></i> 1000.00</span>
                             </div>
-                            <span className="product-shipping">Free Shipping</span>
                              <h3 className="title"><Link>Magic ball reader</Link></h3>
                              <Link className="all-deals">View More<i class="fa fa-angle-right icon"></i></Link>
                         </div>

@@ -15,7 +15,7 @@ import LayoutOne from "../../layouts/LayoutOne";
 // import FourthSection from "../../wrappers/content-home/FourthSection";
 // import MapSection from "../../wrappers/content-home/MapSection";
 // import FifthSection from "../../wrappers/content-home/FifthSection";
-import PredictionallHome from "../../components/astrology/predictionallhome"
+// import PredictionallHome from "../../components/astrology/predictionallhome"
 import OurWorkFlow from "../../components/astrology/ourworkflow"
 import BlogFeatured from "../../wrappers/blog-featured/BlogFeatured";
 import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
@@ -25,6 +25,7 @@ import FeatureIconSix from "../../wrappers/feature-icon/FeatureIconSix";
 import SectionPooja from "../../components/astrology/sectionpooja";
 // import AstroTeam from "../../components/astrology/astroteam";
 import SliderList from "../../components/astrology/sliderlist";
+import ServiceList from "../../components/astrology/ServiceList";
 
 
 const HomeFurnitureTwo = () => {
@@ -41,11 +42,14 @@ const HomeFurnitureTwo = () => {
 
        {/* feature text */}
        <FeatureIconSix spaceBottomClass="pb-30" spaceTopClass="pt-30" />
+      
+      <ServiceList/>
+
 
       <AboutUs />
       {/* abutus */}
 
-      <PredictionallHome />
+      {/* <PredictionallHome /> */}
       {/* third section */}
 
       
