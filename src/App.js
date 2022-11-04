@@ -136,6 +136,8 @@ const CompleteProAstro = lazy(() =>
 const AlertPage = lazy(() => import('./components/astrology/AlertPage'))
 
 const CustomerSupport = lazy(() => import('./components/astrology/CustomerSupport'))
+const AskQuestion = lazy(() => import('./components/astrology/AskQuestion'))
+
 const UserRequestForm = lazy(() => import('./components/astrology/UserRequestForm'))
 const CustomerSupportForm = lazy(() => import('./components/astrology/CustomerSupportForm'))
 const CustomerSupportView = lazy(() => import('./components/astrology/CustomerSupportView'))
@@ -681,6 +683,12 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + '/customersupport'}
                   component={CustomerSupport}
                 /> 
+
+                <Route
+                  path={process.env.PUBLIC_URL + '/askquestion'}
+                  component={AskQuestion}
+                /> 
+
                  <Route
                   path={process.env.PUBLIC_URL + '/customersupportform'}
                   component={CustomerSupportForm}

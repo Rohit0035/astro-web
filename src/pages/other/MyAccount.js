@@ -6,155 +6,184 @@ import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import { Container, Form, Row,Col } from "reactstrap";
+import { Container, Form, Row, Col } from "reactstrap";
 import axios from "axios";
-import userpic from "../../assets/img/userpic.png"
+import userpic from "../../assets/img/userpic.png";
+import axiosConfig from "../../axiosConfig";
 export default class MyAccount extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fullname : "",
+      fullname: "",
       email: "",
       mobile: "",
-      userimg:"",
+      dob: "",
+      bithplace: "",
+      birth_tym: "",
+      userimg: "",
       address: "",
       locality: "",
       pincode: "",
       city: "",
       state: "",
+      country: "",
+      selectedName: "",
+      selectedFile: null,
+      // data: {},
     };
   }
-
-
- 
-
-
- 
-
+  onChangeHandler = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedName: event.target.files[0].name });
+    console.log(event.target.files[0]);
+  };
   componentDidMount() {
-    let { id } = this.props.match.params;
-    console.log(this.state);
-    axios  
-      .get(`http://13.235.180.192/user/viewoneuser/${id}`)
+    // let { id } = this.props.match.params;
+    let user_id = JSON.parse(localStorage.getItem("user_id"));
+    axiosConfig
+      .get(`/user/viewoneuser/${user_id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.data);
         this.setState({
-          fullname: response.data.fullname,
-          email: response.data.email,
-          mobile: response.data.mobile,
-          userimg: response.data.userimg,
-          // about_me: response.data.about_me,
+          fullname: response.data.data.fullname,
+          email: response.data.data.email,
+          mobile: response.data.data.mobile,
+          dob: response.data.data.dob,
+          bithplace: response.data.data.bithplace,
+          birth_tym: response.data.data.birth_tym,
+          userimg: response.data.data.userimg,
+          address: response.data.address,
+          // locality: response.data.data.locality,
+          pincode: response.data.data.pincode,
+          city: response.data.data.city,
+          state: response.data.data.state,
+          country: response.data.data.country,
         });
-        // this.state
-        //console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+  changeHandler1 = (e) => {
+    this.setState({ status: e.target.value });
+  };
+  changeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   submitHandler = (e) => {
     e.preventDefault();
-    //let { id } = this.props.match.params;
-    axios
-      .post(`http://13.235.180.192/api/user/editcustomer`, this.state, {
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      })
+    console.log(this.state.data);
+    const data = new FormData();
+    data.append("fullname", this.state.fullname);
+    data.append("email", this.state.email);
+    data.append("mobile", this.state.mobile);
+    data.append("dob", this.state.dob);
+    data.append("bithplace", this.state.bithplace);
+    data.append("birth_tym", this.state.birth_tym);
+    data.append("address", this.state.address);
+    data.append("pincode", this.state.pincode);
+    data.append("city", this.state.city);
+    data.append("state", this.state.state);
+    data.append("country", this.state.country);
+    if (this.state.selectedFile !== null) {
+      data.append("userimg", this.state.selectedFile, this.state.selectedName);
+    }
+
+    for (var value of data.values()) {
+      console.log(value);
+    }
+
+    for (var key of data.keys()) {
+      console.log(key);
+    }
+    // let { id } = this.props.match.params;
+    let user_id = JSON.parse(localStorage.getItem("user_id"));
+    axiosConfig
+      .post(`/user/edit_myprofile/${user_id}`, data)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        // swal("Success!", "Submitted SuccessFull!", "success");
+        // this.props.history.push("/app/user/userList");
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
-  };
-
-  addAddress = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    axios
-      .post("http://13.235.180.192/api/user/addcus_address", this.state, {
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-
-  changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     return (
       <Fragment>
-        {/* <MetaTags>
-          <title>Flone | My Account</title>
-          <meta
-            name="description"
-            content="Compare page of flone react minimalist eCommerce template."
-          />
-        </MetaTags> */}
-        {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
-          Home / My Account
-        </BreadcrumbsItem> */}
-        {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        My Account
-      </BreadcrumbsItem> */}
         <LayoutOne headerTop="visible">
-          {/* breadcrumb */}
-          {/* <Breadcrumb /> */}
-
-          <section className="pt-0 pb-0" >
-                 <div
-                    className=""
-                    style={{
-                      backgroundColor:"#FFD59E",
-                      width: "100%",
-                      padding:"70px 0px",
-                      backgroundSize:"cover"
-                    }}
-                  >
-                    <Container>
-                            <Row>
-                                <Col md="12">
-                                    <div className="leftcont text-left">
-                                        <h1>My Account Information</h1>
-                                    </div>
-                                </Col>
-                                
-                            </Row>
-                    </Container>
-                    
-                </div>
-        </section>
+          <section className="pt-0 pb-0">
+            <div
+              className=""
+              style={{
+                backgroundColor: "#FFD59E",
+                width: "100%",
+                padding: "70px 0px",
+                backgroundSize: "cover",
+              }}
+            >
+              <Container>
+                <Row>
+                  <Col md="12">
+                    <div className="leftcont text-left">
+                      <h1>My Account Information</h1>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+          </section>
           <div className="myaccount-area pb-80 pt-100">
             <div className="container">
               <div className="row">
                 <div class="col-lg-4">
-                    <Card.Body className="usr-1">
-                         <div className="user-pro">
-                             <img src={userpic} alt=""/>
-                             <ul>
-                                  <li>Name :    <span>{this.state.fullname}</span></li>
-                                  <li>Mobile :    <span>4454544545</span></li>
-                                  <li>Email :    <span>Test@gmail.com</span></li>
-                                  <li>DOB :    <span>02/02/2022</span></li>
-                                  <li>State :    <span>MP</span></li>
-                                  <li>City :    <span>Indore</span></li>
-                                  <li>Address :    <span>Vijay Nagar</span></li>
-                                  <li>Locality :    <span>Indore</span></li>
-                                  <li>Pin Code :    <span>452001</span></li>
-                             </ul>
-                         </div>
-                    </Card.Body>
+                  <Card.Body className="usr-1">
+                    <div className="user-pro">
+                      <img
+                        src={this.state.userimg}
+                        alt="userimg"
+                        className="img-fluid img-border rounded-circle box-shadow-1"
+                        width="150"
+                      />
+                      <ul>
+                        <li>
+                          Name : <span>{this.state.fullname}</span>
+                        </li>
+                        <li>
+                          Mobile : <span>{this.state.mobile}</span>
+                        </li>
+                        <li>
+                          Email : <span>{this.state.email}</span>
+                        </li>
+                        <li>
+                          DOB : <span>{this.state.dob}</span>
+                        </li>
+                        <li>
+                          Address : <span>{this.state.address}</span>
+                        </li>
+                        {/* <li>
+                          Locality : <span>{this.state.data.locality}</span>
+                        </li> */}
+                        <li>
+                          Pin Code : <span>{this.state.pincode}</span>
+                        </li>
+                        <li>
+                          State : <span>{this.state.state}</span>
+                        </li>
+                        <li>
+                          City : <span>{this.state.city}</span>
+                        </li>
+
+                        <li>
+                          Country : <span>{this.state.country}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </Card.Body>
                 </div>
                 <div className="col-lg-8">
                   <div className="myaccount-wrapper">
@@ -180,14 +209,14 @@ export default class MyAccount extends Component {
                                   <label>First Name</label>
                                   <input
                                     type="text"
-                                    placeholder="First Name"
-                                    name="firstname"
-                                    value={this.state.firstname}
+                                    placeholder=" Name"
+                                    name="fullname"
+                                    value={this.state.fullname}
                                     onChange={this.changeHandler}
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6 col-md-6">
+                              {/* <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
                                   <label>Last Name</label>
                                   <input
@@ -198,7 +227,7 @@ export default class MyAccount extends Component {
                                     onChange={this.changeHandler}
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
                                   <label>Email Address</label>
@@ -214,9 +243,19 @@ export default class MyAccount extends Component {
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
+                                  <label>User Image</label>
+                                  <input
+                                    className="form-control"
+                                    type="file"
+                                    name="userimg"
+                                    onChange={this.onChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6">
+                                <div className="billing-info">
                                   <label>Mobile Number</label>
                                   <input
-                                    readOnly
                                     type="number"
                                     name="mobile"
                                     value={this.state.mobile}
@@ -236,7 +275,7 @@ export default class MyAccount extends Component {
                       {/* </Accordion.Collapse> */}
                     </Card>
                     <Card className="single-my-account mb-20">
-                      <Card.Body  className="usr-1">
+                      <Card.Body className="usr-1">
                         <Form onSubmit={this.addAddress}>
                           <div className="myaccount-info-wrapper">
                             <div className="account-info-wrapper">
@@ -315,7 +354,7 @@ export default class MyAccount extends Component {
                       {/* </Accordion.Collapse> */}
                     </Card>
                     <Card className="single-my-account mb-20">
-                      <Card.Body  className="usr-1">
+                      <Card.Body className="usr-1">
                         <Form onSubmit={this.addAddress}>
                           <div className="myaccount-info-wrapper">
                             <div className="account-info-wrapper">

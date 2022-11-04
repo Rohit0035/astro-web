@@ -196,6 +196,11 @@ const IconGroup = ({
                   </Link>
                 </li>
                 <li>
+                  <Link to={process.env.PUBLIC_URL + "/askquestion"}>
+                     Ask Question
+                  </Link>
+                </li>
+                <li>
                   <Link
                     to={process.env.PUBLIC_URL + "/"}
                     // onClick={(e) =>{(

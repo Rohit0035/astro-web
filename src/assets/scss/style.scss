@@ -1240,6 +1240,7 @@ i.pe-7s-note.ad-edit {
 }
 .supp-4 {
     margin: 50px 0px;
+    padding: 30px;
 }
 textarea.form-control.stp {
     height: 100px;
@@ -1263,6 +1264,37 @@ a.oth-btn {
     font-size: 16px;
     margin-bottom: 20px;
 }
+ul.ask-ques li {
+    line-height: 34px;
+    margin-left: 24px;
+    margin-top: 0px;
+    font-weight: 500;
+}
+ul.ask-ques ul {
+    margin-top: 20px;
+}
+ul.ask-ques li p {
+    margin-bottom: 16px;
+    color: #736d6d;
+    padding: 10px 10px;
+    border: 1px solid#ffd59eb5;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.supp-2.ask-qes-2 ul li {
+    line-height: 35px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.supp-2.ask-qes-2 ul {
+    padding: 30px;
+}
+small.sm-txt {
+    color: #ea0909;
+}
+
+
 // css for mobile screen
 
 @media only screen and (max-width: 600px) {
@@ -1317,4 +1349,7 @@ a.oth-btn {
 
 
 //   swiper slide
+
+
+
 
