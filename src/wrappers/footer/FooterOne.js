@@ -186,7 +186,7 @@ const FooterOne = ({
                       </Link>
                     </li>
                     <li>
-                      <Link to={process.env.PUBLIC_URL + "/blog"}>Blog</Link>
+                      <Link to={process.env.PUBLIC_URL + "/blog-standard"}>Blog</Link>
                     </li>
                     <li>
                       <Link to={process.env.PUBLIC_URL + "/aboutdetail"}>

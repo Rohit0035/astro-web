@@ -1,6 +1,8 @@
 import React from "react";
 
 const BlogPagination = () => {
+
+  
   return (
     <div className="pro-pagination-style text-center mt-20">
       <ul>

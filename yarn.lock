@@ -11528,6 +11528,11 @@
     "regenerator-runtime" "^0.13.3"
     "whatwg-fetch" "^3.0.0"
 
+"react-best-chatbot@^2.0.1":
+  "integrity" "sha512-oegzHM+hflDWPrNhug8Rf18FWYGvEiNmvllEwMl4PSgiZKyqeFVixstCgg0jgY9QH5XxrlnBgOWgCG2X6HuG/w=="
+  "resolved" "https://registry.npmjs.org/react-best-chatbot/-/react-best-chatbot-2.0.1.tgz"
+  "version" "2.0.1"
+
 "react-bootstrap-carousel@^4.1.1":
   "integrity" "sha512-nlkmx33jclOfEi1lAfFRRiDO5F2u4D03dbIhvrFPiUoiKgkMngeSZMFg6gY/sQPAhv3pQqhti5evoVgZMFaV2g=="
   "resolved" "https://registry.npmjs.org/react-bootstrap-carousel/-/react-bootstrap-carousel-4.1.1.tgz"
@@ -11562,6 +11567,15 @@
   "version" "1.2.1"
   dependencies:
     "react-through" "^1.1.4"
+
+"react-chat-app@^0.1.9":
+  "integrity" "sha512-29DqsHWa44LtFt4a6Ii/DXipZNu87y8nWygh5HLUj0vyYhQpJyy42dglo5qvoGYyuZavmnBc7p2NEOmPodM/Zw=="
+  "resolved" "https://registry.npmjs.org/react-chat-app/-/react-chat-app-0.1.9.tgz"
+  "version" "0.1.9"
+  dependencies:
+    "prop-types" "^15.7.2"
+    "react-spring" "^9.1.1"
+    "styled-components" "^5.2.1"
 
 "react-chat-engine@^1.11.23":
   "integrity" "sha512-OuGd5WCi7YxjgZMc9ctx3PUJjtk0sxkdmMQCbgqbmRVLqM1K/LsERj9KR3IyYpkZjzygTIR1/FNHpYI3EmLOsw=="
@@ -12169,7 +12183,7 @@
     "lodash.debounce" "^4.0.8"
     "resize-observer-polyfill" "^1.5.0"
 
-"react-spring@^9.2.2":
+"react-spring@^9.1.1", "react-spring@^9.2.2":
   "integrity" "sha512-vMGVd2yjgxWcRCzoLn9AD1d24+WpunHBRg5DoehcRdiBocaOH6qgle0xN9C5LPplXfv4yIpS5QWGN5MKrWxSZg=="
   "resolved" "https://registry.npmjs.org/react-spring/-/react-spring-9.5.5.tgz"
   "version" "9.5.5"
@@ -13683,7 +13697,7 @@
     "loader-utils" "^1.2.3"
     "schema-utils" "^2.0.1"
 
-"styled-components@^5.1.0", "styled-components@^5.3.3", "styled-components@>= 2":
+"styled-components@^5.1.0", "styled-components@^5.2.1", "styled-components@^5.3.3", "styled-components@>= 2":
   "integrity" "sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw=="
   "resolved" "https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz"
   "version" "5.3.3"

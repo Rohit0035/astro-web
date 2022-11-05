@@ -7,26 +7,41 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import BlogSidebar from "../../wrappers/blog/BlogSidebar";
 import BlogComment from "../../wrappers/blog/BlogComment";
 import BlogPost from "../../wrappers/blog/BlogPost";
+import { Col, Container, Row } from "reactstrap";
 
 const BlogDetailsStandard = ({ location }) => {
   const { pathname } = location;
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>Flone | Blog Post</title>
-        <meta
-          name="description"
-          content="Blog post page of flone react minimalist eCommerce template."
-        />
-      </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Blog Post
-      </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
+
+
+      <section className="pt-0 pb-0">
+          <div
+            className=""
+            style={{
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
+            }}
+          >
+            <Container>
+              <Row>
+                <Col md="12">
+                  <div className="leftcont text-left">
+                    <h1>
+                         Blog  Detail
+                    </h1>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </section>
         {/* breadcrumb */}
-        <Breadcrumb />
+
         <div className="blog-area pt-100 pb-100">
           <div className="container">
             <div className="row flex-row-reverse">

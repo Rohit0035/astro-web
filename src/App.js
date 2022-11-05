@@ -196,6 +196,10 @@ const MatchSearch = lazy(() => import('./components/astrology/MatchSearch'))
 const SliderDemo = lazy(() => import('./components/astrology/sliderdemo'))
 const SliderList = lazy(() => import('./components/astrology/sliderlist'))
 const ChatList = lazy(() => import('./components/chat/chatlist'))
+
+const DemoChat = lazy(() => import('./components/astrology/DemoChat'))
+
+
 const KundaliForm = lazy(() =>
   import('./components/astrology/kundalimatch/kundaliform'),
 )
@@ -733,10 +737,18 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + '/sliderlist'}
                   component={SliderList}
                 />
+
                 <Route
                   path={process.env.PUBLIC_URL + '/chatlist'}
                   component={ChatList}
                 />
+                
+                 <Route
+                  path={process.env.PUBLIC_URL + '/demochat'}
+                  component={DemoChat}
+                />
+
+               
 
                 <Route
                   path={process.env.PUBLIC_URL + '/kundaliform'}

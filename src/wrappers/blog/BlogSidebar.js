@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BlogSidebar = () => {
   return (
     <div className="sidebar-style">
-      <div className="sidebar-widget">
+      {/* <div className="sidebar-widget">
         <h4 className="pro-sidebar-title">Search </h4>
         <div className="pro-sidebar-search mb-55 mt-25">
           <form className="pro-sidebar-search-form" action="#">
@@ -14,8 +14,8 @@ const BlogSidebar = () => {
             </button>
           </form>
         </div>
-      </div>
-      <div className="sidebar-widget">
+      </div> */}
+      {/* <div className="sidebar-widget">
         <h4 className="pro-sidebar-title">Recent Projects </h4>
         <div className="sidebar-project-wrap mt-30">
           <div className="single-sidebar-blog">
@@ -99,7 +99,7 @@ const BlogSidebar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="sidebar-widget mt-35">
         <h4 className="pro-sidebar-title">Categories</h4>
         <div className="sidebar-widget-list sidebar-widget-list--blog mt-20">
@@ -108,7 +108,7 @@ const BlogSidebar = () => {
               <div className="sidebar-widget-list-left">
                 <input type="checkbox" defaultValue />{" "}
                 <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                  Women <span>4</span>{" "}
+                    Modern Astrology <span>4</span>{" "}
                 </Link>
                 <span className="checkmark" />
               </div>
@@ -117,7 +117,7 @@ const BlogSidebar = () => {
               <div className="sidebar-widget-list-left">
                 <input type="checkbox" defaultValue />{" "}
                 <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                  Men <span>4</span>{" "}
+                    Traditional Astrology  <span>4</span>{" "}
                 </Link>
                 <span className="checkmark" />
               </div>
@@ -126,7 +126,7 @@ const BlogSidebar = () => {
               <div className="sidebar-widget-list-left">
                 <input type="checkbox" defaultValue />{" "}
                 <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                  Bags <span>4</span>{" "}
+                    Relationship Astrology <span>4</span>{" "}
                 </Link>
                 <span className="checkmark" />
               </div>
@@ -135,7 +135,16 @@ const BlogSidebar = () => {
               <div className="sidebar-widget-list-left">
                 <input type="checkbox" defaultValue />{" "}
                 <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                  Accessories <span>4</span>{" "}
+                   Sidereal Astrology <span>4</span>{" "}
+                </Link>
+                <span className="checkmark" />
+              </div>
+            </li>
+            <li>
+              <div className="sidebar-widget-list-left">
+                <input type="checkbox" defaultValue />{" "}
+                <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
+                    Horary Astrology<span>4</span>{" "}
                 </Link>
                 <span className="checkmark" />
               </div>
@@ -143,7 +152,7 @@ const BlogSidebar = () => {
           </ul>
         </div>
       </div>
-      <div className="sidebar-widget mt-50">
+      {/* <div className="sidebar-widget mt-50">
         <h4 className="pro-sidebar-title">Tag </h4>
         <div className="sidebar-widget-tag mt-25">
           <ul>
@@ -172,7 +181,7 @@ const BlogSidebar = () => {
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
