@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -8,48 +8,46 @@ import {
   InputGroup,
   Form,
   Button,
-} from 'reactstrap'
-import women from '../../assets/img/women.jpg'
-import LayoutOne from '../../layouts/LayoutOne'
-import Tab from 'react-bootstrap/Tab'
-import Rating from '@mui/material/Rating'
-import LinearProgress from '@mui/material/LinearProgress'
-import Nav from 'react-bootstrap/Nav'
-import detailsbg from '../../assets/img/details-bg.jpg'
-import pagetitle from '../../assets/img/pagetitle.jpg'
-import axiosConfig from '../../axiosConfig'
-import axios from 'axios'
-import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+} from "reactstrap";
+import women from "../../assets/img/women.jpg";
+import LayoutOne from "../../layouts/LayoutOne";
+import Tab from "react-bootstrap/Tab";
+import Rating from "@mui/material/Rating";
+import LinearProgress from "@mui/material/LinearProgress";
+import Nav from "react-bootstrap/Nav";
+import detailsbg from "../../assets/img/details-bg.jpg";
+import pagetitle from "../../assets/img/pagetitle.jpg";
+import axiosConfig from "../../axiosConfig";
+import axios from "axios";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class AstrologerDetail extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       data: {},
-    }
+    };
     this.state = {
       modal: false,
-    
     };
 
     this.toggle = this.toggle.bind(this);
   }
-  
+
   toggle() {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
   }
 
-
   componentDidMount() {
-    let { id } = this.props.match.params
+    let { id } = this.props.match.params;
     // console.log(id);
     axiosConfig
       .get(`/admin/getoneAstro/${id}`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         this.setState({
           fullname: response.data.data.fullname,
           all_skills: response.data.data.all_skills,
@@ -61,16 +59,16 @@ class AstrologerDetail extends React.Component {
           callCharge: response.data.data.callCharge,
           long_bio: response.data.data.long_bio,
           msg: response.data.data.msg,
-        })
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
   render() {
     return (
       <LayoutOne headerTop="visible">
-          <section className="pt-0 pb-0">
+        <section className="pt-0 pb-0">
           <div
             className=""
             style={{
@@ -103,7 +101,7 @@ class AstrologerDetail extends React.Component {
                         <img src={this.state?.img} alt="" className="pic-as" />
                       </div>
                     </Col>
-                    <Col md="6">
+                    <Col md="9">
                       <div className="as-content mt-60">
                         <h3>{this.state.fullname}</h3>
                         <div className="review-rating">
@@ -130,10 +128,11 @@ class AstrologerDetail extends React.Component {
                           </li>
                         </ul>
                       </div>
+
                       <Row>
-                        <Col md="6" className="mt-30">
-                          <Button className="btn-as st" onClick={this.toggle} >
-                            <i class="fa fa-commenting" aria-hidden="true"></i>{' '}
+                        <Col md="3" className="mt-30">
+                          <Button className="btn-as st" onClick={this.toggle}>
+                            <i class="fa fa-commenting" aria-hidden="true"></i>{" "}
                             Start Chat
                             <small className="sm-text">
                               {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
@@ -141,10 +140,36 @@ class AstrologerDetail extends React.Component {
                             </small>
                           </Button>
                         </Col>
-                        <Col md="6" className="mt-30">
-                          <Button className="btn-as st" onClick={this.toggle} >
+                        <Col md="3" className="mt-30">
+                          <Button className="btn-as st" onClick={this.toggle}>
                             <i class="fa fa-phone" aria-hidden="true"></i> Start
                             Call
+                            <small className="sm-text">
+                              {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
+                              {/* {this.state.callCharge} */}
+                            </small>
+                          </Button>
+                        </Col>
+                        <Col md="3" className="mt-30">
+                          <Button className="btn-as st" onClick={this.toggle}>
+                            <i
+                              class="fa fa-video-camera"
+                              aria-hidden="true"
+                            ></i>{" "}
+                            Start Video
+                            <small className="sm-text">
+                              {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
+                              {/* {this.state.callCharge} */}
+                            </small>
+                          </Button>
+                        </Col>
+                        <Col md="3" className="mt-30">
+                          <Button className="btn-as st" onClick={this.toggle}>
+                            <i
+                              class="fa fa-youtube-play"
+                              aria-hidden="true"
+                            ></i>{" "}
+                            Start Live
                             <small className="sm-text">
                               {/* <i class="fa fa-inr" aria-hidden="true"></i>{" "} */}
                               {/* {this.state.callCharge} */}
@@ -219,31 +244,31 @@ class AstrologerDetail extends React.Component {
                                 <div className="col-md-6">
                                   <LinearProgress
                                     className="m-1 mb-3 "
-                                    style={{ color: '#14958f' }}
+                                    style={{ color: "#14958f" }}
                                     variant="determinate"
                                     value={70}
                                   />
                                   <LinearProgress
                                     className="m-1 mb-3 "
-                                    style={{ color: '#ff' }}
+                                    style={{ color: "#ff" }}
                                     variant="determinate"
                                     value={30}
                                   />
                                   <LinearProgress
                                     className="m-1 mb-3 "
-                                    style={{ color: '#14958f' }}
+                                    style={{ color: "#14958f" }}
                                     variant="determinate"
                                     value={30}
                                   />
                                   <LinearProgress
                                     className="m-1 mb-3 "
-                                    style={{ color: '#14958f' }}
+                                    style={{ color: "#14958f" }}
                                     variant="determinate"
                                     value={30}
                                   />
                                   <LinearProgress
                                     className="m-1 mb-3 "
-                                    style={{ color: '#14958f' }}
+                                    style={{ color: "#14958f" }}
                                     variant="determinate"
                                     value={10}
                                   />
@@ -253,12 +278,12 @@ class AstrologerDetail extends React.Component {
 
                               <div className="review-wrapper">
                                 <div className="single-review">
-                                  *{' '}
+                                  *{" "}
                                   <div className="review-img">
                                     <img
                                       src={
                                         process.env.PUBLIC_URL +
-                                        '/assets/img/testimonial/1.jpg'
+                                        "/assets/img/testimonial/1.jpg"
                                       }
                                       alt=""
                                     />
@@ -269,7 +294,7 @@ class AstrologerDetail extends React.Component {
                                         <div className="review-name">
                                           <h4
                                             style={{
-                                              textTransform: 'capitalize',
+                                              textTransform: "capitalize",
                                               margin: 5,
                                             }}
                                           >
@@ -293,8 +318,8 @@ class AstrologerDetail extends React.Component {
                                     <div className="review-bottom">
                                       <p
                                         style={{
-                                          display: 'inline',
-                                          textTransform: 'capitalize',
+                                          display: "inline",
+                                          textTransform: "capitalize",
                                         }}
                                       >
                                         Vestibulum ante ipsum primis aucibus
@@ -351,8 +376,8 @@ class AstrologerDetail extends React.Component {
                                           <textarea
                                             name="comment"
                                             placeholder="Comment"
-                                            defaultValue={''}
-                                            style={{ height: 'auto' }}
+                                            defaultValue={""}
+                                            style={{ height: "auto" }}
                                             rows={3}
                                           />
                                           <input
@@ -379,28 +404,36 @@ class AstrologerDetail extends React.Component {
 
         {/* modal for recharge*/}
 
-        <Modal size="md" style={{maxWidth: '600px', width: '100%'}} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader className="wr-3" toggle={this.toggle}>
-                    <h2 className="wr-4">Recharge Now</h2>
-                </ModalHeader>
-                <ModalBody>
-                          <div className="Wr-1">
-                              <h3>
-                                  Minimum balance of 5 minutes (INR 25.0) is required to start call with RajnishM
-                              </h3>
-                              <Link className="wr-5">
-                                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                              </Link>
-                              <Link className="wr-6" to="/walletmoney">
-                                   <Button>Recharge</Button>
-                              </Link>
-                          </div>
-                </ModalBody>
-               
+        <Modal
+          size="md"
+          style={{ maxWidth: "600px", width: "100%" }}
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalHeader className="wr-3" toggle={this.toggle}>
+            <h2 className="wr-4">Recharge Now</h2>
+          </ModalHeader>
+          <ModalBody>
+            <div className="Wr-1">
+              <h3>
+                Minimum balance of 5 minutes (INR 25.0) is required to start
+                call with RajnishM
+              </h3>
+              <Link className="wr-5">
+                <Button color="secondary" onClick={this.toggle}>
+                  Cancel
+                </Button>
+              </Link>
+              <Link className="wr-6" to="/walletmoney">
+                <Button>Recharge</Button>
+              </Link>
+            </div>
+          </ModalBody>
         </Modal>
       </LayoutOne>
-    )
+    );
   }
 }
 
-export default AstrologerDetail
+export default AstrologerDetail;
