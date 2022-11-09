@@ -14,6 +14,7 @@
     "bs-stepper": "^1.7.0",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
+    "history": "^4.10.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^1.0.4",
