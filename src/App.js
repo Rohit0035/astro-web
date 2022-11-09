@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   Redirect,
+  HashRouter,
 } from 'react-router-dom'
 import { ToastProvider } from 'react-toast-notifications'
 import { multilanguage, loadLanguages } from 'redux-multilanguage'
@@ -13,6 +14,7 @@ import { connect } from 'react-redux'
 import { BreadcrumbsProvider } from 'react-breadcrumbs-dynamic'
 import TermsOfUse from './wrappers/myPage/TermsOfUse'
 import { Component } from 'react'
+import { history } from './history'
 
 // home pages
 // const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
@@ -128,20 +130,24 @@ const CompleteProAstro = lazy(() =>
   import('./components/astrology/astrologerpages/CompleteProAstro'),
 )
 
-
-
 // astology pages start
-
 
 const AlertPage = lazy(() => import('./components/astrology/AlertPage'))
 
-const CustomerSupport = lazy(() => import('./components/astrology/CustomerSupport'))
+const CustomerSupport = lazy(() =>
+  import('./components/astrology/CustomerSupport'),
+)
 const AskQuestion = lazy(() => import('./components/astrology/AskQuestion'))
 
-const UserRequestForm = lazy(() => import('./components/astrology/UserRequestForm'))
-const CustomerSupportForm = lazy(() => import('./components/astrology/CustomerSupportForm'))
-const CustomerSupportView = lazy(() => import('./components/astrology/CustomerSupportView'))
-
+const UserRequestForm = lazy(() =>
+  import('./components/astrology/UserRequestForm'),
+)
+const CustomerSupportForm = lazy(() =>
+  import('./components/astrology/CustomerSupportForm'),
+)
+const CustomerSupportView = lazy(() =>
+  import('./components/astrology/CustomerSupportView'),
+)
 
 const FreeKundli = lazy(() =>
   import('./components/astrology/kundalimatch/freekundli'),
@@ -199,7 +205,6 @@ const ChatList = lazy(() => import('./components/chat/chatlist'))
 
 const DemoChat = lazy(() => import('./components/astrology/DemoChat'))
 
-
 const KundaliForm = lazy(() =>
   import('./components/astrology/kundalimatch/kundaliform'),
 )
@@ -210,9 +215,7 @@ const WalletMoney = lazy(() => import('./components/astrology/WalletMoney'))
 const WalletTransacList = lazy(() =>
   import('./components/astrology/WalletTransacList'),
 )
-const PaymentDetail = lazy(() =>
-  import('./components/astrology/PaymentDetail'),
-)
+const PaymentDetail = lazy(() => import('./components/astrology/PaymentDetail'))
 const NotificationList = lazy(() =>
   import('./components/astrology/NotificationList'),
 )
@@ -246,7 +249,7 @@ const App = (props) => {
   return (
     <ToastProvider placement="bottom-left">
       <BreadcrumbsProvider>
-        <Router>
+        <Router history={history}>
           <ScrollToTop>
             <Suspense
               fallback={
@@ -258,23 +261,24 @@ const App = (props) => {
                 </div>
               }
             >
-              <Switch>
-                <Route
-                  exact
-                  path={process.env.PUBLIC_URL + '/'}
-                  component={HomeFurnitureTwo}
-                />
+              <HashRouter>
+                <Switch>
+                  <Route
+                    exact
+                    path={process.env.PUBLIC_URL + '/'}
+                    component={HomeFurnitureTwo}
+                  />
 
-                {/* Homepages */}
-                {/* <Route
+                  {/* Homepages */}
+                  {/* <Route
                   path={process.env.PUBLIC_URL + "/home-fashion"}
                   component={HomeFashion}
                 /> */}
-                {/* <Route
+                  {/* <Route
                   path={process.env.PUBLIC_URL + "/home-fashion-two"}
                   component={HomeFashionTwo}
                 /> */}
-                {/*  <Route
+                  {/*  <Route
                   path={process.env.PUBLIC_URL + "/home-fashion-three"}
                   component={HomeFashionThree}
                 />
@@ -311,12 +315,12 @@ const App = (props) => {
                   component={HomeFurniture}
                 /> */}
 
-                <Route
-                  exact
-                  path={process.env.PUBLIC_URL + '/'}
-                  component={HomeFurnitureTwo}
-                />
-                {/*  <Route
+                  <Route
+                    exact
+                    path={process.env.PUBLIC_URL + '/'}
+                    component={HomeFurnitureTwo}
+                  />
+                  {/*  <Route
                   path={process.env.PUBLIC_URL + "/home-furniture-three"}
                   component={HomeFurnitureThree}
                 />
@@ -421,446 +425,452 @@ const App = (props) => {
                   component={HomeValentinesDay}
                 /> */}
 
-                {/* astologo route  */}
+                  {/* astologo route  */}
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/homecategory'}
-                  component={HomeCategory}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/homecategory'}
+                    component={HomeCategory}
+                  />
 
-                {/* astologo route  Close */}
+                  {/* astologo route  Close */}
 
-                {/* Shop pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-standard'}
-                  component={ShopGridStandard}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-filter'}
-                  component={ShopGridFilter}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-two-column'}
-                  component={ShopGridTwoColumn}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-men-column'}
-                  component={ShopGridMenColumn}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-women-column'}
-                  component={ShopGridWomenColumn}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-kids-column'}
-                  component={ShopGridKidsColumn}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-no-sidebar'}
-                  component={ShopGridNoSidebar}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-full-width'}
-                  component={ShopGridFullWidth}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-grid-right-sidebar'}
-                  component={ShopGridRightSidebar}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-list-standard/:_id'}
-                  render={(routeProps) => (
-                    <Product
-                      {...routeProps}
-                      key={routeProps.match.params._id}
-                    />
-                  )}
-                  component={ShopListStandard}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-list-full-width'}
-                  component={ShopListFullWidth}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/shop-list-two-column'}
-                  component={ShopListTwoColumn}
-                />
+                  {/* Shop pages */}
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-standard'}
+                    component={ShopGridStandard}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-filter'}
+                    component={ShopGridFilter}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-two-column'}
+                    component={ShopGridTwoColumn}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-men-column'}
+                    component={ShopGridMenColumn}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-women-column'}
+                    component={ShopGridWomenColumn}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-kids-column'}
+                    component={ShopGridKidsColumn}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-no-sidebar'}
+                    component={ShopGridNoSidebar}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-full-width'}
+                    component={ShopGridFullWidth}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-grid-right-sidebar'}
+                    component={ShopGridRightSidebar}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-list-standard/:_id'}
+                    render={(routeProps) => (
+                      <Product
+                        {...routeProps}
+                        key={routeProps.match.params._id}
+                      />
+                    )}
+                    component={ShopListStandard}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-list-full-width'}
+                    component={ShopListFullWidth}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/shop-list-two-column'}
+                    component={ShopListTwoColumn}
+                  />
 
-                {/* Shop product pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + '/product/:id'}
-                  render={(routeProps) => (
-                    <Product {...routeProps} key={routeProps.match.params.id} />
-                  )}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/product-tab-left/:id'}
-                  component={ProductTabLeft}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/product-tab-right/:id'}
-                  component={ProductTabRight}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/product-sticky/:id'}
-                  component={ProductSticky}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/product-slider/:id'}
-                  component={ProductSlider}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/product-fixed-image/:id'}
-                  component={ProductFixedImage}
-                />
+                  {/* Shop product pages */}
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product/:id'}
+                    render={(routeProps) => (
+                      <Product
+                        {...routeProps}
+                        key={routeProps.match.params.id}
+                      />
+                    )}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product-tab-left/:id'}
+                    component={ProductTabLeft}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product-tab-right/:id'}
+                    component={ProductTabRight}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product-sticky/:id'}
+                    component={ProductSticky}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product-slider/:id'}
+                    component={ProductSlider}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/product-fixed-image/:id'}
+                    component={ProductFixedImage}
+                  />
 
-                {/* Blog pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + '/blog-standard'}
-                  component={BlogStandard}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/blog-no-sidebar'}
-                  component={BlogNoSidebar}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/blog-right-sidebar'}
-                  component={BlogRightSidebar}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/blog-details-standard'}
-                  component={BlogDetailsStandard}
-                />
+                  {/* Blog pages */}
+                  <Route
+                    path={process.env.PUBLIC_URL + '/blog-standard'}
+                    component={BlogStandard}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/blog-no-sidebar'}
+                    component={BlogNoSidebar}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/blog-right-sidebar'}
+                    component={BlogRightSidebar}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/blog-details-standard'}
+                    component={BlogDetailsStandard}
+                  />
 
-                {/* astrology page path  */}
+                  {/* astrology page path  */}
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/bannerSection'}
-                  component={bannerSection}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/bannerSection'}
+                    component={bannerSection}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/notificationlist'}
-                  component={NotificationList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/notificationlist'}
+                    component={NotificationList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/wallettransaclist'}
-                  component={WalletTransacList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/wallettransaclist'}
+                    component={WalletTransacList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/paymentdetail'}
-                  component={PaymentDetail}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/paymentdetail'}
+                    component={PaymentDetail}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/walletaddform'}
-                  component={WalletAddForm}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/my-account'}
-                  component={MyAccount}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/my-order'}
-                  component={MyOrder}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/addressform/:id'}
-                  component={AddressForm}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/walletaddform'}
+                    component={WalletAddForm}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/my-account'}
+                    component={MyAccount}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/my-order'}
+                    component={MyOrder}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/addressform/:id'}
+                    component={AddressForm}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/walletmoney'}
-                  component={WalletMoney}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/walletmoney'}
+                    component={WalletMoney}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/profiledetail'}
-                  component={ProfileDetail}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/profiledetail'}
+                    component={ProfileDetail}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/TeamMemberOne'}
-                  component={TeamMemberOne}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/ourworkflow'}
-                  component={OurWorkFlow}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/TeamMemberOne'}
+                    component={TeamMemberOne}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/ourworkflow'}
+                    component={OurWorkFlow}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/predictionallhome'}
-                  component={PredictionallHome}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/astrologerdetail/:id'}
-                  component={AstrologerDetail}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/astrologersignup'}
-                  component={AstrologerSignup}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/astrologerlogin'}
-                  component={AstrologerLogin}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/predictionallhome'}
+                    component={PredictionallHome}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/astrologerdetail/:id'}
+                    component={AstrologerDetail}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/astrologersignup'}
+                    component={AstrologerSignup}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/astrologerlogin'}
+                    component={AstrologerLogin}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/astroteam'}
-                  component={AstroTeam}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/astroteam'}
+                    component={AstroTeam}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/freekundli'}
-                  component={FreeKundli}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/sectionpooja'}
-                  component={SectionPooja}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/freekundli'}
+                    component={FreeKundli}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/sectionpooja'}
+                    component={SectionPooja}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/aboutus'}
-                  component={AboutUs}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/aboutus'}
+                    component={AboutUs}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/aboutdetail'}
-                  component={AboutDetail}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/aboutdetail'}
+                    component={AboutDetail}
+                  />
 
-                <Route path={process.env.PUBLIC_URL + '/faq'} component={FAQ} />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/faq'}
+                    component={FAQ}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/poojadetail/:id'}
-                  component={PoojaDetail}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/poojadetail/:id'}
+                    component={PoojaDetail}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/consultantlist/:id'}
-                  component={ConsultantList}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/addressformedit/:id'}
-                  component={AddressFormEdit}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/consultantlist/:id'}
+                    component={ConsultantList}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/addressformedit/:id'}
+                    component={AddressFormEdit}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/cartlist'}
-                  component={CartList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/cartlist'}
+                    component={CartList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/heroscopesall'}
-                  component={HeroscopesAll}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/heroscopesall'}
+                    component={HeroscopesAll}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/heroscopestwo'}
-                  component={HeroscopesTwo}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/horoscopedetail/:id'}
-                  component={HoroscopeDetail}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/heroscopestwo'}
+                    component={HeroscopesTwo}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/horoscopedetail/:id'}
+                    component={HoroscopeDetail}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/astromallList'}
-                  component={AstromallList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/astromallList'}
+                    component={AstromallList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/productlist/:id'}
-                  component={ProductList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/productlist/:id'}
+                    component={ProductList}
+                  />
 
+                  <Route
+                    path={process.env.PUBLIC_URL + '/alertpage'}
+                    component={AlertPage}
+                  />
 
+                  <Route
+                    path={process.env.PUBLIC_URL + '/customersupport'}
+                    component={CustomerSupport}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/alertpage'}
-                  component={AlertPage}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/askquestion'}
+                    component={AskQuestion}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/customersupport'}
-                  component={CustomerSupport}
-                /> 
+                  <Route
+                    path={process.env.PUBLIC_URL + '/customersupportform'}
+                    component={CustomerSupportForm}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/customersupportview'}
+                    component={CustomerSupportView}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/askquestion'}
-                  component={AskQuestion}
-                /> 
+                  <Route
+                    path={process.env.PUBLIC_URL + '/userrequestform'}
+                    component={UserRequestForm}
+                  />
 
-                 <Route
-                  path={process.env.PUBLIC_URL + '/customersupportform'}
-                  component={CustomerSupportForm}
-                /> 
-                 <Route
-                  path={process.env.PUBLIC_URL + '/customersupportview'}
-                  component={CustomerSupportView}
-                /> 
+                  <Route
+                    path={process.env.PUBLIC_URL + '/ourservice'}
+                    component={OurService}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/servicelist'}
+                    component={ServiceList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/userrequestform'}
-                  component={UserRequestForm}
-                />     
+                  <Route
+                    path={process.env.PUBLIC_URL + '/allastrologerlist'}
+                    component={AllAstrologerList}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/autosearch'}
+                    component={AutoSearch}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/matchsearch'}
+                    component={MatchSearch}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/sliderdemo'}
+                    component={SliderDemo}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/ourservice'}
-                  component={OurService}
-                />
-                 <Route
-                  path={process.env.PUBLIC_URL + '/servicelist'}
-                  component={ServiceList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/sliderlist'}
+                    component={SliderList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/allastrologerlist'}
-                  component={AllAstrologerList}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/autosearch'}
-                  component={AutoSearch}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/matchsearch'}
-                  component={MatchSearch}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/sliderdemo'}
-                  component={SliderDemo}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/chatlist'}
+                    component={ChatList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/sliderlist'}
-                  component={SliderList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/demochat'}
+                    component={DemoChat}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/chatlist'}
-                  component={ChatList}
-                />
-                
-                 <Route
-                  path={process.env.PUBLIC_URL + '/demochat'}
-                  component={DemoChat}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/kundaliform'}
+                    component={KundaliForm}
+                  />
 
-               
+                  <Route
+                    path={process.env.PUBLIC_URL + '/kundalimatchlist'}
+                    component={KundaliMatchList}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/kundaliform'}
-                  component={KundaliForm}
-                />
+                  {/* Other pages */}
+                  <Route
+                    path={process.env.PUBLIC_URL + '/about'}
+                    component={About}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/contact'}
+                    component={Contact}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/faqPage'}
+                    component={faqPage}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/privacyPolicy'}
+                    component={privacyPolicy}
+                  />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/TermsOfUse'}
+                    component={TermsOfUse}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/kundalimatchlist'}
-                  component={KundaliMatchList}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/login-register'}
+                    component={LoginRegister}
+                  />
 
-                {/* Other pages */}
-                <Route
-                  path={process.env.PUBLIC_URL + '/about'}
-                  component={About}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/contact'}
-                  component={Contact}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/faqPage'}
-                  component={faqPage}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/privacyPolicy'}
-                  component={privacyPolicy}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + '/TermsOfUse'}
-                  component={TermsOfUse}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/otpverify'}
+                    component={OtpVerify}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/login-register'}
-                  component={LoginRegister}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/registerastro'}
+                    component={RegisterAstro}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/otpverify'}
-                  component={OtpVerify}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/completeproastro'}
+                    component={CompleteProAstro}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/registerastro'}
-                  component={RegisterAstro}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/step'}
+                    component={Step}
+                  />
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/completeproastro'}
-                  component={CompleteProAstro}
-                />
-
-                <Route
-                  path={process.env.PUBLIC_URL + '/step'}
-                  component={Step}
-                />
-
-                <Route
-                  path={process.env.PUBLIC_URL + '/Phone'}
-                  component={Phone}
-                />
-                {/* <Route
+                  <Route
+                    path={process.env.PUBLIC_URL + '/Phone'}
+                    component={Phone}
+                  />
+                  {/* <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
                 /> */}
-                <Route path={process.env.PUBLIC_URL + '/Otp'} component={Otp} />
-                <Route
-                  render={() =>
-                    localStorage.getItem('auth-token') ? (
-                      <>
-                        <Route
-                          path={process.env.PUBLIC_URL + '/cart'}
-                          component={Cart}
-                        />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/Otp'}
+                    component={Otp}
+                  />
+                  <Route
+                    render={() =>
+                      localStorage.getItem('auth-token') ? (
+                        <>
+                          <Route
+                            path={process.env.PUBLIC_URL + '/cart'}
+                            component={Cart}
+                          />
 
-                        <Route
-                          path={process.env.PUBLIC_URL + '/wishlist'}
-                          component={Wishlist}
+                          <Route
+                            path={process.env.PUBLIC_URL + '/wishlist'}
+                            component={Wishlist}
+                          />
+                          <Route
+                            path={process.env.PUBLIC_URL + '/checkout'}
+                            component={Checkout}
+                          />
+                        </>
+                      ) : (
+                        <Redirect
+                          to={process.env.PUBLIC_URL + '/login-register'}
                         />
-                        <Route
-                          path={process.env.PUBLIC_URL + '/checkout'}
-                          component={Checkout}
-                        />
-                      </>
-                    ) : (
-                      <Redirect
-                        to={process.env.PUBLIC_URL + '/login-register'}
-                      />
-                    )
-                  }
-                />
-                {/* <Route
+                      )
+                    }
+                  />
+                  {/* <Route
                   path={process.env.PUBLIC_URL + "/wishlist"}
                   component={Wishlist}
                 /> */}
-                <Route
-                  path={process.env.PUBLIC_URL + '/compare'}
-                  component={Compare}
-                />
-                {/* <Route
+                  <Route
+                    path={process.env.PUBLIC_URL + '/compare'}
+                    component={Compare}
+                  />
+                  {/* <Route
                   path={process.env.PUBLIC_URL + "/checkout"}
                   component={Checkout}
                 /> */}
 
-                <Route
-                  path={process.env.PUBLIC_URL + '/not-found'}
-                  component={NotFound}
-                />
+                  <Route
+                    path={process.env.PUBLIC_URL + '/not-found'}
+                    component={NotFound}
+                  />
 
-                <Route exact component={NotFound} />
-              </Switch>
+                  <Route exact component={NotFound} />
+                </Switch>
+              </HashRouter>
             </Suspense>
           </ScrollToTop>
         </Router>

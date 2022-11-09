@@ -1,18 +1,24 @@
-import React from "react"
+import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row,  Col, Input, InputGroup, Form,Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  InputGroup,
+  Form,
+  Button,
+} from "reactstrap";
 import LayoutOne from "../../layouts/LayoutOne";
 import "../../assets/scss/astroteam.scss";
-import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
-
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import axiosConfig from "../../axiosConfig";
 class WalletMoney extends React.Component {
- 
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-    
+      planList: [],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -20,68 +26,85 @@ class WalletMoney extends React.Component {
 
   toggle() {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
   }
-
+  componentDidMount = () => {
+    axiosConfig
+      .get("/user/active_plans")
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === true) {
+          this.setState({ planList: response.data.data });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+      });
+  };
 
   render() {
-
-
-  return (
-
-    <LayoutOne headerTop="visible">
-        <section className="pt-0 pb-0" >
-                 <div
-                    className=""
-                    style={{
-                      backgroundColor:"#FFD59E",
-                      width: "100%",
-                      padding:"70px 0px",
-                      backgroundSize:"cover"
-                    }}
-                  >
-                    <Container>
-                            <Row>
-                                <Col md="12">
-                                    <div className="leftcont text-left">
-                                        <h1>Add Money to Wallet</h1>
-                                         <h3>Available balance :   <span>₹ 0.00</span></h3>
-                                    </div>
-                                </Col>
-                                
-                            </Row>
-                    </Container>
-                    
-                </div>
+    const { planList } = this.state;
+    return (
+      <LayoutOne headerTop="visible">
+        <section className="pt-0 pb-0">
+          <div
+            className=""
+            style={{
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
+            }}
+          >
+            <Container>
+              <Row>
+                <Col md="12">
+                  <div className="leftcont text-left">
+                    <h1>Add Money to Wallet</h1>
+                    <h3>
+                      Available balance : <span>₹ 0.00</span>
+                    </h3>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </section>
 
         <section>
-              <Container>
-                    <Row>
-                        <Col xl="3" lg="3" md="3" sm="6" xs="6">
-                               <Link to="/walletaddform">
-                                      <div className="promoBox success-box info-ribbon">
-                                        <aside>
-                                            <p>100% extra</p>
-                                        </aside>
-                                                <h4> Amount</h4>
-                                               
-                                        </div>
-                               </Link>
-                         </Col>
-                         <Col xl="3" lg="3" md="3" sm="6" xs="6">
-                               <Link  to="paymentdetail">
-                                      <div className="promoBox success-box info-ribbon">
-                                        <aside>
-                                            <p>100% extra</p>
-                                        </aside>
-                                                <h4>INR 100</h4>
-                                                <p></p>     
-                                        </div>
-                               </Link>
-                         </Col>
-                         <Col xl="3" lg="3" md="3" sm="6" xs="6">
+          <Container>
+            <Row>
+              <Col xl="3" lg="3" md="3" sm="6" xs="6">
+                <Link to="/walletaddform">
+                  <div className="promoBox success-box info-ribbon">
+                    <aside>
+                      <p>100% extra</p>
+                    </aside>
+                    <h4>Amount</h4>
+                    <p></p>
+                  </div>
+                </Link>
+              </Col>
+              {planList.length
+                ? planList.map((plan, index) => {
+                    return (
+                      <Col xl="3" lg="3" md="3" sm="6" xs="6" key={index}>
+                        <Link to="/paymentdetail">
+                          <div className="promoBox success-box info-ribbon">
+                            <aside>
+                              <p>{plan.title}</p>
+                            </aside>
+                            <h4> {plan.amount}</h4>
+                          </div>
+                        </Link>
+                      </Col>
+                    );
+                  })
+                : null}
+
+              {/*    <Col xl="3" lg="3" md="3" sm="6" xs="6">
                                <Link to="paymentdetail">
                                       <div className="promoBox success-box info-ribbon">
                                         <aside>
@@ -91,8 +114,8 @@ class WalletMoney extends React.Component {
                                                 <p></p>     
                                         </div>
                                </Link>
-                         </Col>
-                         <Col xl="3" lg="3" md="3" sm="6" xs="6">
+                         </Col> */}
+              {/* <Col xl="3" lg="3" md="3" sm="6" xs="6">
                                <Link  to="paymentdetail">
                                       <div className="promoBox success-box info-ribbon">
                                         <aside>
@@ -168,9 +191,9 @@ class WalletMoney extends React.Component {
                                                 <p></p>     
                                         </div>
                                </Link>
-                         </Col>
+                         </Col> */}
 
-                         {/* <Col lg="12">
+              {/* <Col lg="12">
                              <div className="w-offer">
                                  <Button onClick={this.toggle} >
                                      <i class="fa fa-percent" aria-hidden="true"></i>
@@ -182,39 +205,36 @@ class WalletMoney extends React.Component {
                                  </Button>
                              </div>
                          </Col> */}
-                    </Row>
-              </Container>
+            </Row>
+          </Container>
         </section>
 
-         {/* modal for recharge*/}
+        {/* modal for recharge*/}
 
-         <Modal size="md" style={{maxWidth: '600px', width: '100%'}} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader className="wr-3" toggle={this.toggle}>
-                    <h2 className="wr-4">Apply Voucher Code</h2>
-                </ModalHeader>
-                <ModalBody>
-                          <div className="Wr-1 wr-t">
-                              <form>
-                                  <Col md="12">
-                                      <input
-                                          type="text"
-                                          placeholder="Enter Your Voucher  Code"
-
-                                      />
-                                  </Col>
-                                  <Button className="btn btn-success">
-                                      Submit
-                                  </Button>
-                              </form>
-                          </div>
-                </ModalBody>
-              
-        </Modal>  
-
-   </LayoutOne>
-  );
+        <Modal
+          size="md"
+          style={{ maxWidth: "600px", width: "100%" }}
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalHeader className="wr-3" toggle={this.toggle}>
+            <h2 className="wr-4">Apply Voucher Code</h2>
+          </ModalHeader>
+          <ModalBody>
+            <div className="Wr-1 wr-t">
+              <form>
+                <Col md="12">
+                  <input type="text" placeholder="Enter Your Voucher  Code" />
+                </Col>
+                <Button className="btn btn-success">Submit</Button>
+              </form>
+            </div>
+          </ModalBody>
+        </Modal>
+      </LayoutOne>
+    );
   }
 }
-
 
 export default WalletMoney;

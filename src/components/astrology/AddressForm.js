@@ -28,6 +28,7 @@ class AddressForm extends React.Component {
   }
   componentDidMount() {
     let userId = JSON.parse(localStorage.getItem("user_id"));
+
     axiosConfig
       .get(`/user/viewone_address/${userId}`)
       .then((response) => {

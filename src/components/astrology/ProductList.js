@@ -92,9 +92,7 @@ class ProductList extends React.Component {
                                       <h3>{product.title}</h3>
                                       <p>
                                         Puja Starting from @₹
-                                        {product?.mrp_price
-                                          ? product?.mrp_price
-                                          : 0}
+                                        {product?.price ? product?.price : 0}
                                       </p>
                                       <Link
                                         to={'/poojadetail/' + product._id}

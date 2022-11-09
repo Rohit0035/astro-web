@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -9,36 +9,36 @@ import {
   InputGroup,
   Form,
   Button,
-} from 'reactstrap'
-import Pj from '../../assets/img/Pj.jpg'
-import '../../assets/scss/astropooja.css'
-import pagetitle from '../../assets/img/pagetitle.jpg'
-import LayoutOne from '../../layouts/LayoutOne'
-import axiosConfig from '../../axiosConfig'
+} from "reactstrap";
+import Pj from "../../assets/img/Pj.jpg";
+import "../../assets/scss/astropooja.css";
+import pagetitle from "../../assets/img/pagetitle.jpg";
+import LayoutOne from "../../layouts/LayoutOne";
+import axiosConfig from "../../axiosConfig";
 
 class PoojaDetail extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       data: {},
-    }
+    };
   }
   componentDidMount() {
-    let { id } = this.props.match.params
-    console.log(id)
+    let { id } = this.props.match.params;
+    console.log(id);
     axiosConfig
       .get(`/admin/viewoneProduct/${id}`)
       .then((response) => {
-        console.log(response.data.data)
+        console.log(response.data.data);
         this.setState({
           data: response.data.data,
           image: response.data.data.image[0],
-        })
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
 
   render() {
@@ -48,10 +48,10 @@ class PoojaDetail extends React.Component {
           <div
             className=""
             style={{
-              backgroundColor: '#FFD59E',
-              width: '100%',
-              padding: '70px 0px',
-              backgroundSize: 'cover',
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
             }}
           >
             <Container>
@@ -84,16 +84,16 @@ class PoojaDetail extends React.Component {
                       </h3>
                       <p>{this.state.data.desc}</p>
                       <h4 className="price">
-                         Starting From: <span>${this.state.data.mrp_price}</span>
+                        Starting From: <span>${this.state.data.price}</span>
                       </h4>
-                    
+
                       {/* <h5 className="colors">colors:
                                             <span className="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
                                             <span className="color green"></span>
                                             <span className="color blue"></span>
                                         </h5> */}
                       <div class="action">
-                        <Link to={'/consultantlist/' + this.state.data._id}>
+                        <Link to={"/consultantlist/" + this.state.data._id}>
                           <button
                             className="add-to-cart btn btn-default"
                             type="button"
@@ -110,8 +110,8 @@ class PoojaDetail extends React.Component {
           </Row>
         </Container>
       </LayoutOne>
-    )
+    );
   }
 }
 
-export default PoojaDetail
+export default PoojaDetail;

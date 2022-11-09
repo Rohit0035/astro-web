@@ -19,7 +19,7 @@ class FreeKundli extends React.Component {
 
     <LayoutOne headerTop="visible">
 
-     <section className="pt-0 pb-0" >
+         <section className="pt-0 pb-0" >
                  <div
                     className=""
                     style={{

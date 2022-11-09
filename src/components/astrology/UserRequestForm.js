@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button, Input } from "reactstrap";
 import LayoutOne from "../../layouts/LayoutOne";
 // import AutoSearch from './autosearch'
 import axiosConfig from "../../axiosConfig";
@@ -21,19 +21,24 @@ class UserRequestForm extends React.Component {
       marital_status: "",
       occupation: "",
       topic_of_cnsrn: "",
+
       data: [],
     };
   }
 
   componentDidMount() {
-    let { id } = this.props.match.params;
+    //  let { id } = this.props.match.params;
+    //   console.log(id);
+    let userId = JSON.parse(localStorage.getItem("user_id"));
     axiosConfig
-      .get(`/user/viewoneuser/${id}`)
+      .get(`/user/viewoneuser/${userId}`)
       .then((response) => {
-        console.log("viewone_user", response.data.data);
+        // console.log("viewone_user", response.data.data);
         this.setState({
-          fullname: response.data.data.fullname,
+          // fullname: response.data.data.fullname,
           mobile: response.data.data.mobile,
+          // gender: response.data.data.gender,
+          // dob: response.data.data.dob,
         });
       })
       .catch((error) => {
@@ -49,13 +54,14 @@ class UserRequestForm extends React.Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    // let { id } = this.props.match.params
-    // console.log(id)
+    // let { id } = this.props.match.params;
+    // console.log(id);
     let userId = JSON.parse(localStorage.getItem("user_id"));
-    let astro_id = JSON.parse(localStorage.getItem("astroId"));
+    // let astroid = JSON.parse(localStorage.getItem("astroId"));
     let obj = {
       userid: userId,
-      astroid: astro_id,
+      // astroId: astroid,
+      //astroid: this.state.astroid,
       fullname: this.state.fullname,
       gender: this.state.gender,
       tym_of_birth: this.state.tym_of_birth,
@@ -71,13 +77,15 @@ class UserRequestForm extends React.Component {
       // mobile: parseInt(this.state.mobile),
       // email: this.state.email,
     };
-
     axiosConfig
-      .post(`/user/add_chat_intake`, obj)
+      .post(`/user/add_chat_intake`, {
+        astroid: localStorage.getItem("astroId"),
+      })
       .then((response) => {
-        console.log("@@@@@", response.data.data);
+        console.log("aaaaaaaaaaaa", response.data.data);
         swal("Success!", "Submitted SuccessFull!", "success");
-        window.location.reload("/addressForm");
+        // window.location.reload("/allastrologerlist");
+        this.props.history.push("/allastrologerlist");
       })
 
       .catch((error) => {
@@ -134,28 +142,19 @@ class UserRequestForm extends React.Component {
                           />
                         </div>
                       </Col>
-                      {/* <Col md="4">
-                        <div class="form-group mtb-10">
-                          <label>Last Name:</label>
-                          <input
-                            type="text"
-                            name="name"
-                            // required
-                            placeholder="Enter Your Fullname"
-                          />
-                        </div>
-                      </Col> */}
+
                       <Col md="4">
                         <div class="form-group mtb-10">
                           <label>Gender*</label>
-                          <select
-                            className="form-control"
-                            value={this.state.gender}
+                          <Input
+                            type="select"
+                            value={this.state.data.gender}
                             onChange={this.changeHandler}
                           >
+                            <option>Select Gender</option>
                             <option>Male</option>
                             <option>Female</option>
-                          </select>
+                          </Input>
                         </div>
                       </Col>
                       <Col md="4">
@@ -217,7 +216,7 @@ class UserRequestForm extends React.Component {
                           <input
                             type="text"
                             name="birth_state"
-                            value={this.state.birth_state}
+                            value={this.state.data.birth_state}
                             onChange={this.changeHandler}
                             // required
                             placeholder="Enter Your Number"
@@ -237,46 +236,101 @@ class UserRequestForm extends React.Component {
                           />
                         </div>
                       </Col>
-                      <Col md="4">
+                      {/* <Col md="4">
                         <div class="form-group mtb-10">
                           <label>Marital Status*</label>
-                          <select
-                            className="form-control"
+                          <Input
+                            type="select"
                             value={this.state.marital_status}
                             onChange={this.changeHandler}
                           >
-                            <option>lorem</option>
-                            <option>lorem</option>
-                          </select>
+                            <option>Select Marital Status</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Divorced</option>
+                            <option>Separated</option>
+                            <option>Widowed</option>
+                          </Input>
+                        </div>
+                      </Col> */}
+                      <Col md="4">
+                        <div class="form-group mtb-10">
+                          <label>Marital Status*</label>
+                          <Input
+                            type="select"
+                            value={this.state.data.marital_status}
+                            onChange={this.changeHandler}
+                          >
+                            <option>Select Marital Status</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Divorced</option>
+                            <option>Separated</option>
+                            <option>Widowed</option>
+                          </Input>
                         </div>
                       </Col>
                       <Col md="4">
                         <div class="form-group mtb-10">
                           <label>Occupation*</label>
-                          <select
-                            className="form-control"
-                            value={this.state.occupation}
+                          <Input
+                            type="select"
+                            value={this.state.data.occupation}
                             onChange={this.changeHandler}
                           >
-                            <option>lorem</option>
-                            <option>lorem</option>
-                          </select>
+                            <option>Select Employed in</option>
+                            <option>Private Sector</option>
+                            <option>Govt Sector</option>
+                            <option>Business/Self Employed</option>
+                            <option>Civil Services</option>
+                            <option>Defence</option>
+                            <option>Not Working</option>
+                            <option>Student</option>
+                          </Input>
                         </div>
                       </Col>
                       <Col md="4">
                         <div class="form-group mtb-10">
                           <label>Topic of concern*</label>
-                          <select
-                            className="form-control"
-                            value={this.state.topic_of_cnsrn}
+                          <Input
+                            type="select"
+                            value={this.state.data.topic_of_cnsrn}
                             onChange={this.changeHandler}
                           >
-                            <option>lorem</option>
-                            <option>lorem</option>
-                          </select>
+                            <option>Select Topic</option>
+                            <option>Career and Business</option>
+                            <option>Marriage</option>
+                            <option>Love and Relationship</option>
+                            <option>Wealth and Property</option>
+                            <option>Education</option>
+                            <option>Legal Matters</option>
+                            <option>Child Name Consultation</option>
+                            <option>Business Name Consultation</option>
+                            <option>Gem Stone Consultation</option>
+                            <option>Commodity trading consultation</option>
+                            <option>Match making</option>
+                            <option>Birth Time Rectification</option>
+                            <option>Name Correction Consultation</option>
+                            <option>Travel Abroad Consulation</option>
+                            <option>Remedy Consultation</option>
+                            <option>Health Consultation</option>
+                            <option>Others</option>
+                          </Input>
                         </div>
                       </Col>
-
+                      <Col md="4">
+                        <div class="form-group mtb-10">
+                          <label>Enter topic of concern:</label>
+                          <input
+                            type="text"
+                            name="fullname"
+                            required
+                            placeholder="Enter Your Fullname"
+                            value={this.state.fullname}
+                            onChange={this.changeHandler}
+                          />
+                        </div>
+                      </Col>
                       <Col md="12" className="mt-3">
                         <Button className="btn btn-warning">
                           Start chat with Mukesh07
