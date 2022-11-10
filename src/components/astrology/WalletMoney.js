@@ -96,7 +96,7 @@ class WalletMoney extends React.Component {
                             <aside>
                               <p>{plan.title}</p>
                             </aside>
-                            <h4> {plan.amount}</h4>
+                            <h4>INR {plan.amount}</h4>
                           </div>
                         </Link>
                       </Col>

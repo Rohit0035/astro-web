@@ -1,11 +1,32 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect,useState  } from "react";
 import blogFeaturedData from "../../data/blog-featured/blog-featured.json";
 import BlogFeaturedSingle from "../../components/blog-featured/BlogFeaturedSingle";
 // import SectionTitle from "../../components/section-title/SectionTitle";
 import textbottom from "../../assets/img/textbottom.png";
+import axiosConfig from "../../axiosConfig";
+
 
 const BlogFeatured = ({ spaceTopClass, spaceBottomClass }) => {
+
+
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    axiosConfig
+  .get(`/user/active_blog_category`)
+  .then((response) => {
+    console.log(response.data.data);
+    if(response.data.status === true){
+      setBlogData(response.data.data)
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  }, []);
+
+
   return (
     <div
       className={`blog-area ${spaceTopClass ? spaceTopClass : ""} ${
@@ -23,11 +44,22 @@ const BlogFeatured = ({ spaceTopClass, spaceBottomClass }) => {
               <img src={textbottom} alt=""/>
           </div>
          <div className="row">
-          {blogFeaturedData.map(singlePost => {
-            return (
-              <BlogFeaturedSingle singlePost={singlePost} key={singlePost.id} />
-            );
-          })}
+                {blogData &&
+                  blogData.map((single, key) => {
+                    return (
+                      // <SliderDemo
+                      //   data={single}
+                      //   key={key}
+                      //   sliderClass="swiper-slide rtt"
+                      //   sliderdemoClass={sliderdemoClass}
+                      // />
+                      <BlogFeaturedSingle
+                        data={single}
+                        key={key}
+                        sliderClass="swiper-slide rtt"
+                      />
+                    );
+                  })}
         </div>
       </div>
     </div>

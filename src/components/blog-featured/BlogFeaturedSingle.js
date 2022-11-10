@@ -1,38 +1,50 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect,useState  } from "react";
 import { Link } from "react-router-dom";
+import axiosConfig from "../../axiosConfig";
 
-const BlogFeaturedSingle = ({ singlePost }) => {
+const BlogFeaturedSingle = ({  data, singlePost }) => {
+ 
+  const [userId, setUserId] = useState('')
+  const [bestBlog, setBestBlog] = useState(data)
+
+  // useEffect(() => {
+  //   var user_id = localStorage.getItem("user_id");
+  //   setUserId(user_id);
+  // });
+
+  useEffect(() => {
+    setBestBlog(data)
+  }, [data])
+  
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="blog-wrap mb-30 scroll-zoom">
         <div className="blog-img">
           <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-            <img src={process.env.PUBLIC_URL + singlePost.image} alt="" />
+               <img src={data?.img} alt="" />
           </Link>
           <div className="blog-category-names">
-            {singlePost.category.map((singleCategory, key) => {
-              return (
-                <span className="purple" key={key}>
-                  {singleCategory}
+          
+                <span className="purple">
+                  
                 </span>
-              );
-            })}
+            
           </div>
         </div>
         <div className="blog-content-wrap">
           <div className="blog-content text-center">
             <h3>
-              <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
+              {/* <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
                 {singlePost.title}
-              </Link>
+              </Link> */}
+              {data?.name}
             </h3>
             <span>
-              By{" "}
-              <Link to={process.env.PUBLIC_URL + singlePost.authorUrl}>
-                {singlePost.author}
-              </Link>
+              By Admin{" "}
+              
             </span>
+            <p></p>
           </div>
         </div>
       </div>
