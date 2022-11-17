@@ -21,7 +21,7 @@ const BlogFeaturedSingle = ({  data, singlePost }) => {
     <div className="col-lg-4 col-sm-6">
       <div className="blog-wrap mb-30 scroll-zoom">
         <div className="blog-img">
-          <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
+          <Link to={process.env.PUBLIC_URL + "/blog-standard/" + data?._id}>
                <img src={data?.img} alt="" />
           </Link>
           <div className="blog-category-names">

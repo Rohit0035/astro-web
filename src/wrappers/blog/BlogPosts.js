@@ -1,21 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useEffect,useState  } from "react";
 import { Link } from "react-router-dom";
+import axiosConfig from "../../axiosConfig";
 
+const BlogPosts = ({data}) => {
 
-
-const BlogPosts = () => {
+const [latestBlog, setLatestBlog] = useState(data)
 
   
+useEffect(() => {
+  setLatestBlog(data)
+}, [data])
+
+
   return (
     <Fragment>
       <div className="col-lg-6 col-md-6 col-sm-12">
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-              <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-1.jpg"}
-                alt=""
-              />
+                 <img src={data?.blogImg} alt="" />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -31,7 +34,7 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                Lorem ipsum blog post
+               {data?.blog_title}
               </Link>
             </h4>
             <p>

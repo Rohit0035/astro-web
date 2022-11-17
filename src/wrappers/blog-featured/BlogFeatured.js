@@ -47,12 +47,7 @@ const BlogFeatured = ({ spaceTopClass, spaceBottomClass }) => {
                 {blogData &&
                   blogData.map((single, key) => {
                     return (
-                      // <SliderDemo
-                      //   data={single}
-                      //   key={key}
-                      //   sliderClass="swiper-slide rtt"
-                      //   sliderdemoClass={sliderdemoClass}
-                      // />
+                     
                       <BlogFeaturedSingle
                         data={single}
                         key={key}

@@ -8,11 +8,46 @@ import BlogSidebar from "../../wrappers/blog/BlogSidebar";
 import BlogComment from "../../wrappers/blog/BlogComment";
 import BlogPost from "../../wrappers/blog/BlogPost";
 import { Col, Container, Row } from "reactstrap";
+import { render } from "sass";
+import axiosConfig from "../../axiosConfig";
 
-const BlogDetailsStandard = ({ location }) => {
-  const { pathname } = location;
+class BlogDetailsStandard extends React.Component{
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: {},
+    };
+  }
+
+  
+
+componentDidMount(){
+    let { id } = this.props.match.params;
+    console.log(id)
+    axiosConfig
+  .get(`/admin/viewoneBlog/${id}`)
+  .then((response) => {
+    console.log(response.data.data);
+    this.setState({
+      blogImg: response.data.data.blogImg[0],
+      blog_title:response.data.data,
+      desc:response.data.data,
+      name:response.data.data,
+      
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+render(){
 
   return (
+
+
     <Fragment>
       <LayoutOne headerTop="visible">
 
@@ -64,10 +99,10 @@ const BlogDetailsStandard = ({ location }) => {
       </LayoutOne>
     </Fragment>
   );
-};
-
-BlogDetailsStandard.propTypes = {
-  location: PropTypes.object
-};
+ }
+}
+// BlogDetailsStandard.propTypes = {
+//   location: PropTypes.object
+// };
 
 export default BlogDetailsStandard;

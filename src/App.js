@@ -523,7 +523,7 @@ const App = (props) => {
 
                   {/* Blog pages */}
                   <Route
-                    path={process.env.PUBLIC_URL + '/blog-standard'}
+                    path={process.env.PUBLIC_URL + '/blog-standard/:id'}
                     component={BlogStandard}
                   />
                   <Route

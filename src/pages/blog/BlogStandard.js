@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { useEffect,useState  } from "react";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
@@ -8,20 +8,43 @@ import BlogPagination from "../../wrappers/blog/BlogPagination";
 import BlogPosts from "../../wrappers/blog/BlogPosts";
 import { Container } from "react-bootstrap";
 import { Col, Row } from "reactstrap";
+import axiosConfig from "../../axiosConfig";
 
-const BlogStandard = ({ location }) => {
-  const { pathname } = location;
-  
-  
+
+// const BlogStandard = ({  }) => {
+
+
+//   const [BlogViewData, setBlogViewData] = useState([]);
+class BlogStandard extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state={
+      // data:{},
+      BlogViewData:[],
+    }
+  }
+
+componentDidMount(){
+    let { id } = this.props.match.params;
+    console.log(id)
+    axiosConfig
+  .get(`/user/blog_by_category/${id}`)
+  .then((response) => {
+    console.log(response.data.data);
+    this.setState({
+      BlogViewData: response.data.data,
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+  render(){
+    const {BlogViewData} = this.state;
   return (
-    <Fragment>
-      <MetaTags>
-        <title>AstroVipra</title>
-        <meta
-          name="description"
-          content=""
-        />
-      </MetaTags>
+
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
        
@@ -57,7 +80,16 @@ const BlogStandard = ({ location }) => {
                 <div className="ml-20">
                   <div className="row">
                     {/* blog posts */}
-                    <BlogPosts />
+                    {BlogViewData &&
+                        BlogViewData.map((single, key) => {
+                          return (
+                            <BlogPosts
+                              data={single}
+                              key={key}
+                              sliderClass="swiper-slide rtt"
+                            />
+                          );
+                        })}
                   </div>
 
                   {/* blog pagination */}
@@ -72,12 +104,13 @@ const BlogStandard = ({ location }) => {
           </div>
         </div>
       </LayoutOne>
-    </Fragment>
+    
   );
-};
 
-BlogStandard.propTypes = {
-  location: PropTypes.object
-};
+}
+}
+// BlogStandard.propTypes = {
+//   location: PropTypes.object
+// };
 
 export default BlogStandard;
