@@ -130,6 +130,10 @@ const CompleteProAstro = lazy(() =>
   import('./components/astrology/astrologerpages/CompleteProAstro'),
 )
 
+const DemoCall = lazy(() =>
+  import('./components/astrology/DemoCall'),
+)
+
 // astology pages start
 
 const AlertPage = lazy(() => import('./components/astrology/AlertPage'))
@@ -806,6 +810,10 @@ const App = (props) => {
                   <Route
                     path={process.env.PUBLIC_URL + '/completeproastro'}
                     component={CompleteProAstro}
+                  />
+                   <Route
+                    path={process.env.PUBLIC_URL + '/democall'}
+                    component={DemoCall}
                   />
 
                   <Route

@@ -65,6 +65,11 @@ class AstrologerDetail extends React.Component {
         console.log(error);
       });
   }
+
+
+
+
+  
   render() {
     return (
       <LayoutOne headerTop="visible">
