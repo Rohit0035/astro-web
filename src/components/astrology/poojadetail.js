@@ -15,6 +15,7 @@ import "../../assets/scss/astropooja.css";
 import pagetitle from "../../assets/img/pagetitle.jpg";
 import LayoutOne from "../../layouts/LayoutOne";
 import axiosConfig from "../../axiosConfig";
+import ReactHtmlParser from "react-html-parser";
 
 class PoojaDetail extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class PoojaDetail extends React.Component {
   }
   componentDidMount() {
     let { id } = this.props.match.params;
-    console.log(id);
+    localStorage.setItem("product_id", id);
     axiosConfig
       .get(`/admin/viewoneProduct/${id}`)
       .then((response) => {
@@ -82,16 +83,11 @@ class PoojaDetail extends React.Component {
                       <h3 className="product-title">
                         {this.state.data.productname}
                       </h3>
-                      <p>{this.state.data.desc}</p>
+                      <p>{ReactHtmlParser(this.state.data.desc)}</p>
                       <h4 className="price">
                         Starting From: <span>${this.state.data.price}</span>
                       </h4>
 
-                      {/* <h5 className="colors">colors:
-                                            <span className="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-                                            <span className="color green"></span>
-                                            <span className="color blue"></span>
-                                        </h5> */}
                       <div class="action">
                         <Link to={"/consultantlist/" + this.state.data._id}>
                           <button

@@ -55,9 +55,7 @@ const BlogPost = () => {
             <div className="dec-img mb-50">
               <img
                 alt=""
-                src={
-                  process.env.PUBLIC_URL + "/assets/img/blog/blog-2.jpg"
-                }
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-2.jpg"}
               />
             </div>
           </div>
@@ -65,9 +63,7 @@ const BlogPost = () => {
             <div className="dec-img mb-50">
               <img
                 alt=""
-                src={
-                  process.env.PUBLIC_URL + "/assets/img/blog/blog-3.jpg"
-                }
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-3.jpg"}
               />
             </div>
           </div>

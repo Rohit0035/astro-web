@@ -11,95 +11,91 @@ import { Col, Container, Row } from "reactstrap";
 import { render } from "sass";
 import axiosConfig from "../../axiosConfig";
 
-class BlogDetailsStandard extends React.Component{
-
+class BlogDetailsStandard extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: {},
+      // data: {},
+      BlogData: [],
     };
   }
 
-  
-
-componentDidMount(){
+  componentDidMount() {
     let { id } = this.props.match.params;
-    console.log(id)
+    console.log(id);
     axiosConfig
-  .get(`/admin/viewoneBlog/${id}`)
-  .then((response) => {
-    console.log(response.data.data);
-    this.setState({
-      blogImg: response.data.data.blogImg[0],
-      blog_title:response.data.data,
-      desc:response.data.data,
-      name:response.data.data,
-      
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+      .get(`/admin/viewoneBlog/${id}`)
+      .then((response) => {
+        console.log(response.data.data);
+        this.setState({
+          // data: response.data.data,
+          BlogData: response.data.data,
 
-render(){
+          // blogImg: response.data.data.blogImg[0],
+          // blog_title: response.data.data.blog_title,
+          // desc: response.data.data.desc,
+          // name: response.data.data.name,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-  return (
+  render() {
+    const { BlogData } = this.state;
 
+    return (
+      <Fragment>
+        <LayoutOne headerTop="visible">
+          <section className="pt-0 pb-0">
+            <div
+              className=""
+              style={{
+                backgroundColor: "#FFD59E",
+                width: "100%",
+                padding: "70px 0px",
+                backgroundSize: "cover",
+              }}
+            >
+              <Container>
+                <Row>
+                  <Col md="12">
+                    <div className="leftcont text-left">
+                      <h1>Blog Detail</h1>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+          </section>
+          {/* breadcrumb */}
 
-    <Fragment>
-      <LayoutOne headerTop="visible">
+          <div className="blog-area pt-100 pb-100">
+            <div className="container">
+              <div className="row flex-row-reverse">
+                <div className="col-lg-9">
+                  <div className="blog-details-wrapper ml-20">
+                    {/* blog post */}
 
+                    <BlogPost />
 
-      <section className="pt-0 pb-0">
-          <div
-            className=""
-            style={{
-              backgroundColor: "#FFD59E",
-              width: "100%",
-              padding: "70px 0px",
-              backgroundSize: "cover",
-            }}
-          >
-            <Container>
-              <Row>
-                <Col md="12">
-                  <div className="leftcont text-left">
-                    <h1>
-                         Blog  Detail
-                    </h1>
+                    {/* blog post comment */}
+                    <BlogComment />
                   </div>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </section>
-        {/* breadcrumb */}
-
-        <div className="blog-area pt-100 pb-100">
-          <div className="container">
-            <div className="row flex-row-reverse">
-              <div className="col-lg-9">
-                <div className="blog-details-wrapper ml-20">
-                  {/* blog post */}
-                  <BlogPost />
-
-                  {/* blog post comment */}
-                  <BlogComment />
                 </div>
-              </div>
-              <div className="col-lg-3">
-                {/* blog sidebar */}
-                <BlogSidebar />
+                <div className="col-lg-3">
+                  {/* blog sidebar */}
+                  <BlogSidebar />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </LayoutOne>
-    </Fragment>
-  );
- }
+        </LayoutOne>
+      </Fragment>
+    );
+  }
 }
 // BlogDetailsStandard.propTypes = {
 //   location: PropTypes.object

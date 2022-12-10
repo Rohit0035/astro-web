@@ -20,6 +20,7 @@ class ConsultantList extends React.Component {
       .then((response) => {
         console.log(response.data.data)
         this.setState({ consultantList: response.data.data })
+        localStorage.setItem('astro_id', response?.data?.data[0]?._id)
       })
       .catch((error) => {
         console.log(error.response)
@@ -78,10 +79,17 @@ class ConsultantList extends React.Component {
                           </li>
                           <li>
                             {' '}
-                            <span>Tarot Card , Vedic Astrology</span>
+                            <span>{list?.astroid?.primary_skills}</span>
                           </li>
                           <li>
                             Language: <span>{list?.astroid?.language}</span>
+                          </li>
+                          <li>
+                            {' '}
+                            ₹ <span>{list?.price}</span>
+                          </li>
+                          <li>
+                            Exp: <span>{list?.astroid?.exp_in_years}</span>
                           </li>
                         </ul>
                         <div className="my-2">

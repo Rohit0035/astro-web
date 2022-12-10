@@ -19,6 +19,7 @@ class WalletMoney extends React.Component {
     this.state = {
       modal: false,
       planList: [],
+      data: {},
     };
 
     this.toggle = this.toggle.bind(this);
@@ -30,6 +31,21 @@ class WalletMoney extends React.Component {
     });
   }
   componentDidMount = () => {
+    let user_id = JSON.parse(localStorage.getItem("user_id"));
+
+    console.log("first", user_id);
+    axiosConfig
+      .get(`/user/viewoneuser/${user_id}`)
+      .then((response) => {
+        console.log("sjdfjdfg", response.data.data);
+        this.setState({
+          amount: response.data.data.amount,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     axiosConfig
       .get("/user/active_plans")
       .then((response) => {
@@ -40,7 +56,7 @@ class WalletMoney extends React.Component {
       })
       .catch((error) => {
         console.log(error);
-        console.log(error.response);
+        console.log(error.response.data.data);
       });
   };
 
@@ -64,7 +80,7 @@ class WalletMoney extends React.Component {
                   <div className="leftcont text-left">
                     <h1>Add Money to Wallet</h1>
                     <h3>
-                      Available balance : <span>₹ 0.00</span>
+                      Available balance : <span>{this.state.amount}</span>
                     </h3>
                   </div>
                 </Col>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 // import textbottom from '../../assets/img/textbottom.png'
 // import astro3 from '../../assets/img/team/astro3.jpg'
 import "../../assets/scss/astroteam.scss";
@@ -14,6 +14,10 @@ class AllAstrologerList extends React.Component {
     this.state = {
       // data: {},
       astrologerList: [],
+      Form: "",
+      To: "",
+      astroid: "",
+      userid: "",
     };
   }
   componentDidMount = () => {
@@ -30,6 +34,37 @@ class AllAstrologerList extends React.Component {
         console.log(error.response);
       });
   };
+
+  submitHandler = (e, astroid, mobile) => {
+    e.preventDefault();
+    // let astrologerList = localStorage.getItem('astrologerList')
+    let mobileNo = localStorage.getItem("user_mobile_no");
+    let userId = JSON.parse(localStorage.getItem("user_id"));
+    let astroId = astroid;
+    let obj = {
+      userid: userId,
+      astroid: astroId,
+      // astrologerList: astrologerList,
+      From: mobile, //parseInt(this.state.number)
+      To: mobileNo, //parseInt(this.state.number)
+    };
+    axiosConfig
+      .post(`/user/make_call`, obj)
+
+      .then((response) => {
+        console.log("rhsagdhgshgdjhgj", response.data.data);
+        // console.log(response.data.STATUSMSG)
+        // this.setState({ responseData: response.data })
+        // swal('Successful!', 'Recharge Successful!', 'success')
+        // this.props.history.push('/orderrecharge')
+      })
+
+      .catch((error) => {
+        console.log(error);
+        // swal('Error!', 'Invalid!', 'error')
+      });
+  };
+
   render() {
     const { astrologerList } = this.state;
 
@@ -104,17 +139,55 @@ class AllAstrologerList extends React.Component {
                                         </span>
                                       </li>
                                     </ul>
-                                    <Link className="btn btn-primary btn-sm st-d">
-                                      Online
-                                    </Link>
+                                    {/* <Link
+                                      className="btn btn-primary btn-sm st-d"
+                                      to={'/askquestion/' + astrologer?._id}
+                                    >
+                                      Ask Question
+                                    </Link> */}
+                                    {/* <Link className="btn btn-primary btn-sm st-d">
+                                      {astrologer?.status}
+                                    </Link> */}
                                     <Link
                                       className="btn btn-primary btn-sm"
-                                      to={"/userRequestForm/" + astrologer._id}
+                                      to={
+                                        "/allastrologerlist/" + astrologer._id
+                                      }
                                     >
-                                      <i class="fa fa-phone">
-                                        {/* {astrologer?.userRequestForm} */}
-                                      </i>{" "}
-                                      Call
+                                      {/* <span
+                                        className="sr-btn"
+                                        onClick={this.onCallSubmit}
+                                      >
+                                        <i class="fa fa-phone">
+                                          {astrologer?.userRequestForm}
+                                        </i>{' '}
+                                        Call
+                                      </span> */}
+                                      {/* {localStorage.getItem('auth-token') ? ( */}
+                                      <span
+                                        className="sr-btn"
+                                        onClick={(e) =>
+                                          this.submitHandler(
+                                            e,
+                                            astrologer?._id,
+                                            astrologer?.mobile
+                                          )
+                                        }
+                                      >
+                                        <i class="fa fa-phone"> Call</i>
+                                      </span>
+
+                                      {/* ) : (
+                                        <span
+                                          className="sr-btn"
+                                          onClick={(e) =>
+                                            (window.location.href =
+                                              '/#/login-register')
+                                          }
+                                        >
+                                          <i class="fa fa-phone"></i> Call
+                                        </span>
+                                      )} */}
                                       {/* <small>
                                             / 20{' '}
                                             <i class="fa fa-inr" aria-hidden="true">
@@ -123,6 +196,7 @@ class AllAstrologerList extends React.Component {
                                             per Hour
                                           </small> */}
                                     </Link>
+                                    <br /> <span> Wait ~ 5m</span>
                                   </div>
                                 </div>
                               </Link>

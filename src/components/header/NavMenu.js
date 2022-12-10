@@ -32,19 +32,16 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
     >
       <nav>
         <ul>
-
           <li>
             <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
           </li>
 
           <li>
-
             <Link to="/kundaliform">Kundli Matching</Link>
           </li>
 
           <li>
-
-          <Link to="/freekundli"> Free Kundli</Link>
+            <Link to="/freekundli"> Free Kundli</Link>
           </li>
 
           <li>
@@ -52,7 +49,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
           </li>
 
           <li>
-            <Link to="/allastrologerlist">Chat Astrologer</Link>
+            <Link to="/allastrochatlist">Chat Astrologer</Link>
           </li>
 
           <li>

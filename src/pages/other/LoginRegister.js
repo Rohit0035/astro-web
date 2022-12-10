@@ -47,6 +47,10 @@ export default class LoginRegister extends Component {
             'user_id',
             JSON.stringify(response?.data?.data?._id),
           )
+          localStorage.setItem(
+            'user_mobile_no',
+            JSON.stringify(response?.data?.data?.mobile),
+          )
           if (response.data.msg === 'otp verified') {
             swal('otp verified')
             // window.location.replace('/')

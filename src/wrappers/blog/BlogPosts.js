@@ -1,30 +1,31 @@
-import React, { Fragment,useEffect,useState  } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosConfig from "../../axiosConfig";
 
-const BlogPosts = ({data}) => {
+const BlogPosts = ({ data }) => {
+  const [latestBlog, setLatestBlog] = useState(data);
 
-const [latestBlog, setLatestBlog] = useState(data)
-
-  
-useEffect(() => {
-  setLatestBlog(data)
-}, [data])
-
+  useEffect(() => {
+    setLatestBlog(data);
+  }, [data]);
 
   return (
     <Fragment>
       <div className="col-lg-6 col-md-6 col-sm-12">
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
-            <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                 <img src={data?.blogImg} alt="" />
+            <Link
+              to={
+                process.env.PUBLIC_URL + "/blog-details-standard/" + data?._id
+              }
+            >
+              <img src={data?.blogImg} alt="" />
             </Link>
           </div>
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>{data?.createdAt}</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -33,14 +34,15 @@ useEffect(() => {
               </ul>
             </div>
             <h4>
-              <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-               {data?.blog_title}
+              <Link
+                to={
+                  process.env.PUBLIC_URL + "/blog-details-standard" + data?._id
+                }
+              >
+                {data?.blog_title}
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
-            </p>
+            <p>{data?.desc}</p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
                 <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
@@ -73,7 +75,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      <div className="col-lg-6 col-md-6 col-sm-12">
+      {/* <div className="col-lg-6 col-md-6 col-sm-12">
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
@@ -95,7 +97,11 @@ useEffect(() => {
               </ul>
             </div>
             <h4>
-              <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
+              <Link
+                to={
+                  process.env.PUBLIC_URL + "/blog-details-standard/" + data?._id
+                }
+              >
                 New collection of our shop
               </Link>
             </h4>
@@ -382,7 +388,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };

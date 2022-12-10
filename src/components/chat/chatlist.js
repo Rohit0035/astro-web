@@ -1,173 +1,236 @@
-import React from "react"
-import { Link } from "react-router-dom";
-import { Container, Row,  Col, Input, InputGroup, Form,Button } from "reactstrap";
+import React from "react";
+import Stopwatch from "./Stopwatch";
+// import { Link } from 'react-router-dom'
+import { Container, Row, Col } from "reactstrap";
 import tilak from "../../assets/img/tilak.png";
 import "../../assets/scss/chat.scss";
 import LayoutOne from "../../layouts/LayoutOne";
-import { useState } from 'react'
-
+// import { useState } from 'react'
+import swal from "sweetalert";
+import axiosConfig from "../../axiosConfig";
 class ChatList extends React.Component {
- 
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      astroid: "",
+      msg: "",
+      chatMsgList: [],
+      userId: "",
+      roomid: "",
+    };
+  }
+  componentDidMount = () => {
+    let astroid = JSON.parse(localStorage.getItem("astroId"));
+
+    // console.log(id);
+    axiosConfig
+      .get(`/admin/getoneAstro/${astroid}`)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          fullname: response.data.data.fullname,
+          all_skills: response.data.data.all_skills,
+          language: response.data.data.language,
+          img: response.data.data.img[0],
+          status: response.data.status,
+          // Exp: response.data.data.Exp,
+          // exp_in_years: response.data.data.exp_in_years,
+          // callCharge: response.data.data.callCharge,
+          // long_bio: response.data.data.long_bio,
+          // msg: response.data.data.msg,
+          // astroMobile: response?.data?.data?.mobile,
+          status: response?.data?.data?.status,
+          astroId: response?.data?.data?._id,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  submitHandler = (e, astroid, userId, roomid) => {
+    e.preventDefault();
+    let { id } = this.props.match.params;
+    let user_id = JSON.parse(localStorage.getItem("user_id"));
+    let obj = {
+      astroId: id,
+      astroid: astroid,
+      roomId: id,
+      roomid: roomid,
+      userid: user_id,
+      msg: this.state.msg,
+    };
+
+    axiosConfig
+      .post(`/user/addchat/${user_id}`, obj)
+      .then((response) => {
+        console.log("@@@@@", response?.data?.data?.roomid);
+        this.setState({ msg: "" });
+        this.setState({ roomid: response?.data?.data?.roomid });
+        if (response?.data?.data?.roomid !== undefined) {
+          axiosConfig
+            .get(`/user/allchatwithuser/` + response?.data?.data?.roomid)
+            .then((response) => {
+              console.log("ROOMID", response.data.data);
+              this.setState({
+                msg: "",
+                chatMsgList: response?.data?.data,
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        swal("Success!", "Submitted SuccessFull!", "success");
+        //window.location.reload('/askQuestion')
+      })
+      .catch((error) => {
+        swal("Error!", "You clicked the button!", "error");
+        console.log(error);
+      });
+  };
+  handleChange = (e) => {
+    this.setState({
+      msg: e.target.value,
+    });
+  };
 
   render() {
-
-
-  return (
-
-    <LayoutOne headerTop="visible">
-
-     <section className="pt-0 pb-0" >
-                 <div
-                    className=""
+    const { chatMsgList } = this.state;
+    return (
+      <LayoutOne headerTop="visible">
+        <section className="pt-0 pb-0">
+          <div
+            className=""
+            style={{
+              backgroundColor: "#FFD59E",
+              width: "100%",
+              padding: "70px 0px",
+              backgroundSize: "cover",
+            }}
+          >
+            <Container>
+              <Row>
+                <Col md="12">
+                  <div className="leftcont text-left">
+                    <h1>Chat With Best Astrologers</h1>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </section>
+        <section>
+          <Container>
+            <div className="">
+              <div className="">
+                <div className="col-md-12 col-xl-12 chat">
+                  <div
+                    className="card cardchat"
                     style={{
-                      backgroundColor:"#FFD59E",
+                      backgroundColor: "#f0f0f0",
                       width: "100%",
-                      padding:"70px 0px",
-                      backgroundSize:"cover"
                     }}
                   >
-                    <Container>
-                            <Row>
-                                <Col md="12">
-                                    <div className="leftcont text-left">
-                                        <h1>Chat With Best Astrologers</h1>
-                                        {/* <h3>Get instant & accurate, Janam Kundli</h3> */}
-                                    </div>
-                                </Col>
-                                
-                            </Row>
-                    </Container>
-                    
-                </div>
-        </section>
+                    <div className="card-header msg_head">
+                      <div className="d-flex ">
+                        <div className="img_cont">
+                          <img
+                            src={this.state?.img}
+                            alt=""
+                            className="rounded-circle user_st"
+                          />
 
-        <section>
-            <Container>
-                <div className="">
-                    <div className="">
-                    {/* <div className="col-md-4 col-xl-3 chat">
-                        <div className="card mb-sm-3 mb-md-0 contacts_card">
-                        <div className="card-header">
-                            <div className="input-group">
-                            <input type="text" placeholder="Search..." name className="form-control search" />
-                            <div className="input-group-prepend">
-                                <span className="input-group-text search_btn"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            </div>
-                            </div>
+                          {/* <img
+                            className="rounded-circle user_st"
+                            src={tilak}
+                            alt="userpic"
+                          /> */}
+                          <span className="online_icon" />
                         </div>
-                        <div className="card-body contacts_body">
-                            <ui className="contacts">
-                            <li className="active">
-                                <div className="d-flex bd-highlight">
-                                    <div className="img_cont">
-                                    <span className="online_icon" />
-                                    </div>
-                                    <div className="user_info">
-                                        <span>Khalid</span>
-                                        <p>Kalid is online</p>
-                                    </div>
-                                </div>
-                            </li>
-                            </ui>
+                        <div className="user_info">
+                          <span>Tilak</span>
+                          <Stopwatch />
+                          <p>typing....</p>
                         </div>
-                        <div className="card-footer" />
-                        </div>
-                    </div> */}
-                    <div className="col-md-12 col-xl-12 chat">
-                        <div className="card cardchat" 
-                        style={{
-                            backgroundColor:"#f0f0f0",
-                            width: "100%",
-                           
-                        }}
-                        >
-                            <div className="card-header msg_head">
-                            <div className="d-flex ">
-                                    <div className="img_cont">
-                                        {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img" /> */}
-                                        <img className="rounded-circle user_st" src={tilak} alt="userpic" />
-                                    <span className="online_icon" />
-                                    </div>
-                                    <div className="user_info">
-                                        <span>Tilak</span>
-                                        <p>typing....</p>
-                                    </div>
-                                    {/* <div className="video_cam">
-                                        <span><i className="fas fa-video" /></span>
-                                        <span><i className="fas fa-phone" /></span>
-                                    </div> */}
-                            </div>
-                                
-                            </div>
-                            <div className="card-body msg_card_body">
-                                <div className="d-flex justify-content-start mb-4">
-                                    <div className="img_cont_msg">
-                                    {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img_msg" /> */}
-                                </div>
-                                    <div className="msg_cotainer">
-                                        Hi, how are you samim?
-                                        <span className="msg_time">8:40 AM, Today</span>
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-end mb-4">
-                                    <div className="msg_cotainer_send">
-                                        Hi Khalid i am good tnx how about you?
-                                        <span className="msg_time_send">8:55 AM, Today</span>
-                                    </div>
-                                    <div className="img_cont_msg">
-                                        {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img_msg" /> */}
-                                    </div>
-                                </div>
-                               <div className="d-flex justify-content-start mb-4">
-                                    <div className="img_cont_msg">
-                                        {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img_msg" /> */}
-                                    </div>
-                                    <div className="msg_cotainer">
-                                        I am looking for your next templates
-                                        <span className="msg_time">9:07 AM, Today</span>
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-end mb-4">
-                                    <div className="msg_cotainer_send">
-                                        Ok, thank you have a good day
-                                        <span className="msg_time_send">9:10 AM, Today</span>
-                                    </div>
-                                    <div className="img_cont_msg">
-                                        {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img_msg" /> */}
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-start mb-4">
-                                    <div className="img_cont_msg">
-                                        {/* <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user_img_msg" /> */}
-                                    </div>
-                                    <div className="msg_cotainer">
-                                        Bye, see you
-                                        <span className="msg_time">9:12 AM, Today</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-footer">
-                                <div className="input-group">
-                                    <div className="input-group-append">
-                                        <span className="input-group-text attach_btn"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
-                                    </div>
-                                    <textarea name className="form-control type_msg" placeholder="Type your message..." defaultValue={""} />
-                                    <div className="input-group-append">
-                                        <span className="input-group-text send_btn"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
+                      </div>
                     </div>
+                    <div>
+                      {chatMsgList.length > 0
+                        ? chatMsgList.map((chatMsg, index) => {
+                            return (
+                              <div>
+                                <div className="card-body msg_card_body">
+                                  <div className="d-flex justify-content-start mb-4">
+                                    <div className="msg_cotainer">
+                                      {chatMsg.msg_reply}
+                                      <span className="msg_time">
+                                        8:40 AM, Today
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="card-body msg_card_body">
+                                  <div className="d-flex justify-content-end mb-4">
+                                    <div className="msg_cotainer_send">
+                                      {chatMsg.msg}
+                                      <span className="msg_time_send">
+                                        8:55 AM, Today
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        : ""}
                     </div>
+                    <div className="card-footer">
+                      <div className="input-group">
+                        <div className="input-group-append">
+                          <span className="input-group-text attach_btn">
+                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <textarea
+                          name
+                          className="form-control type_msg"
+                          placeholder="Type your message..."
+                          onChange={(e) => {
+                            this.handleChange(e);
+                          }}
+                          value={this.state.msg}
+                          defaultValue={""}
+                        />
+                        <div className="input-group-append">
+                          <span
+                            className="input-group-text send_btn"
+                            onClick={(e) =>
+                              this.submitHandler(
+                                e,
+                                this.state.astroId,
+                                this.state.userId,
+                                this.state.roomid
+                              )
+                            }
+                          >
+                            <i
+                              class="fa fa-location-arrow"
+                              aria-hidden="true"
+                            ></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </Container>
+              </div>
+            </div>
+          </Container>
         </section>
-    </LayoutOne>
-  );
+      </LayoutOne>
+    );
   }
 }
-
 
 export default ChatList;

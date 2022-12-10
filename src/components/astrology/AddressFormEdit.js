@@ -19,10 +19,39 @@ class AddressFormEdit extends React.Component {
       landmark: '',
       name: '',
       mobile: '',
+      data: [],
     }
   }
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  componentDidMount() {
+    let userId = JSON.parse(localStorage.getItem('user_id'))
+    axiosConfig
+      .get(`/user/getone_address/${userId}`)
+      .then((response) => {
+        console.log(response.data.data)
+        this.setState({
+          data: response.data.data,
+          name: response.data.data.name,
+          email: response.data.data.email,
+          mobile: response.data.data.mobile,
+          alt_mobile: response.data.data.alt_mobile,
+          flat_no: response.data.data.flat_no,
+          city: response.data.data.city,
+          locality: response.data.data.locality,
+          pincode: response.data.data.pincode,
+          // image: response.data.data.image[0],
+          // gst: response.data.data.gst,
+          state: response.data.data.state,
+          country: response.data.data.country,
+          landmark: response.data.data.landmark,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   submitHandler = (e) => {
     e.preventDefault()
